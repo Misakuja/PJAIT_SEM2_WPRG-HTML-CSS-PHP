@@ -1,0 +1,13 @@
+.flexbox {
+    display: flex;
+    position: relative;
+}
+.capybara {
+    width: 100%;
+}
+.carrot {
+    position: absolute;
+    width: 20%;
+    right: 35%;
+    top: 45%;
+}

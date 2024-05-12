@@ -1,0 +1,11 @@
+.shape {
+    display: flex;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 150px;
+    color: white;
+    font-family: "Comic Sans MS", sans-serif;
+}

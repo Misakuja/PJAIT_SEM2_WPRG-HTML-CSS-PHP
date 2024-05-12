@@ -1,0 +1,97 @@
+body {
+    color: #3a3131;
+}
+.title {
+    background-color: #e8e2d9;
+    letter-spacing: 1em;
+    color: #4d4344;
+    text-align: center;
+    box-shadow: 0 5px 5px -1px darkgray;
+    height: 5em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.form, .inputs {
+    width: 800px;
+    margin: auto;
+}
+h1 {
+    line-height: inherit;
+    position: sticky;
+}
+.form {
+    background-color: #f7f3f3;
+    margin-top: 5em;
+    padding: 20px;
+    box-shadow: 5px 5px 5px 1px darkgray;
+    font-weight: bold;
+}
+.form legend {
+    color: #9f9a95;
+    letter-spacing: 4px;
+}
+.form ul {
+    list-style: none;
+    line-height: 30px;
+}
+fieldset {
+    border: 1px solid #bdbdbd;
+}
+#left {
+    float: left;
+    width: 25%;
+    border: none;
+    text-align: right;
+    color: #4d4344;
+    margin-right: 10px;
+}
+#right {
+    text-align: left;
+    width: 75%;
+    height: 70px;
+    border: none;
+}
+#saveButton {
+    float: right;
+}
+.form input[type="submit"] {
+    text-align: center;
+    border: 1px solid #c4beb6;
+    background-color: #c4beb6;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px 23px 8px 23px;
+}
+.form input[type="submit"]:active {
+    background-color: #3a3131;
+}
+.inputs {
+    list-style: none;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f7f3f3;
+    color: #4d4344;
+    box-shadow: 5px 5px 5px 1px darkgray;
+}
+.inputs thead {
+    background-color: #e8e2d9;
+    font-weight: bold;
+    width: 100%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table #firstColForIDs {
+    text-align: center;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+tbody tr:nth-child(even) {
+    background-color: #f1ece9;
+}

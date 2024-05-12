@@ -1,0 +1,28 @@
+p {
+    font-size: 15px;
+}
+h1 {
+    font-size: 25px;
+}
+
+.firstBox {
+    background-color: darkgray;
+    padding: 12px;
+    outline: 1px black solid;
+}
+.secondBox {
+    background-color: darkgray;
+    border: 5px white solid;
+    padding: 10px;
+}
+.thirdBox {
+    background-color: white;
+    outline: 1px black solid;
+    padding: 5px;
+}
+.textBox {
+    background-color: darkgray;
+    outline: 1px black solid;
+    padding: 5px;
+    line-height: 19px;
+}

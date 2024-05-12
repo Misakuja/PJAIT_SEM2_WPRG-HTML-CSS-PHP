@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forms - Dates</title>
+</head>
+<body>
+<form action="" method="POST">
+    <label for="title"><strong>Title</strong> <br>
+    <input type="text" name="title" id="title" required></label> <br>
+
+    <label for="date"><strong>Date</strong> <br>
+    <input type="date" name="date" id="date"></label> <br>
+    <label><textarea cols="5" name="comment">Date-only description.</textarea></label> <br>
+
+    <fieldset>
+        <legend><strong>DATE/TIME</strong></legend>
+        <label for="dateTime1"> <br>
+        <input type="date" name="dateTime1" id="dateTime1"></label>
+
+        <label for="dateTime2">
+        <input type="time" name="dateTime2" id="dateTime2"></label> <br>
+
+        <label><textarea cols="5" name="comment2">Date and time description.</textarea></label> <br>
+    </fieldset>
+    <fieldset>
+        <legend><strong>DATE RANGE</strong></legend>
+        <label for="startDate"><strong>START DATE</strong> <br>
+        <input type="date" name="startDate" id="startDate"></label>
+
+        <label for="startTime">
+        <input type="time"  name="startTime" id="startTime"></label> <br>
+
+        <label for="endDate"><strong>END DATE</strong> <br>
+        <input type="date" name="endDate" id="endDate"></label>
+
+        <label for="endTime">
+        <input type="time"  name="endTime" id="endTime"></label> <br>
+        <label><textarea cols="5" name="comment">Date range description.</textarea></label> <br>
+    </fieldset>
+    <fieldset>
+        <legend><strong>DATE/TIME LIST</strong></legend>
+        <label for="dateYear">
+        <select name="dateYear" id="dateYear">
+            <option value="" disabled selected>Year</option>
+            <script>
+                for (let i = 1950; i <= 2024; i++) {
+                    document.write("<option value='" + i + "'>" + i + "</option>");
+                }
+            </script>
+        </select></label>
+        <label for="dateMonth">
+        <select name="dateMonth" id="dateMonth">
+            <option value="" disabled selected>Month</option>
+            <script>
+                for (let i = 1; i <= 12; i++) {
+                    document.write("<option value='" + i + "'>" + i + "</option>");
+                }
+            </script>
+        </select></label>
+        <label for="dateDay">
+        <select name="dateDay" id="dateDay">
+            <option value="" disabled selected>Day</option>
+            <script>
+                for (let i = 1; i <= 31; i++) {
+                    document.write("<option value='" + i + "'>" + i + "</option>");
+                }
+            </script>
+        </select></label>
+        <label for="dateHour">
+        <select name="dateHour" id="dateHour">
+            <option value="" disabled selected>Hour</option>
+            <script>
+                for (let i = 1; i <= 24; i++) {
+                    document.write("<option value='" + i + "'>" + i + "</option>");
+                }
+            </script>
+        </select></label>
+        <label for="dateMinute">
+        <select name="dateMinute" id="dateMinute">
+            <option value="" disabled selected>Minute</option>
+            <script>
+                for (let i = 0; i <= 59; i++) {
+                    document.write("<option value='" + i + "'>" + i + "</option>");
+                }
+            </script>
+            <!--tbh idk how to make it adjust so that ex. february cant have 31 days in a month, but whatever ig!-->
+        </select></label>
+        <br>
+        <label><textarea cols="5" name="comment">Date / time list description.</textarea></label> <br>
+    </fieldset>
+</form>
+</body>
+</html>
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit</title>
+    <link href="LAB04_Ex03.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="title">
+    <h1>TITLE</h1>
+</div>
+<br>
+<div class="form">
+    <form action="" method="POST" id="formID">
+        <fieldset id="MainFieldset">
+            <legend>Add Item</legend>
+            <div id="left">
+                <ul>
+                    <li><label><span>NAME</span>
+                    </label></li>
+                    <li><label><span>DESCRIPTION</span>
+                    </label></li>
+                    <li><label><span>VALUE</span>
+                    </label></li>
+                </ul>
+            </div>
+            <div id="right">
+                <ul>
+                    <li><label><input type="text" id="name"> <br>
+                    </label></li>
+                    <li><label><input type="text" id="desc"> <br>
+                    </label></li>
+                    <li><label><input type="text" id="value"> <br>
+                    </label></li>
+                </ul>
+            </div>
+            <div id="saveButton">
+                <ul>
+                    <li><label for="save">
+                        <input type="submit" id="save" value="SAVE">
+                    </label></li>
+                </ul>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="inputs">
+    <table>
+        <colgroup>
+            <col id="firstColForIDs" span="1">
+            <col span="2">
+            <col span="8">
+            <col span="2">
+        </colgroup>
+        <thead>
+        <tr>
+            <th id="FormInputID"></th>
+            <th>NAME</th>
+            <th>DESCRIPTION</th>
+            <th>VALUE</th>
+        </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+</div>
+<script>
+    document.getElementById('formID').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const desc = document.getElementById('desc').value;
+        const value = document.getElementById('value').value;
+        const tableBody = document.getElementById('tableBody');
+        const id = tableBody.childElementCount + 1;
+
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = '<td id="firstColForIDs">' + id + '</td>' +
+            '<td>' + name + '</td>' +
+            '<td>' + desc + '</td>' +
+            '<td>' + value + '</td>';
+
+        document.getElementById('tableBody').appendChild(newRow);
+
+        document.getElementById('name').value = '';
+        document.getElementById('desc').value = '';
+        document.getElementById('value').value = '';
+    });
+</script>
+</body>
+</html>

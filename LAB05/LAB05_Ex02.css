@@ -1,0 +1,50 @@
+    html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+    }
+    #container {
+        font-size: 1.5em;
+        color: white;
+        text-shadow: 2px 2px 3px darkgrey;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    .line {
+        text-align: center;
+        flex: 0 1 auto;
+        height: 5%;
+    }
+    .line1 {
+        background-color: #ef80ee;
+    }
+    .line2 {
+        background-color: #f3dfb3;
+    }
+    .line3 {
+        background-color: #f5f5f5;
+    }
+    .line4 {
+        background-color: #feff00;
+    }
+    .line5 {
+        background-color: #99cd31;
+    }
+    .line6 {
+        background-color: #40e0d0;
+    }
+    .line7 {
+        background-color: #ff6447;
+    }
+    .line8 {
+        background-color: #d8bfd8;
+    }
+    .line9 {
+        background-color: #008080;
+    }
+    .line10 {
+        background-color: #d1b48c;
+    }

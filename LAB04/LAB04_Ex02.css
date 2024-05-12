@@ -1,0 +1,62 @@
+body {
+    background-color: #e7e7e7;
+}
+h1 {
+    text-align: center;
+    letter-spacing: 0.3em;
+    color: #0a480a;
+}
+.firstContact, .secondContact, .thirdContact {
+    background-color: #ffffff;
+    margin: auto;
+    width: 350px;
+    height: 175px;
+    position: relative;
+    box-shadow: 6px 6px 6px dimgrey;
+}
+#name1, #name2, #name3 {
+    color: #ffffff;
+    font-size: 25px;
+    margin: auto;
+    letter-spacing: 2px;
+    text-align: left;
+    padding: 0.4em 0.6em;
+    background-color: #0a480a;
+}
+.firstDescRight, .secondDescRight, .thirdDescRight {
+    background-color: #ffffff;
+    text-align: right;
+    float: right;
+    padding-right: 1.2em;
+    line-height: 2px;
+    position: absolute;
+    top: 50px;
+    right: 0;
+}
+#address1Street, #address2Street, #address3Street {
+    color: #0a480a;
+}
+#address1City, #address2City, #address3City {
+    color: #000000;
+}
+.firstDescLeft, .secondDescLeft, .thirdDescLeft {
+    background-color: #ffffff;
+    text-align: left;
+    float: left;
+    padding-left: 1.2em;
+    line-height: 8px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+#address1Mail, #address2Mail, #address3Mail {
+    color: #0a480a;
+    font-weight: bolder;
+    font-style: italic;
+    text-decoration:none;
+}
+#address1Phone, #address2Phone, #address3Phone {
+    color:black;
+    letter-spacing: 0.1em;
+    text-decoration:none;
+}

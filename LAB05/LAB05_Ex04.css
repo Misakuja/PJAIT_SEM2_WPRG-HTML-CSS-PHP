@@ -1,0 +1,17 @@
+.grid-container {
+    display: grid;
+    grid: repeat(5, 100px) / repeat(5, 100px);
+}
+.grid-item {
+    background-color: rgba(212, 232, 195, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    font-size: 25px;
+    text-align: left;
+    padding: 5px;
+    color: white;
+    text-shadow: 1px 1px 2px darkgrey;
+}
+.grid-item:nth-child(2n) {
+    background-image: url("https://www.rainforest-alliance.org/wp-content/uploads/2021/06/capybara-square-1.jpg.optimal.jpg") ;
+    background-size: 100px;
+}

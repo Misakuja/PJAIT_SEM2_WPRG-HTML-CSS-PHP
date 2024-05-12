@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table Colgroup Practice</title>
+</head>
+<body>
+<table>
+    <caption>Example Table</caption>
+    <colgroup>
+        <col style="background-color:pink">
+        <col style="background-color:pink">
+        <col style="background-color:lightblue">
+        <col style="background-color:lightblue">
+    </colgroup>
+    <thead>
+    <tr>
+        <th rowspan="2">Group A</th>
+        <th colspan="2">Game 1</th>
+        <th colspan="2">Game 2</th>
+    </tr>
+    <tr>
+        <th>Team 1</th>
+        <th>Team 2</th>
+        <th>Team 1</th>
+        <th>Team 2</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="2">Russia</td>
+        <td>1</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Poland</td>
+        <td>0</td>
+        <td>2</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td colspan="4">
+    <table>
+        <caption>Nested Table</caption>
+        <colgroup>
+            <col span="5">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Age</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Kapi</td>
+            <td>Bara</td>
+            <td>21</td>
+        </tr>
+        <tr>
+        <td>Capy</td>
+        <td>Barra</td>
+        <td>37</td>
+        </tr>
+        </tbody>
+    </table>
+    <tr>
+        <td colspan="2">Sum</td>
+        <td>4</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,60 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+#container {
+    font-size: 3em;
+    color: white;
+    text-shadow: 2px 2px 3px darkgrey;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.line {
+    text-align: center;
+    line-height: 50px;
+    padding: 10px;
+    flex: 1 0 60px;
+}
+.line1 {
+    background-color: #ef80ee;
+    order: 2;
+}
+.line2 {
+    background-color: #f3dfb3;
+    order: 9;
+}
+.line3 {
+    background-color: #f5f5f5;
+    order: 1;
+}
+.line4 {
+    background-color: #feff00;
+    order: 3;
+}
+.line5 {
+    background-color: #99cd31;
+    order: 4;
+}
+.line6 {
+    background-color: #40e0d0;
+    order: 5;
+}
+.line7 {
+    background-color: #ff6447;
+    order: 10;
+}
+.line8 {
+    background-color: #d8bfd8;
+    order: 5;
+}
+.line9 {
+    background-color: #008080;
+    order: 6;
+}
+.line10 {
+    background-color: #d1b48c;
+    order: 8;
+}
