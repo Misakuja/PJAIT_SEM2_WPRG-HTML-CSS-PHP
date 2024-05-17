@@ -1,0 +1,69 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: #e6e6e6;
+}
+.topText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    position: relative;
+    background-color: #cfcfcf;
+    min-height: 35px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: #aaaaaa 1px 3px 5px;
+}
+
+.boxes {
+    background-color: #cfcfcf;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 25px auto;
+}
+.formsBox {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 25px auto;
+
+    fieldset {
+        display: flex;
+        padding: 20px;
+        flex-direction: column;
+        align-items: center;
+    }
+    input {
+        margin: 5px;
+    }
+}
+.boxRegisterLogin {
+    position: relative;
+    width: 300px;
+    margin: 0 10px 10px 0;
+}
+.buttonsBox {
+    position: relative;
+    max-width: 700px;
+    margin: 0 10px 10px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    button {
+        padding: 10px 20px;
+    }
+    fieldset {
+        border: none;
+    }
+}
+
