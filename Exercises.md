@@ -431,3 +431,26 @@ Funkcjonalności:
 
 ----
 
+# LAB10
+
+1. Napisz skrypt PHP który umożliwi użytkownikowi zalogowanie się na stronę.
+- Strona zapisze ciastko połączone z użytkownikiem.
+- Niech strona zawiera przycisk “dodaj kapibarę” a następnie wyświetla ile kapibar ma zalogowany użytkownik.
+-  Strona powinna pozwalać na posiadanie kilku użytkowników, a każdy z nich może mieć własną liczbę kapibar (im więcej tym lepiej).
+
+----
+
+2. Utwórz trzy strony html:
+- Pierwsza z nich wyświetli formularz i umożliwi użytkownikowi ustawienia preferencji odnośnie wyświetlania strony. Po wybraniu opcji z listy (np. Różne kolory tła i różne kolory napisów na stronie) i potwierdzeniu przyciskiem, użytkownik jest przekierowany na stronę nr. 2
+- Strona nr. 2 wyświetla potwierdzenie zapisania ustawień. Tutaj ustawenia jeszcze nie działają. Na dole zostanie wyświetlony link, który zabierze użytkownika na stronę z jakąś treścią (może być Lorem Ipsum), gdzie zobaczymy już zmiany w stylu. Na dole strony powinien znajdować się link który umożliwi zmianę ustawień (strona nr. 1)
+
+----
+
+3. Zmodyfikuj zadanie 2 aby używało sesji zamiast ciastek.
+
+----
+
+4. Stwórz podstawowy sklep internetowy. Sklep powinien wyświetlić listę produktów które są możliwe do kupienia, wraz z linkami które spowodują dodanie do koszyka. Koszyk powinien być powiązany z zalogowanym użytkownikiem.
+Sklep powinien umożliwić przejście do koszyka, wyświetlenie jego zawartości, i kupienie przedmiotów, co spowoduje wyczyszczenie koszyka. Na chwilę obecną możesz pominąć cenę produktów.
+
+----
