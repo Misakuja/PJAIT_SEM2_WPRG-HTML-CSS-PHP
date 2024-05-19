@@ -1,0 +1,101 @@
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+/* general */
+fieldset {
+    text-align: center;
+    margin-top: 30px;
+    border: none;
+}
+
+.formBox p {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+select, button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+button {
+    background-color: #8f8f8f;
+    color: #fff;
+}
+
+/* file1 */
+.formBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formBox fieldset {
+    box-shadow: 0 3px 5px 1px darkgrey;
+}
+
+/* file2 */
+.formBox2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+
+    fieldset {
+        box-shadow: 0 3px 5px 1px darkgrey;
+    }
+
+    p {
+        font-size: 20px;
+        margin: 0 0 10px 0;
+        font-weight: bold;
+    }
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 3px 5px 1px darkgrey;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+/* file3 */
+.container {
+    display: flex;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    flex-direction: column;
+}
+
+.textLorem {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.formBox3 {
+    display: flex;
+    justify-content: center;
+
+    button {
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #8f8f8f;
+        color: #fff;
+        margin-top: 10px;
+    }
+
+}
