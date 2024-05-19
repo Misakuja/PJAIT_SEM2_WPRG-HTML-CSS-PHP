@@ -20,9 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     if (!isset($users[$newUsername])) {
         $users[$newUsername] = password_hash($newPassword, PASSWORD_DEFAULT);
         file_put_contents($userFile, json_encode($users));
-        $topText = '<div class="topText">User ' . $newUsername . ' registered successfully.</div>';
+        echo $topText = '<div class="topText">User ' . $newUsername . ' registered successfully.</div>';
     } else {
-        $topText = '<div class="topText">Username ' . $newUsername . ' is already taken.</div>';
+        echo $topText = '<div class="topText">Username ' . $newUsername . ' is already taken.</div>';
     }
 }
 
