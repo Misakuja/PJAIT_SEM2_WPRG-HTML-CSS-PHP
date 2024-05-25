@@ -20,3 +20,7 @@ echo $newCar;
 $carInsurance = new InsuranceCar("BMW", 30000, 5.0, true, false, true, "Joe Doe", 2);
 echo "Car Information:\n";
 echo $carInsurance . "\n\n";
+
+echo "value calc: " . $carInsurance->value();
+
+echo "Amount of cars: " . Car::getCount();

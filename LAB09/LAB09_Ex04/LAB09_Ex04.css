@@ -11,6 +11,7 @@ body {
 }
 .formResult {
     background-color: #e6e6e6;
+    min-width: 500px;
     padding: 20px;
     border-radius: 15px;
     display: flex;
@@ -39,12 +40,17 @@ button, input[type='text'] {
 fieldset {
     border-radius: 10px;
     border: 1px solid darkgrey;
+    min-width: 450px;
 }
 .reviews {
     border-radius: 10px;
     border: 1px solid darkgrey;
     padding: 20px;
+    width: 500px;
 }
 .border {
     border-bottom: 1px solid darkgrey;
+}
+h1 {
+    margin: 15px;
 }

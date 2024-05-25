@@ -11,6 +11,9 @@ class Car {
         $this->exchangeRate = $exchangeRate;
         self::$count++;
     }
+    static function getCount() : int {
+        return self::$count;
+    }
     function getModel(): string {
         return $this->model;
     }

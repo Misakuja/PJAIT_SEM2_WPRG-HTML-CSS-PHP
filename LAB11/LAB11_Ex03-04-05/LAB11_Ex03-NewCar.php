@@ -31,8 +31,8 @@ class NewCar extends Car {
     function value(): float|int {
         $baseCarValue = parent::value();
         if ($this->alarm) $baseCarValue *= 1.05;
-        if ($this->radio) $baseCarValue *= 107.5;
-        if ($this->climatronic) $baseCarValue *= 1.10;
+        if ($this->radio) $baseCarValue *= 1.075;
+        if ($this->climatronic) $baseCarValue *= 1.1;
         return $baseCarValue;
     }
     function __toString() {

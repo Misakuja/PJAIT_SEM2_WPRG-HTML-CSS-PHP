@@ -1,7 +1,7 @@
 <?php
 
 class InsuranceCar extends NewCar {
-    private string $firstOwner;
+    private bool $firstOwner;
     private int $years;
 
     function __construct($model, $price, $exchangeRate, $alarm, $radio, $climatronic, $firstOwner, $years) {
@@ -34,6 +34,7 @@ class InsuranceCar extends NewCar {
     }
 
     function __toString() {
-        return parent::__toString() . " First owner: $this->firstOwner, Years: $this->years";
+        $firstOwnerYesNo = $this->firstOwner ? 'Yes' : 'No';
+        return parent::__toString() . " First owner: $firstOwnerYesNo, Years: $this->years";
     }
 }
