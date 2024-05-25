@@ -28,8 +28,12 @@ class InsuranceCar extends NewCar {
 
     function value(): float|int {
         $baseCarValue = parent::value();
-        $baseCarValue -= 0.1*($baseCarValue*$this->years);
-        if ($this->firstOwner) $baseCarValue -= 0.5*$baseCarValue;
+        $baseCarValue -= 0.01 * $baseCarValue * $this->years;
+        if ($this->firstOwner) $baseCarValue -= 0.05 * $baseCarValue;
         return $baseCarValue;
+    }
+
+    function __toString() {
+        return parent::__toString() . " First owner: $this->firstOwner, Years: $this->years";
     }
 }
