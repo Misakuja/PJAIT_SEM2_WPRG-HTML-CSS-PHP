@@ -6,6 +6,7 @@ require_once "LAB11-Ex04-InsuranceCar.php";
 session_start();
 
 $firstFormSubmitted = false;
+$calculatedPrice = null;
 
 if (!isset($_SESSION['carsObjects'])) {
     $_SESSION['carsObjects'] = [];
@@ -49,21 +50,24 @@ function createObject($carChoice, $model, $price, $exchangeRate, $alarm, $radio,
 
 // delete / edit / check / calc price | logic below
 function deleteCar($index) : void {
-    unset ($_SESSION['cars'][$index]);
     unset ($_SESSION['carsObjects'][$index]);
     $_SESSION['car_count']--;
-    $_SESSION['cars'] = array_values($_SESSION['cars']);
     $_SESSION['cars'] = array_values($_SESSION['carsObjects']);
 }
 if(isset($_POST["deleteCar"]) && isset($_POST["index"])) {
     $index = $_POST["index"];
     deleteCar($index);
 }
-if(isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
-    $index = $_POST["index"];
-    $car = $_SESSION['carsObjects'][$index];
-    $carValue = $car->value();
-    echo $carValue;
+function calcPrice() : int|float {
+    if (isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
+        $index = $_POST["index"];
+        $car = $_SESSION['carsObjects'][$index];
+        return $car->value();
+    }
+    return 0;
+}
+if (isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
+    $calculatedPrice = calcPrice();
 }
 ?>
 <!DOCTYPE html>
@@ -132,24 +136,28 @@ if(isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
 </div>
 <div class="carList">
     <ul>
-        <?php if($_SESSION['carsObjects'] != null)foreach ($_SESSION['carsObjects'] as $index => $car) : ?>
-            <?php echo "<li>" . $car->getModel() . " | " . $car->getPrice() . " | " . $car->getExchangeRate() . "</li>"; ?>
-            <form action="" method="post">
-                <button type="submit" name="calculatePrice">Calculate Price</button>
-                <input type="hidden" name="index" value="<?php echo $index ?>">
-            </form>
+        <?php if($_SESSION['carsObjects'] != null) foreach ($_SESSION['carsObjects'] as $index => $car) : ?>
+            <li>
+                <?php echo $car->getModel() . " | " . $car->getPrice() . " | " . $car->getExchangeRate(); ?>
+                <?php if ($calculatedPrice !== null && isset($_POST['index']) && $_POST['index'] == $index): ?>
+                    <?php echo " | Value: " . $calculatedPrice; ?>
+                <?php endif; ?>
+                <form action="" method="post">
+                    <button type="submit" name="calculatePrice">Calculate Price</button>
+                    <input type="hidden" name="index" value="<?php echo $index ?>">
+                </form>
 
-            <form action="" method="post">
-                <button type="submit" name="detailsCar">Check or edit Car Details</button>
-                <input type="hidden" name="index" value="<?php echo $index ?>">
-            </form>
-            <form action="" method="post">
-                <button type="submit" name="deleteCar">Delete Car</button>
-                <input type="hidden" name="index" value="<?php echo $index ?>">
-            </form>
+                <form action="LAB11_Ex05-2.php" method="post">
+                    <button type="submit" name="detailsCar">Check or edit Car Details</button>
+                    <input type="hidden" name="index" value="<?php echo $index ?>">
+                </form>
+                <form action="" method="post">
+                    <button type="submit" name="deleteCar">Delete Car</button>
+                    <input type="hidden" name="index" value="<?php echo $index ?>">
+                </form>
+            </li>
         <?php endforeach ?>
     </ul>
 </div>
-
 </body>
 </html>
