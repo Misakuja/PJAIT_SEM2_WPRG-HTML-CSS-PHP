@@ -10,6 +10,7 @@ $firstFormSubmitted = false;
 
 if (!isset($_SESSION['cars'])) {
     $_SESSION['cars'] = [];
+    $_SESSION['car_count'] = 0;
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['carChoice'])) {
@@ -39,6 +40,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['model'])) {
         'firstOwner' => $firstOwner,
         'years' => $years
     ];
+
+    $_SESSION['car_count']++;
 }
 
 function createObject($carChoice, $model, $price, $exchangeRate, $alarm, $radio, $climatronic, $firstOwner, $years) {
@@ -53,12 +56,19 @@ function createObject($carChoice, $model, $price, $exchangeRate, $alarm, $radio,
 // delete / edit / check / calc price | logic below
 function deleteCar($index) : void {
     unset ($_SESSION['cars'][$index]);
+    $_SESSION['car_count']--;
+    $_SESSION['cars'] = array_values($_SESSION['cars']);
 }
 if(isset($_POST["deleteCar"]) && isset($_POST["index"])) {
     $index = $_POST["index"];
     deleteCar($index);
 }
-
+if(isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
+    $index = $_POST["index"];
+    $car = $_SESSION['cars'][$index];
+    $carValue = $car->value();
+    echo $carValue;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +80,7 @@ if(isset($_POST["deleteCar"]) && isset($_POST["index"])) {
 <body>
 <div class="carCounter">
     <?php
-    echo "Car Counter:" . Car::getCount(); //no work?
+    echo "Car Counter: " . $_SESSION['car_count'];
     ?>
 </div>
 <div class="formChoice">
@@ -132,6 +142,7 @@ if(isset($_POST["deleteCar"]) && isset($_POST["index"])) {
             <form action="" method="post">
                 <button type="submit" name="calculatePrice">Calculate Price</button>
             </form>
+
             <form action="" method="post">
                 <button type="submit" name="detailsCar">Check or edit Car Details</button>
             </form>
