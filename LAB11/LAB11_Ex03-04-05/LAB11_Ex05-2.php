@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Car Site</title>
-    <link href="-" rel="stylesheet" type="text/css">
+    <link href="LAB11_Ex05.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="carDetailedInfo">
