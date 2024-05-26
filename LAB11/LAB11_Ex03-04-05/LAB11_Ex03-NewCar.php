@@ -10,20 +10,20 @@ class NewCar extends Car {
         $this->climatronic = $climatronic;
     }
 
-    function getAlarm(): bool {
-        return $this->alarm;
+    function getAlarm(): string {
+        return $this->alarm ? 'Yes' : 'No';
     }
     function setAlarm($alarmInput): void {
         $this->alarm = $alarmInput;
     }
-    function getRadio(): bool {
-        return $this->radio;
+    function getRadio(): string {
+        return $this->radio ? 'Yes' : 'No';
     }
     function setRadio($radioInput): void {
         $this->radio = $radioInput;
     }
-    function getClimatronic(): bool {
-        return $this->climatronic;
+    function getClimatronic(): string {
+        return $this->climatronic ? 'Yes' : 'No';
     }
     function setClimatronic($climatronicInput): void {
         $this->climatronic = $climatronicInput;
@@ -36,9 +36,6 @@ class NewCar extends Car {
         return $baseCarValue;
     }
     function __toString() {
-        $alarmYesNo = $this->alarm ? 'Yes' : 'No';
-        $radioYesNo = $this->radio ? 'Yes' : 'No';
-        $climatronicYesNo = $this->climatronic ? 'Yes' : 'No';
-        return parent::__toString() . " Alarm: $alarmYesNo, Radio: $radioYesNo, Climatronic: $climatronicYesNo";
+        return parent::__toString() . " Alarm: " . $this->getAlarm() . ", Radio: "  . $this->getRadio() . ", Climatronic: " . $this->getClimatronic();
     }
 }

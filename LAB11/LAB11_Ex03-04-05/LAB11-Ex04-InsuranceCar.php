@@ -11,7 +11,7 @@ class InsuranceCar extends NewCar {
     }
 
     function getFirstOwner(): string {
-        return $this->firstOwner;
+        return $this->firstOwner ? 'Yes' : 'No';
     }
 
     function setFirstOwner($ownerInput): void {
@@ -34,7 +34,6 @@ class InsuranceCar extends NewCar {
     }
 
     function __toString() {
-        $firstOwnerYesNo = $this->firstOwner ? 'Yes' : 'No';
-        return parent::__toString() . " First owner: $firstOwnerYesNo, Years: $this->years";
+        return parent::__toString() . " First owner: " . $this->getFirstOwner() . ", Years: $this->years";
     }
 }
