@@ -31,6 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST['yearsChange'])) $_SESSION['chosenCar']->setYears($_POST['yearsChange']);
     }
 
+    if (isset($_SESSION['calculatedPrices'][$_SESSION['indexSession']])) {
+        $_SESSION['calculatedPrices'][$_SESSION['indexSession']] = $_SESSION['chosenCar']->value();
+    }
+
     $_SESSION['carsObjects'][$_SESSION['indexSession']] = $_SESSION['chosenCar'];
 }
 

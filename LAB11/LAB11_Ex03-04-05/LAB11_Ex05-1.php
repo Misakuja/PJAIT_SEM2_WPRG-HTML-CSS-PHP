@@ -6,7 +6,6 @@ require_once "LAB11-Ex04-InsuranceCar.php";
 session_start();
 
 $firstFormSubmitted = false;
-$calculatedPrice = null;
 
 if (!isset($_SESSION['carsObjects'])) {
     $_SESSION['carsObjects'] = [];
@@ -15,8 +14,11 @@ if (!isset($_SESSION['carsObjects'])) {
 if (!isset($_SESSION['carChoice'])) {
     $_SESSION['carChoice'] = null;
 }
+if (!isset($_SESSION['calculatedPrices'])) {
+    $_SESSION['calculatedPrices'] = [];
+}
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["firstFormSubmit"])) {
     if (isset($_POST['carChoice'])) $_SESSION['carChoice'] = $_POST['carChoice'];
     $firstFormSubmitted = true;
 }
@@ -39,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['model'])) {
     $_SESSION['car_count']++;
 }
 
-function createObject($carChoice, $model, $price, $exchangeRate, $alarm, $radio, $climatronic, $firstOwner, $years) {
+function createObject($carChoice, $model, $price, $exchangeRate, $alarm, $radio, $climatronic, $firstOwner, $years) : NewCar|Car|InsuranceCar|null {
     return match ($carChoice) {
         "car" => new Car($model, $price, $exchangeRate),
         "newCar" => new NewCar($model, $price, $exchangeRate, $alarm, $radio, $climatronic),
@@ -51,23 +53,22 @@ function createObject($carChoice, $model, $price, $exchangeRate, $alarm, $radio,
 // delete / edit / check / calc price | logic below
 function deleteCar($index) : void {
     unset ($_SESSION['carsObjects'][$index]);
+    unset ($_SESSION['calculatedPrices'][$index]);
     $_SESSION['car_count']--;
     $_SESSION['cars'] = array_values($_SESSION['carsObjects']);
+    $_SESSION['calculatedPrices'] = array_values($_SESSION['calculatedPrices']);
 }
 if(isset($_POST["deleteCar"]) && isset($_POST["index"])) {
     $index = $_POST["index"];
     deleteCar($index);
 }
-function calcPrice() : int|float {
-    if (isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
-        $index = $_POST["index"];
-        $car = $_SESSION['carsObjects'][$index];
-        return $car->value();
-    }
-    return 0;
+function calcPrice($index) : int|float {
+    $car = $_SESSION['carsObjects'][$index];
+    return $car->value();
 }
 if (isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
-    $calculatedPrice = calcPrice();
+    $index = $_POST["index"];
+    $_SESSION['calculatedPrices'][$index] = calcPrice($index);
 }
 ?>
 <!DOCTYPE html>
@@ -94,6 +95,7 @@ if (isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
                 </select>
             </label>
             <button type='submit'>Send</button>
+            <input type="hidden" name="firstFormSubmit" value="firstFormSubmit">
         </fieldset>
     </form>
 </div>
@@ -138,10 +140,12 @@ if (isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
     <ul>
         <?php if($_SESSION['carsObjects'] != null) foreach ($_SESSION['carsObjects'] as $index => $car) : ?>
             <li>
-                <?php echo $car->getModel() . " | " . $car->getPrice() . " | " . $car->getExchangeRate(); ?>
-                <?php if ($calculatedPrice !== null && isset($_POST['index']) && $_POST['index'] == $index): ?>
-                    <?php echo " | Value: " . $calculatedPrice; ?>
-                <?php endif; ?>
+                <?php
+                echo $car->getModel() . " | " . $car->getPrice() . " | " . $car->getExchangeRate();
+                if (isset($_SESSION['calculatedPrices'][$index])) {
+                    echo " | Value: " . $_SESSION['calculatedPrices'][$index];
+                }
+                ?>
                 <form action="" method="post">
                     <button type="submit" name="calculatePrice">Calculate Price</button>
                     <input type="hidden" name="index" value="<?php echo $index ?>">
