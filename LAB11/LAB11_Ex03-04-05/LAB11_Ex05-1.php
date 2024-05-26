@@ -79,9 +79,10 @@ if (isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
     <link href="LAB11_Ex05.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="page">
 <div class="carCounter">
     <?php
-    echo "Car Counter: " . $_SESSION['car_count'];
+    echo "<h1>Car Counter: " . $_SESSION['car_count'] . "</h1>";
     ?>
 </div>
 <div class="formChoice">
@@ -89,12 +90,13 @@ if (isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
         <fieldset>
             <label>
                 <select name="carChoice">
+                    <option value="choice" name="choice" disabled selected>Choose Car Type</option>
                     <option value="car" name="car">Car</option>
                     <option value="newCar" name="newCar">NewCar</option>
                     <option value="insuranceCar" name="insuranceCar">InsuranceCar</option>
                 </select>
             </label>
-            <button type='submit'>Send</button>
+            <button type='submit'>Submit</button>
             <input type="hidden" name="firstFormSubmit" value="firstFormSubmit">
         </fieldset>
     </form>
@@ -103,65 +105,72 @@ if (isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
 <div class="formInput">
     <form method='post' action="">
         <fieldset>
-            <label for="model">Model:</label>
+            <label for="model">Model:
             <input type='text' id='model' name='model' required>
-
-            <label for="price">Price:</label>
+            </label>
+            <label for="price">Price:
             <input type='number' id='price' name='price' required>
-
-            <label for="exchangeRate">Exchange Rate:</label>
+            </label>
+            <label for="exchangeRate">Exchange Rate:
             <input type='number' id='exchangeRate' name='exchangeRate' required>
-
+            </label>
             <?php if ($_SESSION['carChoice'] === 'newCar' || $_SESSION['carChoice'] === "insuranceCar"): ?>
-                <label for="alarm">Alarm:</label>
+                <label for="alarm">Alarm:
                 <input type='checkbox' id='alarm' name='alarm'>
-
-                <label for="radio">Radio:</label>
+                </label>
+                <label for="radio">Radio:
                 <input type='checkbox' id='radio' name='radio'>
-
-                <label for="climatronic">Climatronic:</label>
+                </label>
+                <label for="climatronic">Climatronic:
                 <input type='checkbox' id='climatronic' name='climatronic'>
+                </label>
             <?php endif ?>
 
             <?php if ($_SESSION['carChoice'] === 'insuranceCar'): ?>
-                <label for="firstOwner">First Owner:</label>
+                <label for="firstOwner">First Owner:
                 <input type='checkbox' id='firstOwner' name='firstOwner'>
+                </label>
 
-                <label for="years">Years:</label>
+                <label for="years">Years:
                 <input type='number' id='years' name='years' required>
+                </label>
             <?php endif ?>
 
             <button type='submit'>Submit</button>
         </fieldset>
     </form>
-    <?php endif ?>
 </div>
+<?php endif ?>
 <div class="carList">
     <ul>
         <?php if($_SESSION['carsObjects'] != null) foreach ($_SESSION['carsObjects'] as $index => $car) : ?>
             <li>
                 <?php
-                echo $car->getModel() . " | " . $car->getPrice() . " | " . $car->getExchangeRate();
+                echo "<p>Model: " . $car->getModel() . "<br>Price: " . $car->getPrice() . " EUR" . "<br>Exchange Rate: " . $car->getExchangeRate() . " PLN";
                 if (isset($_SESSION['calculatedPrices'][$index])) {
-                    echo " | Value: " . $_SESSION['calculatedPrices'][$index];
+                    echo "<br>Value: " . $_SESSION['calculatedPrices'][$index];
                 }
+                echo "</p>";
                 ?>
+                <div class="listButtons">
                 <form action="" method="post">
                     <button type="submit" name="calculatePrice">Calculate Price</button>
                     <input type="hidden" name="index" value="<?php echo $index ?>">
                 </form>
 
                 <form action="LAB11_Ex05-2.php" method="post">
-                    <button type="submit" name="detailsCar">Check or edit Car Details</button>
+                    <button type="submit" name="detailsCar">Check or edit car details</button>
                     <input type="hidden" name="index" value="<?php echo $index ?>">
                 </form>
                 <form action="" method="post">
                     <button type="submit" name="deleteCar">Delete Car</button>
                     <input type="hidden" name="index" value="<?php echo $index ?>">
                 </form>
+                </div>
             </li>
         <?php endforeach ?>
     </ul>
+</div>
 </div>
 </body>
 </html>
