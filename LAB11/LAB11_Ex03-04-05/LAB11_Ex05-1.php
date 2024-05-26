@@ -1,14 +1,14 @@
 <?php
-session_start();
-
 require_once "LAB11_Ex03-Car.php";
 require_once "LAB11_Ex03-NewCar.php";
 require_once "LAB11-Ex04-InsuranceCar.php";
 
+session_start();
+
 $firstFormSubmitted = false;
 
-if (!isset($_SESSION['cars'])) {
-    $_SESSION['cars'] = [];
+if (!isset($_SESSION['carsObjects'])) {
+    $_SESSION['carsObjects'] = [];
     $_SESSION['car_count'] = 0;
 }
 if (!isset($_SESSION['carChoice'])) {
@@ -34,20 +34,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['model'])) {
 
     $car = createObject($carChoice, $model, $price, $exchangeRate, $alarm, $radio, $climatronic, $firstOwner, $years);
 
-    echo $car;
-    echo $carChoice;
-
-    $_SESSION['cars'][] = [
-        'model' => $model,
-        'price' => $price,
-        'exchangeRate' => $exchangeRate,
-        'alarm' => $alarm,
-        'radio' => $radio,
-        'climatronic' => $climatronic,
-        'firstOwner' => $firstOwner,
-        'years' => $years
-    ];
-
     $_SESSION['carsObjects'][] = $car;
     $_SESSION['car_count']++;
 }
@@ -64,8 +50,10 @@ function createObject($carChoice, $model, $price, $exchangeRate, $alarm, $radio,
 // delete / edit / check / calc price | logic below
 function deleteCar($index) : void {
     unset ($_SESSION['cars'][$index]);
+    unset ($_SESSION['carsObjects'][$index]);
     $_SESSION['car_count']--;
     $_SESSION['cars'] = array_values($_SESSION['cars']);
+    $_SESSION['cars'] = array_values($_SESSION['carsObjects']);
 }
 if(isset($_POST["deleteCar"]) && isset($_POST["index"])) {
     $index = $_POST["index"];
@@ -144,8 +132,8 @@ if(isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
 </div>
 <div class="carList">
     <ul>
-        <?php foreach ($_SESSION['cars'] as $index => $carData) : ?>
-            <?php echo "<li>" . $carData['model'] . " | " . $carData['price'] . " | " . $carData['exchangeRate'] . "</li>"; ?>
+        <?php if($_SESSION['carsObjects'] != null)foreach ($_SESSION['carsObjects'] as $index => $car) : ?>
+            <?php echo "<li>" . $car->getModel() . " | " . $car->getPrice() . " | " . $car->getExchangeRate() . "</li>"; ?>
             <form action="" method="post">
                 <button type="submit" name="calculatePrice">Calculate Price</button>
                 <input type="hidden" name="index" value="<?php echo $index ?>">
