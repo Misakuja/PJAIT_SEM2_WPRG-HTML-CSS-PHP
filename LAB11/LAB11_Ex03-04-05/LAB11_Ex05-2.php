@@ -17,16 +17,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($_SESSION['chosenCar'] instanceof NewCar || $_SESSION['chosenCar'] instanceof InsuranceCar) {
         if (isset($_POST['alarmChange'])) $_SESSION['chosenCar']->setAlarm(true);
-        if (!isset($_POST['alarmChange'])) $_SESSION['chosenCar']->setAlarm(false);
+        else $_SESSION['chosenCar']->setAlarm(false);
         if (isset($_POST['radioChange'])) $_SESSION['chosenCar']->setRadio(true);
-        if (!isset($_POST['radioChange'])) $_SESSION['chosenCar']->setRadio(false);
+        else $_SESSION['chosenCar']->setRadio(false);
         if (isset($_POST['climatronicChange'])) $_SESSION['chosenCar']->setClimatronic(true);
-        if (!isset($_POST['climatronicChange'])) $_SESSION['chosenCar']->setClimatronic(false);
+        else $_SESSION['chosenCar']->setClimatronic(false);
     }
 
     if ($_SESSION['chosenCar'] instanceof InsuranceCar) {
         if (isset($_POST['firstOwnerChange'])) $_SESSION['chosenCar']->setFirstOwner(true);
-        if (!isset($_POST['firstOwnerChange'])) $_SESSION['chosenCar']->setFirstOwner(false);
+        else $_SESSION['chosenCar']->setFirstOwner(false);
 
         if (isset($_POST['yearsChange'])) $_SESSION['chosenCar']->setYears($_POST['yearsChange']);
     }
@@ -47,18 +47,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="LAB11_Ex05.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="page">
 <div class="carDetailedInfo">
     <ul>
-        <?php echo "<li>" . $_SESSION['chosenCar']->getModel() . " | " . $_SESSION['chosenCar']->getPrice() . " | " . $_SESSION['chosenCar']->getExchangeRate() . "</li>"; ?>
+        <?php echo "<li>Model: " . $_SESSION['chosenCar']->getModel() . "</li><li>Price: " . $_SESSION['chosenCar']->getPrice() . "</li><li>Exchange Rate: " . $_SESSION['chosenCar']->getExchangeRate() . "</li>"; ?>
         <?php
         if ($_SESSION['chosenCar'] instanceof NewCar || $_SESSION['chosenCar'] instanceof InsuranceCar) {
-            echo "<li>" . $_SESSION['chosenCar']->getAlarm() . "</li>";
-            echo "<li>" . $_SESSION['chosenCar']->getRadio() . "</li>";
-            echo "<li>" . $_SESSION['chosenCar']->getClimatronic() . "</li>";
+            echo "<li>Alarm: " . $_SESSION['chosenCar']->getAlarm() . "</li>";
+            echo "<li>Radio: " . $_SESSION['chosenCar']->getRadio() . "</li>";
+            echo "<li>Climatronic: " . $_SESSION['chosenCar']->getClimatronic() . "</li>";
         }
         if ($_SESSION['chosenCar'] instanceof InsuranceCar) {
-            echo "<li>" . $_SESSION['chosenCar']->getFirstOwner() . "</li>";
-            echo "<li>" . $_SESSION['chosenCar']->getYears() . "</li>";
+            echo "<li>First Owner: " . $_SESSION['chosenCar']->getFirstOwner() . "</li>";
+            echo "<li>Years: " . $_SESSION['chosenCar']->getYears() . "</li>";
         }
         ?>
     </ul>
@@ -66,32 +67,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="formChange">
     <form method='post' action="">
         <fieldset>
-            <label for="modelChange">Model:</label>
+            <label for="modelChange">Model:
             <input type='text' id='modelChange' name='modelChange'>
-
-            <label for="priceChange">Price:</label>
+            </label>
+            <label for="priceChange">Price:
             <input type='number' id='priceChange' name='priceChange'>
-
-            <label for="exchangeRateChange">Exchange Rate:</label>
+            </label>
+            <label for="exchangeRateChange">Exchange Rate:
             <input type='number' id='exchangeRateChange' name='exchangeRateChange'>
+            </label>
 
             <?php if ($_SESSION['chosenCar'] instanceof NewCar || $_SESSION['chosenCar'] instanceof InsuranceCar): ?>
-                <label for="alarmChange">Alarm:</label>
+                <label for="alarmChange">Alarm:
                 <input type='checkbox' id='alarmChange' name='alarmChange'>
-
-                <label for="radioChange">Radio:</label>
+                </label>
+                <label for="radioChange">Radio:
                 <input type='checkbox' id='radioChange' name='radioChange'>
-
-                <label for="climatronicChange">Climatronic:</label>
+                </label>
+                <label for="climatronicChange">Climatronic:
                 <input type='checkbox' id='climatronicChange' name='climatronicChange'>
+                </label>
             <?php endif ?>
 
             <?php if ($_SESSION['chosenCar'] instanceof InsuranceCar): ?>
-                <label for="firstOwnerChange">First Owner:</label>
+                <label for="firstOwnerChange">First Owner:
                 <input type='checkbox' id='firstOwnerChange' name='firstOwnerChange'>
-
-                <label for="yearsChange">Years:</label>
+                </label>
+                <label for="yearsChange">Years:
                 <input type='number' id='yearsChange' name='yearsChange'>
+                </label>
             <?php endif ?>
 
             <button type="submit" name="submitChangedChange">Submit Changes</button>
@@ -100,8 +104,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 <div class="formGoBack">
     <form action="LAB11_Ex05-1.php" method="post">
-        <button type='submit'>goBack</button>
+        <button type='submit'>Back to main page</button>
     </form>
+</div>
 </div>
 </body>
 </html>

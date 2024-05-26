@@ -39,8 +39,8 @@ html, body {
     }
 }
 
-/*Form - input*/
-.formInput {
+/*Form - input + second page*/
+.formInput, .formChange {
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -59,11 +59,13 @@ html, body {
             float: right;
             margin-left: 10px;
         }
+
         input[type='checkbox'] {
             margin-right: 55%;
         }
 
     }
+
     button, input[type='checkbox'], input[type='number'], input[type='text'] {
         padding: 5px;
         border: 1px solid #ccc;
@@ -128,5 +130,25 @@ html, body {
         button:active {
             background-color: #8c8c8c;
         }
+    }
+}
+.formGoBack button {
+    margin-top: 5px;
+    padding: 15px 50px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 1px darkgrey;
+}
+.carDetailedInfo {
+    ul {
+        list-style: none;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px 1px darkgrey;
+        padding: 15px 50px;
+        margin-top: 20px;
+        flex: 1 1 calc(33.333% - 40px);
+        box-sizing: border-box;
     }
 }
