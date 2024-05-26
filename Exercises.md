@@ -503,4 +503,6 @@ Klasę NewCar oraz Car z poprzedniego zadania wklej tutaj.
   - Edycję danych samochodu.
   - Usunięcie samochodu z listy. Przykładowe wyglądy strony:
 
+<img src="https://i.imgur.com/8tHSDyo.png" width="50%">
+
 ----
