@@ -10,7 +10,7 @@ if (isset($_POST['index'])) {
 }
 $_SESSION['chosenCar'] = $_SESSION['carsObjects'][$_SESSION['indexSession']];
 // setters below
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitChange'])) {
     if (isset($_POST['modelChange'])) $_SESSION['chosenCar']->setModel($_POST['modelChange']);
     if (isset($_POST['priceChange'])) $_SESSION['chosenCar']->setPrice($_POST['priceChange']);
     if (isset($_POST['exchangeRateChange'])) $_SESSION['chosenCar']->setExchangeRate($_POST['exchangeRateChange']);
@@ -53,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php echo "<li>Model: " . $_SESSION['chosenCar']->getModel() . "</li><li>Price: " . $_SESSION['chosenCar']->getPrice() . "</li><li>Exchange Rate: " . $_SESSION['chosenCar']->getExchangeRate() . "</li>"; ?>
         <?php
         if ($_SESSION['chosenCar'] instanceof NewCar || $_SESSION['chosenCar'] instanceof InsuranceCar) {
+
             echo "<li>Alarm: " . $_SESSION['chosenCar']->getAlarm() . "</li>";
             echo "<li>Radio: " . $_SESSION['chosenCar']->getRadio() . "</li>";
             echo "<li>Climatronic: " . $_SESSION['chosenCar']->getClimatronic() . "</li>";
@@ -99,6 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php endif ?>
 
             <button type="submit" name="submitChangedChange">Submit Changes</button>
+            <input type="hidden" name="submitChange" value="submitChange">
         </fieldset>
     </form>
 </div>
