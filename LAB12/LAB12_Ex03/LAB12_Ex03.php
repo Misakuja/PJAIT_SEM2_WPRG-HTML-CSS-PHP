@@ -3,6 +3,7 @@ $dbhost = 'localhost';
 $dbuser = 'Misakuja';
 $dbpass = '';
 $dbname = 'LAB12Ex03';
+$notif = null;
 try {
     $pdo = new PDO("mysql:host=$dbhost", $dbuser, $dbpass);
 
@@ -27,8 +28,14 @@ try {
         $gender = $_POST["registerGender"];
         $password = password_hash($_POST["registerPassword"], PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO registered (User_first_name, User_last_name, User_email, User_gender, User_password) VALUES ('$firstName', '$lastName', '$email', '$gender', '$password')";
-        $pdo->exec($sql);
+        $checkEmail = $pdo->query("SELECT * FROM Registered WHERE User_email = '$email'")->fetch(PDO::FETCH_ASSOC);
+        if ($checkEmail) {
+            $notif = "Email already registered";
+        } else {
+            $sql = "INSERT INTO registered (User_first_name, User_last_name, User_email, User_gender, User_password) VALUES ('$firstName', '$lastName', '$email', '$gender', '$password')";
+            $pdo->exec($sql);
+            $notif = "Registered successfully";
+        }
     }
 
     $registered = $pdo->query("SELECT * FROM Registered")->fetchAll(PDO::FETCH_ASSOC);
@@ -45,29 +52,34 @@ try {
     <link href="LAB12_Ex03.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="formWrap">
-    <form method='post' action="">
-        <fieldset>
-            <legend>Registration Form</legend>
-            <label for="registerFirstName">First Name:</label>
-            <input type="text" id="registerFirstName" name="registerFirstName" required>
-            <label for="registerLastName">Last Name:</label>
-            <input type="text" id="registerLastName" name="registerLastName" required>
-            <label for="registerPassword">Password:</label>
-            <input type="password" id="registerPassword" name="registerPassword" required>
-            <label for="registerEmail">Email:</label>
-            <input type="email" id="registerEmail" name="registerEmail" required>
-            <label for="registerGender">Gender:</label>
-            <select id="registerGender" name="registerGender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-            <label>
-            <button type="submit" name="register">Register</button>
-            </label>
-        </fieldset>
-    </form>
+<div class="page">
+    <?php if ($notif) : ?>
+        <h1><?= $notif ?> </h1>
+    <?php endif ?>
+    <div class="formWrap">
+        <form method='post' action="">
+            <fieldset>
+                <legend>Registration Form</legend>
+                <label for="registerFirstName">First Name:</label>
+                <input type="text" id="registerFirstName" name="registerFirstName" required>
+                <label for="registerLastName">Last Name:</label>
+                <input type="text" id="registerLastName" name="registerLastName" required>
+                <label for="registerPassword">Password:</label>
+                <input type="password" id="registerPassword" name="registerPassword" required>
+                <label for="registerEmail">Email:</label>
+                <input type="email" id="registerEmail" name="registerEmail" required>
+                <label for="registerGender">Gender:</label>
+                <select id="registerGender" name="registerGender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <label>
+                    <button type="submit" name="register">Register</button>
+                </label>
+            </fieldset>
+        </form>
+    </div>
 </div>
 </body>
 </html>

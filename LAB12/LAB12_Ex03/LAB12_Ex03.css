@@ -7,13 +7,19 @@ html, body {
     display: flex;
     justify-content: center;
 }
+.page {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    align-items: center;
+}
 
 .formWrap {
     background-color: white;
     width: 50%;
 
     fieldset {
-        width: 100%;
         margin-bottom: 15px;
         border: 1px solid #7e7e7e;
         border-radius: 10px;
