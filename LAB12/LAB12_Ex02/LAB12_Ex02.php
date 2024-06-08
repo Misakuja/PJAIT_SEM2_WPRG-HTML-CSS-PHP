@@ -16,9 +16,6 @@ try {
     $pdo->exec("CREATE DATABASE IF NOT EXISTS $dbname");
     $pdo->exec("USE $dbname");
 
-    $persons = $pdo->query("SELECT * FROM Person")->fetchAll(PDO::FETCH_ASSOC);
-    $cars = $pdo->query("SELECT * FROM Cars")->fetchAll(PDO::FETCH_ASSOC);
-
     $personTable = "CREATE TABLE IF NOT EXISTS Person ( 
     Person_id INT AUTO_INCREMENT, 
     Person_first_name VARCHAR(255) NOT NULL, 
@@ -39,6 +36,9 @@ try {
     );";
     $pdo->exec($carsTable);
     $notif = "Successfully created tables Person and Cars.\n";
+
+    $persons = $pdo->query("SELECT * FROM Person")->fetchAll(PDO::FETCH_ASSOC);
+    $cars = $pdo->query("SELECT * FROM Cars")->fetchAll(PDO::FETCH_ASSOC);
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["addPerson"])) {
         $firstName = $_POST["personFirstName"];
@@ -118,7 +118,7 @@ try {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Managing MySQL Database</title>
     <link href="LAB12_Ex02.css" rel="stylesheet" type="text/css">
 </head>
 <body>
