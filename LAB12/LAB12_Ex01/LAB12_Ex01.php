@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <link href="" rel="stylesheet" type="text/css">
+    <title>Manage MySQL Table</title>
+    <link href="LAB12_Ex01.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<h1>Manage MySQL Table</h1>
 <form method='post' action="">
     <fieldset>
         <button type='submit'>Drop Table</button>
@@ -18,23 +19,17 @@
 mysqli_report(MYSQLI_REPORT_OFF);
 
 $dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = 'MyN3wP4ssw0rd';
-$dbname = 'Student';
-$mysqli = new mysqli($dbhost, $dbuser, $dbpass);
-
-$mysqli->query("CREATE DATABASE IF NOT EXISTS $dbname");
-$mysqli->select_db($dbname);
+$dbuser = 'Misakuja';
+$dbpass = '';
+$dbname = 'student';
+$mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
 if ($mysqli->connect_errno) {
-    printf(
-        "Connect failed: %s<br />", $mysqli->connect_error);
+    printf("Connect failed: %s<br />", $mysqli->connect_error);
     exit();
 }
-
-if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['dropTable'])) {
-    mysqli_query($mysqli, "DROP TABLE IF EXISTS $dbname");
-}
+$mysqli->query("CREATE DATABASE IF NOT EXISTS $dbname");
+$mysqli->select_db($dbname);
 
 $sql = "CREATE TABLE IF NOT EXISTS Student( " .
     "studentID INT NOT NULL AUTO_INCREMENT, " .
@@ -44,7 +39,13 @@ $sql = "CREATE TABLE IF NOT EXISTS Student( " .
     "DateOfBirth DATE NOT NULL, " .
     "PRIMARY KEY ( studentID )); ";
 
-if ($mysqli->query($sql)) {
+if ($mysqli->query($sql) === TRUE) {
     printf("Table " . $dbname . " created successfully.<br />");
-} else printf("Table " . $dbname . " already exists.<br />");
+}
+
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['dropTable'])) {
+    $mysqli->query("DROP TABLE student");
+    printf("Table dropped successfully<br>");
+}
+$mysqli->close();
 ?>
