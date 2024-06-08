@@ -4,6 +4,7 @@ $dbuser = 'Misakuja';
 $dbpass = '';
 $dbname = 'LAB12Ex03';
 $notif = null;
+$rowCount = null;
 try {
     $pdo = new PDO("mysql:host=$dbhost", $dbuser, $dbpass);
 
@@ -20,6 +21,9 @@ try {
     PRIMARY KEY (User_id)
     )";
     $pdo->exec($registeredTable);
+
+    $rowCount = $pdo->query("SELECT * FROM Registered")->rowCount();
+
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
         $firstName = $_POST["registerFirstName"];
@@ -56,6 +60,11 @@ try {
     <?php if ($notif) : ?>
         <h1><?= $notif ?> </h1>
     <?php endif ?>
+
+    <div class="counter">
+        <p>Amount of registered users: <?= $rowCount ?> </p>
+    </div>
+
     <div class="formWrap">
         <form method='post' action="">
             <fieldset>

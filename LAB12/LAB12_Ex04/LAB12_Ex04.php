@@ -7,7 +7,8 @@ $dbpass = '';
 $dbname = 'LAB12Ex04';
 $registered = null;
 $user = null;
-$notif = 0;
+$notif = null;
+$rowCount = null;
 try {
     $pdo = new PDO("mysql:host=$dbhost", $dbuser, $dbpass);
 
@@ -26,6 +27,8 @@ try {
     $pdo->exec($registeredTable);
 
     $registered = $pdo->query("SELECT * FROM Registered")->fetchAll(PDO::FETCH_ASSOC);
+
+    $rowCount = $pdo->query("SELECT * FROM Registered")->rowCount();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
         $firstName = $_POST["registerFirstName"];
@@ -122,6 +125,11 @@ try {
         <h1>Notifications:</h1>
         <p><?= $notif ?> </p>
     <?php endif ?>
+
+    <div class="counter">
+        <p>Amount of registered users: <?= $rowCount ?> </p>
+    </div>
+
     <div class="formWrap register">
         <form method='post' action="">
             <fieldset>
