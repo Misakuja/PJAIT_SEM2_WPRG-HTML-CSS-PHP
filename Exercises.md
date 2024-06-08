@@ -506,3 +506,42 @@ Klasę NewCar oraz Car z poprzedniego zadania wklej tutaj.
 <img src="https://i.imgur.com/8tHSDyo.png" width="50%">
 
 ----
+
+# LAB12
+
+1. Za pomocą skryptu PHP oraz mysqli utwórz następującą tabelę w bazie danych mysql: 
+- Strona powinna wyświetlić komunikat o utworzeniu tabeli oraz powinna obsłużyć wyjątek, kiedy tabela będzie już utworzona. 
+- Strona powinna posiadać przycisk kasowania tabeli, dzięki któremu usunie się ona z bazy a po jej odświeżeniu utworzy się ponownie. 
+
+<img src="https://i.imgur.com/iChOkiA.png" width="50%">
+
+----
+
+2. Na komputerze lokalnym dokonaj podłączenia się z bazą MySQL za pomocą PDO. 
+Za pomocą skryptu w PHP utwórz następujące tabele w bazie danych:
+
+<img src="https://i.imgur.com/kxzHqdi.png" width="50%">
+
+Strona powinna wyświetlić komunikat o utworzeniu tabeli oraz powinna obsłużyć wyjątek, kiedy tabela będzie już utworzona. Strona powinna posiadać również następujące funkcjonalności: 
+- Formularz dodania obiektu klasy Person oraz Cars. W Cars pole Person_id powinno być wybieralne z listy. 
+- Możliwość wyświetlenia wszystkich danych z obydwu tabel.
+- Każdy rekord danych powinien posiadać przycisk edycji danych (w wyświetlonych danych). Po naciśnięciu tego przycisku powinien pokazać się formularz z uzupełnionymi danymi, na których chcemy dokonać zmiany.
+- Każdy rekord danych powinien posiadać przycisk usunięcia danych. Po naciśnięciu przycisku powinien się wyświetlić komunikat potwierdzający. 
+- Możliwość wyszukiwania wyników tabeli wedle określonego pola
+
+----
+
+3. Napisz stronę w PHP, który będzie zawierał formularz rejestracyjny użytkowników do serwisu. Użytkownicy powinni podać co najmniej 5 różnych danych.
+
+- Strona powinna wyświetlić ilość zarejestrowanych użytkowników i zapisywać ich do utworzonej dla nich bazy danych.
+- Hasła powinny być kodowane w bazie (za pomocą funkcji haszujących).
+
+----
+
+4. Do poprzedniego zadania dopisz formularz logowania się użytkownika do serwisu. Po zalogowaniu użytkownik: 
+- Może zmienić swoje dane.
+- Może usunąć konto. 
+- Rozważ sytuację poprawnego logowania oraz niepoprawnego logowania. Skorzystaj z sesji albo ciasteczek. 
+- Dodatkowo w przypadku utworzenia mechanizmu resetowania hasła dla użytkownika. 
+
+----
