@@ -3,24 +3,113 @@ html, body {
     width: 100%;
     margin: 0;
 
+    font-family: "Segoe UI", sans-serif;
+    font-size: 15px;
+
     display: flex;
     justify-content: center;
+
+    background-color: #e3e3e3;
 }
+h1 {
+    letter-spacing: 8px;
+}
+
 .page {
+    background-color: white;
     text-align: center;
-    width: 75%;
+    width: 80%;
+    overflow-y: auto;
+
+    justify-content: center;
 }
-.tableWrap {
+
+.formWrap {
     display: flex;
 
+    flex-direction: column;
+    align-items: center;
+
+    legend {
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+    }
+
+    fieldset {
+        width: 90%;
+        margin-bottom: 15px;
+        border: 1px solid #7e7e7e;
+        border-radius: 10px;
+    }
+
+    input, select {
+        width: 50%;
+        padding: 5px;
+        margin-bottom: 5px;
+        box-sizing: border-box;
+        border-radius: 8px;
+        border: 1px solid darkgrey;
+    }
+
+    label {
+        display: block;
+        padding: 5px;
+        margin-bottom: 5px;
+        box-sizing: border-box;
+        width: 50%;
+    }
+
+    button {
+        padding: 5px 15px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    button:hover {
+        background-color: #ddd;;
+    }
 }
 
-/*temp*/
-table {
-    border-spacing: 0;
+.tableWrap {
+    table {
+        border-collapse: collapse;
+        width: 90%;
+        margin-bottom: 20px;
+    }
 
     th, td {
-        border: 1px solid darkgrey;
-        padding: 20px;
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    th {
+        background-color: #d3d2d2;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    button {
+        padding: 5px 15px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    button:hover {
+        background-color: #ddd;;
     }
 }

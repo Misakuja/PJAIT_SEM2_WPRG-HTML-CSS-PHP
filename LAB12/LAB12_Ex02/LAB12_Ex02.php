@@ -183,9 +183,9 @@ try {
                             <option value="Cars_day_of_buy">Car Date of Buy</option>
                         </select>
                     </label>
-                    <label for="searchValue">Search Value</label>
+                    <label for="searchValue">Search Value:
                     <input type='text' id='searchValue' name='searchValue' required>
-
+                    </label>
                     <button type='submit' name='search'>Search</button>
                 </fieldset>
             </form>
@@ -201,14 +201,14 @@ try {
             <form method='post' action="">
                 <fieldset>
                     <legend>Edit Person</legend>
-                    <label for="firstNameEdit">First Name</label>
+                    <label for="firstNameEdit">First Name:
                     <input type='text' id='firstNameEdit' name='personFirstNameEdit'
                            value='<?= $chosenPerson[0]['Person_first_name'] ?>' required>
-
-                    <label for="secondNameEdit">Second Name</label>
+                    </label>
+                    <label for="secondNameEdit">Second Name:
                     <input type='text' id='secondNameEdit' name='personSecondNameEdit'
                            value='<?= $chosenPerson[0]['Person_second_name'] ?>' required>
-
+                    </label>
                     <button type='submit' name='editPersonSubmit'>Edit Person</button>
                     <input type="hidden" name="index" value="<?php echo $index ?>">
                 </fieldset>
@@ -225,13 +225,13 @@ try {
             <form method='post' action="">
                 <fieldset>
                     <legend>Edit Car</legend>
-                    <label for="modelEdit">Model
+                    <label for="modelEdit">Model:
                     <input type='text' id='modelEdit' name='modelEdit' value='<?= $chosenCar[0]['Cars_model'] ?>' required>
                     </label>
-                    <label for="priceEdit">Price
+                    <label for="priceEdit">Price:
                     <input type='number' id='priceEdit' step='0.01' name='priceEdit' value='<?= $chosenCar[0]['Cars_price'] ?>' required>
                     </label>
-                    <label for="dayOfBuyEdit">Day of Buy
+                    <label for="dayOfBuyEdit">Day of Buy:
                     <input type='datetime-local' id='dayOfBuyEdit' name='dayOfBuyEdit' value='<?= $chosenCar[0]['Cars_day_of_buy'] ?>' required>
                     </label>
                     <label>Person ID:
