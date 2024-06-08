@@ -143,7 +143,8 @@ if (isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
 <?php endif ?>
 <div class="carList">
     <ul>
-        <?php if($_SESSION['carsObjects'] != null) foreach ($_SESSION['carsObjects'] as $index => $car) : ?>
+        <?php if(!empty($_SESSION['carsObjects'])) foreach ($_SESSION['carsObjects'] as $index => $car) : ?>
+        <?php if($car !== null) : ?>
             <li>
                 <?php
                 echo "<p>Model: " . $car->getModel() . "<br>Price: " . $car->getPrice() . " EUR" . "<br>Exchange Rate: " . $car->getExchangeRate() . " PLN";
@@ -168,6 +169,7 @@ if (isset($_POST["calculatePrice"]) && isset($_POST["index"])) {
                 </form>
                 </div>
             </li>
+        <?php endif ?>
         <?php endforeach ?>
     </ul>
 </div>

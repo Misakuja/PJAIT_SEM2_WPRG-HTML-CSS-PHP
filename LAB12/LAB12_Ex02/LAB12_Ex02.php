@@ -7,6 +7,8 @@ $persons = null;
 $cars = null;
 $pdo = null;
 $searchResults = null;
+$notif = null;
+$notif2 = null;
 
 try {
     $pdo = new PDO("mysql:host=$dbhost", $dbuser, $dbpass);
@@ -36,7 +38,7 @@ try {
     FOREIGN KEY (Person_id) REFERENCES Person (Person_id)
     );";
     $pdo->exec($carsTable);
-    echo "Successfully created tables Person and Cars.\n";
+    $notif = "Successfully created tables Person and Cars.\n";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["addPerson"])) {
         $firstName = $_POST["personFirstName"];
@@ -65,13 +67,16 @@ try {
 
         $sql2 = "DELETE FROM Person WHERE Person_id = '$PersonIndex'";
         $pdo->exec($sql2);
+
+        $notif2 = "Successfully deleted Person with index: " . $PersonIndex;
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deleteCar"])) {
-        $CarIndex = $_POST["index"];
-        $sql = "DELETE FROM Cars WHERE Cars_id = '$CarIndex'";
+        $carIndex = $_POST["index"];
+        $sql = "DELETE FROM Cars WHERE Cars_id = '$carIndex'";
         $pdo->exec($sql);
 
+        $notif2 = "Successfully deleted Car with index: " . $carIndex;
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["editPersonSubmit"])) {
@@ -94,7 +99,7 @@ try {
         $pdo->exec($sql);
     }
 
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["search"])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["search"])) {
         $field = $_POST["searchField"];
         $value = $_POST["searchValue"];
 
@@ -114,194 +119,225 @@ try {
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link href="" rel="stylesheet" type="text/css">
+    <link href="LAB12_Ex02.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<form method='post' action="">
-    <fieldset>
-        <legend>Add Person</legend>
-        <label for="firstName"></label>
-        <input type='text' id='firstName' placeholder='First Name' name='personFirstName' required>
-        <label for="secondName"></label>
-        <input type='text' id='secondName' placeholder='Second Name' name='personSecondName' required>
+<div class="page">
+    <h1>Manage MySQL Database</h1>
+    <?php if ($notif) : ?>
+        <p> <?= $notif ?> </p>
+    <?php endif ?>
+    <?php if ($notif2) : ?>
+        <p> <?= $notif2 ?> </p>
+    <?php endif ?>
+    <div class="formWrap addPersonForm">
+        <form method='post' action="">
+            <fieldset>
+                <legend>Add Person</legend>
+                <label for="firstName">First Name:
+                <input type='text' id='firstName' placeholder='First Name' name='personFirstName' required>
+                </label>
+                <label for="secondName">Second Name:
+                <input type='text' id='secondName' placeholder='Second Name' name='personSecondName' required>
+                </label>
 
-        <button type='submit' name='addPerson'>Add Person</button>
-    </fieldset>
-</form>
+                <button type='submit' name='addPerson'>Add Person</button>
+            </fieldset>
+        </form>
+    </div>
+    <div class="formWrap addCarForm">
+        <form method='post' action="">
+            <fieldset>
+                <legend>Add Car</legend>
+                <label for="model">Model:
+                <input type='text' id='model' placeholder='Model' name='carsModel' required>
+                </label>
+                <label for="price">Price:
+                <input type='number' step='0.01' id='price' placeholder='Price' name='carsPrice' required>
+                </label>
+                <label for="carsDayOfBuy">Day of Buy:
+                <input type='datetime-local' id='carsDayOfBuy' name='carsDayOfBuy' required>
+                </label>
+                <label>Person ID:
+                    <select name="personId">
+                        <?php foreach ($persons as $person) : ?>
+                            <option value="<?= $person["Person_id"] ?>"> <?= $person['Person_id'] ?> </option>
+                        <?php endforeach ?>
+                    </select>
+                </label>
+                <button type='submit' name='addCar'>Add Car</button>
+            </fieldset>
+        </form>
+    </div>
+    <?php if ($persons && $cars) : ?>
+        <div class="formWrap searchForm">
+            <form method='post' action="">
+                <fieldset>
+                    <legend>Search by Value</legend>
+                    <label>Search Field:
+                        <select name="searchField" id="searchField">
+                            <option value="Person_first_name">First Name</option>
+                            <option value="Person_second_name">Second Name</option>
+                            <option value="Cars_model">Car Model</option>
+                            <option value="Cars_price">Car Price</option>
+                            <option value="Cars_day_of_buy">Car Date of Buy</option>
+                        </select>
+                    </label>
+                    <label for="searchValue">Search Value</label>
+                    <input type='text' id='searchValue' name='searchValue' required>
 
-<form method='post' action="">
-    <fieldset>
-        <legend>Add Car</legend>
-        <label for="model"></label>
-        <input type='text' id='model' placeholder='Model' name='carsModel' required>
-        <label for="price"></label>
-        <input type='number' step='0.01' id='price' placeholder='Price' name='carsPrice' required>
-        <label for="carsDayOfBuy"></label>
-        <input type='datetime-local' id='carsDayOfBuy' name='carsDayOfBuy' required>
-        <label>
-            <select name="personId">
-                <?php foreach ($persons as $person) : ?>
-                    <option value="<?= $person["Person_id"] ?>"> <?= $person['Person_id'] ?> </option>
+                    <button type='submit' name='search'>Search</button>
+                </fieldset>
+            </form>
+        </div>
+    <?php endif ?>
+
+    <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["editPerson"])) : ?>
+        <?php
+        $index = $_POST['index'];
+        $chosenPerson = $pdo->query("SELECT * FROM Person WHERE Person_id = '$index'")->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+        <div class="formWrap editPersonForm">
+            <form method='post' action="">
+                <fieldset>
+                    <legend>Edit Person</legend>
+                    <label for="firstNameEdit">First Name</label>
+                    <input type='text' id='firstNameEdit' name='personFirstNameEdit'
+                           value='<?= $chosenPerson[0]['Person_first_name'] ?>' required>
+
+                    <label for="secondNameEdit">Second Name</label>
+                    <input type='text' id='secondNameEdit' name='personSecondNameEdit'
+                           value='<?= $chosenPerson[0]['Person_second_name'] ?>' required>
+
+                    <button type='submit' name='editPersonSubmit'>Edit Person</button>
+                    <input type="hidden" name="index" value="<?php echo $index ?>">
+                </fieldset>
+            </form>
+        </div>
+    <?php endif ?>
+
+    <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["editCar"])) : ?>
+        <?php
+        $index = $_POST['index'];
+        $chosenCar = $pdo->query("SELECT * FROM Cars WHERE Cars_id = '$index'")->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+        <div class="formWrap editCar">
+            <form method='post' action="">
+                <fieldset>
+                    <legend>Edit Car</legend>
+                    <label for="modelEdit">Model
+                    <input type='text' id='modelEdit' name='modelEdit' value='<?= $chosenCar[0]['Cars_model'] ?>' required>
+                    </label>
+                    <label for="priceEdit">Price
+                    <input type='number' id='priceEdit' step='0.01' name='priceEdit' value='<?= $chosenCar[0]['Cars_price'] ?>' required>
+                    </label>
+                    <label for="dayOfBuyEdit">Day of Buy
+                    <input type='datetime-local' id='dayOfBuyEdit' name='dayOfBuyEdit' value='<?= $chosenCar[0]['Cars_day_of_buy'] ?>' required>
+                    </label>
+                    <label>Person ID:
+                        <select name="carPersonIdEdit">
+                            <?php foreach ($persons as $person) : ?>
+
+                                <?php if ($chosenCar[0]['Person_id'] == $person['Person_id']) { ?>
+                                    <option value="<?= $person['Person_id'] ?>"
+                                            selected> <?= $person['Person_id'] ?> </option>
+                                <?php } else { ?>
+                                    <option value="<?= $person['Person_id'] ?>"> <?= $person['Person_id'] ?> </option>
+                                <?php } ?>
+                            <?php endforeach ?>
+                        </select>
+                    </label>
+
+                    <button type='submit' name='editCarSubmit'>Edit Car</button>
+                    <input type="hidden" name="index" value="<?php echo $index ?>">
+                </fieldset>
+            </form>
+        </div>
+    <?php endif ?>
+
+    <?php if ($searchResults) : ?>
+        <div class="tableWrap searchTable">
+            <table>
+                <tr>
+                    <th>Person_ID</th>
+                    <th>First Name</th>
+                    <th>Second Name</th>
+                    <th>Cars_ID</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                    <th>Day of Buy</th>
+                </tr>
+                <?php foreach ($searchResults as $row) : ?>
+                    <tr>
+                        <td> <?= $row['Person_id'] ?> </td>
+                        <td> <?= $row['Person_first_name'] ?> </td>
+                        <td> <?= $row['Person_second_name'] ?> </td>
+                        <td> <?= $row['Cars_id'] ?> </td>
+                        <td> <?= $row['Cars_model'] ?> </td>
+                        <td> <?= $row['Cars_price'] ?> </td>
+                        <td> <?= $row['Cars_day_of_buy'] ?> </td>
+                    </tr>
                 <?php endforeach ?>
-            </select>
-        </label>
-        <button type='submit' name='addCar'>Add Car</button>
-    </fieldset>
-</form>
+            </table>
+        </div>
+    <?php endif ?>
 
-<?php if ($persons && $cars) : ?>
-<form method='post' action="">
-    <fieldset>
-        <legend>Search by Value</legend>
-        <label>Search Field:
-        <select name="searchField" id="searchField">
-            <option value="Person_first_name">First Name</option>
-            <option value="Person_second_name">Second Name</option>
-            <option value="Cars_model">Car Model</option>
-            <option value="Cars_price">Car Price</option>
-            <option value="Cars_day_of_buy">Car Date of Buy</option>
-        </select>
-        </label>
-        <label for="searchValue">Search Value</label>
-        <input type='text' id='searchValue' name='searchValue' required>
-
-        <button type='submit' name='search'>Search</button>
-    </fieldset>
-</form>
-<?php endif ?>
-
-<?php if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["editPerson"])) : ?>
-<?php
-    $index = $_POST['index'];
-    $chosenPerson = $pdo->query("SELECT * FROM Person WHERE Person_id = '$index'")->fetchAll(PDO::FETCH_ASSOC);
-?>
-    <form method='post' action="">
-        <fieldset>
-            <legend>Edit Person</legend>
-            <label for="firstNameEdit">First Name</label>
-            <input type='text' id='firstNameEdit' name='personFirstNameEdit' value='<?= $chosenPerson[0]['Person_first_name'] ?>' required>
-
-            <label for="secondNameEdit">Second Name</label>
-            <input type='text' id='secondNameEdit' name='personSecondNameEdit' value='<?= $chosenPerson[0]['Person_second_name'] ?>' required>
-
-            <button type='submit' name='editPersonSubmit'>Edit Person</button>
-            <input type="hidden" name="index" value="<?php echo $index ?>">
-        </fieldset>
-    </form>
-<?php endif ?>
-
-<?php if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["editCar"])) : ?>
-    <?php
-    $index = $_POST['index'];
-    $chosenCar = $pdo->query("SELECT * FROM Cars WHERE Cars_id = '$index'")->fetchAll(PDO::FETCH_ASSOC);
-    ?>
-    <form method='post' action="">
-        <fieldset>
-            <legend>Edit Car</legend>
-            <label for="modelEdit">Model</label>
-            <input type='text' id='modelEdit' name='modelEdit' value='<?= $chosenCar[0]['Cars_model'] ?>' required>
-
-            <label for="priceEdit">Price</label>
-            <input type='number' id='priceEdit' step='0.01' name='priceEdit' value='<?= $chosenCar[0]['Cars_price'] ?>' required>
-
-            <label for="dayOfBuyEdit">Day of Buy</label>
-            <input type='datetime-local' id='dayOfBuyEdit' name='dayOfBuyEdit' value='<?= $chosenCar[0]['Cars_day_of_buy'] ?>' required>
-
-            <label>
-                <select name="carPersonIdEdit">
-                    <?php foreach ($persons as $person) : ?>
-
-                        <?php if($chosenCar[0]['Person_id'] == $person['Person_id']) { ?>
-                        <option value="<?= $person['Person_id'] ?>" selected> <?= $person['Person_id'] ?> </option>
-                        <?php } else { ?>
-                        <option value="<?= $person['Person_id'] ?>"> <?= $person['Person_id'] ?> </option>
-                        <?php } ?>
-                    <?php endforeach ?>
-                </select>
-            </label>
-
-            <button type='submit' name='editCarSubmit'>Edit Car</button>
-            <input type="hidden" name="index" value="<?php echo $index ?>">
-        </fieldset>
-    </form>
-<?php endif ?>
-
-<?php if ($searchResults) : ?>
-    <table>
-        <tr>
-            <th>Person_ID</th>
-            <th>First Name</th>
-            <th>Second Name</th>
-            <th>Cars_ID</th>
-            <th>Model</th>
-            <th>Price</th>
-            <th>Day of Buy</th>
-        </tr>
-<?php foreach ($searchResults as $row) : ?>
-<tr>
-    <td> <?= $row['Person_id'] ?> </td>
-    <td> <?= $row['Person_first_name'] ?> </td>
-    <td> <?= $row['Person_second_name'] ?> </td>
-    <td> <?= $row['Cars_id'] ?> </td>
-    <td> <?= $row['Cars_model'] ?> </td>
-    <td> <?= $row['Cars_price'] ?> </td>
-    <td> <?= $row['Cars_day_of_buy'] ?> </td>
-</tr>
-<?php endforeach ?>
-    </table>
-<?php endif ?>
-
-<?php if ($persons) : ?>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Second Name</th>
-            <th>Action</th>
-        </tr>
-        <?php foreach ($persons as $person) : ?>
-            <tr>
-                <td> <?= $person['Person_id'] ?> </td>
-                <td> <?= $person['Person_first_name'] ?> </td>
-                <td> <?= $person['Person_second_name'] ?> </td>
-                <td>
-                    <form method="post" action="">
-                        <button type="submit" name="deletePerson">Delete</button>
-                        <button type="submit" name="editPerson">Edit</button>
-                        <input type="hidden" name="index" value="<?php echo $person['Person_id'] ?>">
-                    </form>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-<?php endif ?>
-<?php if ($cars) : ?>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Model</th>
-            <th>Price</th>
-            <th>Day of Buy</th>
-            <th>Person ID</th>
-            <th>Action</th>
-        </tr>
-        <?php foreach ($cars as $car) : ?>
-            <tr>
-                <td> <?= $car['Cars_id'] ?> </td>
-                <td> <?= $car['Cars_model'] ?> </td>
-                <td> <?= $car['Cars_price'] ?> </td>
-                <td> <?= $car['Cars_day_of_buy'] ?> </td>
-                <td> <?= $car['Person_id'] ?> </td>
-                <td>
-                    <form method="post" action="">
-                        <button type="submit" name="deleteCar">Delete</button>
-                        <button type="submit" name="editCar">Edit</button>
-                        <input type="hidden" name="index" value="<?php echo $car['Cars_id'] ?>">
-                    </form>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-<?php endif ?>
+    <?php if ($persons) : ?>
+        <div class="tableWrap personTable">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Second Name</th>
+                    <th>Action</th>
+                </tr>
+                <?php foreach ($persons as $person) : ?>
+                    <tr>
+                        <td> <?= $person['Person_id'] ?> </td>
+                        <td> <?= $person['Person_first_name'] ?> </td>
+                        <td> <?= $person['Person_second_name'] ?> </td>
+                        <td>
+                            <form method="post" action="">
+                                <button type="submit" name="deletePerson">Delete</button>
+                                <button type="submit" name="editPerson">Edit</button>
+                                <input type="hidden" name="index" value="<?php echo $person['Person_id'] ?>">
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    <?php endif ?>
+    <?php if ($cars) : ?>
+        <div class="tableWrap carsTable">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                    <th>Day of Buy</th>
+                    <th>Person ID</th>
+                    <th>Action</th>
+                </tr>
+                <?php foreach ($cars as $car) : ?>
+                    <tr>
+                        <td> <?= $car['Cars_id'] ?> </td>
+                        <td> <?= $car['Cars_model'] ?> </td>
+                        <td> <?= $car['Cars_price'] ?> </td>
+                        <td> <?= $car['Cars_day_of_buy'] ?> </td>
+                        <td> <?= $car['Person_id'] ?> </td>
+                        <td>
+                            <form method="post" action="">
+                                <button type="submit" name="deleteCar">Delete</button>
+                                <button type="submit" name="editCar">Edit</button>
+                                <input type="hidden" name="index" value="<?php echo $car['Cars_id'] ?>">
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    <?php endif ?>
+</div>
 </body>
 </html>
