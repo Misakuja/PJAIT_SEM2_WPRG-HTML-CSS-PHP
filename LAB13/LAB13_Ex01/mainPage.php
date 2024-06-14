@@ -1,87 +1,32 @@
 <?php
-session_start();
-
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = 'MyN3wP4ssw0rd';
-$dbname = 'LAB13Ex01';
-$registered = null;
-$user = null;
-$notif = null;
-$rowCount = null;
-
-try {
-    $pdo = new PDO("mysql:host=$dbhost", $dbuser, $dbpass);
-
-    $pdo->exec("CREATE DATABASE IF NOT EXISTS $dbname");
-    $pdo->exec("USE $dbname");
-
-    $cartTable = "CREATE TABLE IF NOT EXISTS Cart ( 
-    TableInput_id INT NOT NULL AUTO_INCREMENT,
-    Product_id INT,
-    Quantity INT,
-    User_id INT, 
-
-    PRIMARY KEY (TableInput_id),
-    FOREIGN KEY (User_id) REFERENCES Registered (User_id)                  
-    )";
-    $pdo->exec($cartTable);
-
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-$productId = $_POST['product_id'];
-$quantity = 1;
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = array();
-    }
-    if (isset($_SESSION['cart'][$productId])) {
-        $_SESSION['cart'][$productId] += $quantity;
-    } else {
-        $_SESSION['cart'][$productId] = $quantity;
-    }
-
-    $isInTable = $pdo->query("SELECT * FROM Cart WHERE User_id = '{$_SESSION['user_id']}' AND Product_id = '$productId'")->fetchAll(PDO::FETCH_ASSOC);
-    if($isInTable) {
-        $sql = "UPDATE Cart SET Quantity = '{$_SESSION['cart'][$productId]}' WHERE User_id = '{$_SESSION['user_id']}' AND Product_id = '$productId'";
-        $pdo->exec($sql);
-    } else {
-        $sql = "INSERT INTO Cart (Product_id, Quantity, User_id) VALUES ('$productId', '{$_SESSION['cart'][$productId]}', '{$_SESSION['user_id']}')";
-        $pdo->query($sql);
-    }
-}
-
-} catch (PDOException $e) {
-    echo $e->getMessage();
-}
-
-
-
+if (session_status() == PHP_SESSION_NONE) session_start();
+require_once 'databases.php';
+require_once 'addToCart.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Main Page - Simple shop site</title>
-    <link href="LAB13_Ex04.css" rel="stylesheet" type="text/css">
+    <link href="LAB13_Ex01.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="page">
     <div class="top-nav-header">
         <div class="top-nav-container">
             <div class="top-left-menu">
-                <form action="LAB13_Ex04-3.php">
+                <form action="cartPage.php">
                     <button type="submit">Cart</button>
                 </form>
             </div>
             <div class="top-right-menu">
                 <div class="menu-item 1">
-                    <form action="LAB13_Ex04-2.php">
+                    <form action="registerLogin.php">
                         <button type="submit">Register & Login</button>
                     </form>
                 </div>
                 <div class="menu-item 2 bank">
-                    <form action="LAB13_Ex04-4.php">
+                    <form action="bankPage.php">
                         <button type="submit">Bank</button>
                     </form>
                 </div>
