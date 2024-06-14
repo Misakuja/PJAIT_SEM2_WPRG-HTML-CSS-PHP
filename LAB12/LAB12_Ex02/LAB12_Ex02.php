@@ -55,7 +55,6 @@ try {
         $personId = $_POST["personId"];
 
         $sql = "INSERT INTO Cars (Cars_model, Cars_price, Cars_day_of_buy, Person_id) VALUES ('$carsModel', '$carsPrice', '$dayOfBuy', '$personId')";
-
         $pdo->query($sql);
     }
 
