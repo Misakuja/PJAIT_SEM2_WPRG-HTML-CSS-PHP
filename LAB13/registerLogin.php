@@ -7,7 +7,7 @@ global $notif;
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register, Login & MySQL Databases</title>
+    <title>Simple shop site</title>
     <link href="LAB13_Ex01.css" rel="stylesheet" type="text/css">
 </head>
 <body>

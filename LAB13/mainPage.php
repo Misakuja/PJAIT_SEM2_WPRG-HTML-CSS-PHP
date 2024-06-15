@@ -7,7 +7,7 @@ require_once 'addToCart.php';
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Main Page - Simple shop site</title>
+    <title>Simple shop site</title>
     <link href="LAB13_Ex01.css" rel="stylesheet" type="text/css">
 </head>
 <body>

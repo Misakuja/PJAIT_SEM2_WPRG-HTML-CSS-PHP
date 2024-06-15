@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login Page - Simple shop site</title>
+    <title>Simple shop site</title>
     <link href="LAB13_Ex01.css" rel="stylesheet" type="text/css">
 </head>
 <body>

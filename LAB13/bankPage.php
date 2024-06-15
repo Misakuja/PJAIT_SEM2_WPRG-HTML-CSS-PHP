@@ -6,7 +6,7 @@ require 'bankLogic.php';
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple Shop</title>
+    <title>Simple shop site</title>
     <link href="LAB13_Ex01.css" rel="stylesheet" type="text/css">
 </head>
 <body>
