@@ -1,0 +1,149 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: "Times New Roman", sans-serif;
+}
+
+/* TOPNAV */
+.top-nav-container {
+    align-items: center;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    z-index: 1;
+    min-height: 75px;
+
+    .top-nav-item {
+        color: white;
+        cursor: pointer;
+        width: fit-content;
+    }
+
+    #burger-menu {
+        font-size: 45px;
+        margin-left: 20px;
+    }
+
+    #tickets-button {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        margin-right: 25px;
+
+        button {
+            font-family: "Times New Roman", sans-serif;
+            background-color: rgba(255, 255, 255, 0.5);
+            color: #000000;
+            font-size: 25px;
+            border-radius: 20px;
+            border: none;
+            padding: 10px 25px;
+            box-shadow: none;
+        }
+
+        button:active {
+            color: #ffffff;
+        }
+    }
+
+    #logo {
+        height: 50px;
+        width: 50px;
+        margin-right: 20px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        display: inline-block;
+    }
+}
+
+/* HEADER */
+.image-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+#header-background {
+    position: relative;
+    z-index: -1;
+    width: 100vw;
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    transition: background-image 1s;
+    box-shadow: 0 5px 15px 0 rgba(106, 106, 106, 0.75);
+}
+
+/* SIDENAV MENU */
+.side-nav-container {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.75);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding: 75px 0;
+
+    a {
+        padding: 8px 10px 8px 25px;
+        font-size: 23px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #f1f1f1;
+    }
+
+    .closeButton {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 36px;
+        margin-left: 50px;
+        color: white;
+        text-decoration: none;
+    }
+
+    #contact-regulations {
+        margin-top: calc(82vh - 210px);
+    }
+}
+
+/* SPECIES BUTTON HEADER */
+#species-button-form {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    button {
+        font-family: "Times New Roman", sans-serif;
+        padding: 25px 150px;
+        margin-top: 15px;
+        font-size: 25px;
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        z-index: 1;
+        width: auto;
+        box-sizing: border-box;
+    }
+
+    button:hover {
+        background-color: #c6c6c6;
+    }
+}

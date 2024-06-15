@@ -43,7 +43,7 @@ try {
         FOREIGN KEY (species_id) REFERENCES Species (species_id)
     )";
 
-    $zookeepersTable = "CREATE TABLE IF NOT EXISTS zookeepersTable (
+    $zookeepersTable = "CREATE TABLE IF NOT EXISTS Zookeepers (
         zookeeper_id INT AUTO_INCREMENT PRIMARY KEY,
         zookeeper_first_name VARCHAR(255) NOT NULL,
         zookeeper_last_name VARCHAR(255) NOT NULL,
@@ -60,22 +60,24 @@ try {
         user_password VARCHAR(255) NOT NULL
     )";
 
-    $ticketsTable = "CREATE TABLE IF NOT EXISTS Tickets (
-        ticket_id INT AUTO_INCREMENT PRIMARY KEY,
+    $ticketOrdersTable = "CREATE TABLE IF NOT EXISTS TicketOrders (
+        order_id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT,
         buyer_first_name VARCHAR(255) NOT NULL,
         buyer_last_name VARCHAR(255) NOT NULL,
         ticket_date DATE NOT NULL,
         adult_tickets_amount INT,
-        child_tickets_amount INT       
+        child_tickets_amount INT,
+        
+        FOREIGN KEY (user_id) REFERENCES User (user_id)      
     )";
 
     $pdo->exec($animalCategoriesTable);
     $pdo->exec($speciesTable);
     $pdo->exec($animalsTable);
-
     $pdo->exec($zookeepersTable);
     $pdo->exec($usersTable);
-    $pdo->exec($ticketsTable);
+    $pdo->exec($ticketOrdersTable);
 
 } catch (PDOException $e) {
     die("Could not connect to the database: " . $e->getMessage());
