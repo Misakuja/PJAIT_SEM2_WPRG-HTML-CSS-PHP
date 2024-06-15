@@ -34,6 +34,7 @@
 
 <div class="image-container" id="header-background"></div>
 
+<!--Buttons Grid/Flex/Whatever-->
 <div class="button-banners-flexContainer">
     <div class="button-banners-gridContainer">
         <!--Species Page-->
@@ -51,6 +52,54 @@
     </div>
 </div>
 
+<!--Restaurant Banner-->
+<div class="restaurant-container">
+    <header class="middle-text">
+        <h1>
+            <strong>Safari Stop</strong>
+            Coming Soon~
+        </h1>
+    </header>
+    <div class="restaurant-background"><img src="https://i.imgur.com/i7l5cQx.jpeg" alt="restaurant-background"></div>
+</div>
+
+<!--Zoo in Numbers + Info Banner-->
+<div class="info-container">
+    <h1>Welcome!</h1>
+    <p>We're delighted to have you here, a unique sanctuary sprawling across approximately 69
+        hectares, housing animals from every corner of the globe. Our zoo offers a diverse and enriching experience,
+        providing a safe haven for species from various continents.
+    </p>
+    <p>
+        While you explore our fascinating animal exhibits, don't forget to visit Safari Stop, our charming zoo
+        restaurant. It's the perfect spot to unwind and refuel after your wildlife adventures. Whether you're craving a
+        quick snack or a leisurely meal, Safari Stop promises a delightful dining experience amidst the zoo's natural
+        beauty.
+    </p>
+    <p>
+        Come discover the wonders of the animal kingdom and indulge in delicious treats at Safari Stop – your gateway to
+        both wildlife and culinary delights at the ZOO!
+    </p>
+    <h1>Our ZOO in numbers</h1>
+    <div class="box">
+        <h1>2000</h1>
+        <p>year of foundation</p>
+    </div>
+    <div class="box">
+        <h1>69 ha</h1>
+        <p>total area</p>
+    </div>
+    <div class="box">
+        <!--TODO// ECHO SPECIES FROM DATABASES TABLE-->
+        <h1>420</h1>
+        <p>total species</p>
+    </div>
+    <div class="box">
+        <!--TODO// ECHO SPECIMENS FROM DATABASES TABLE-->
+        <h1>2137</h1>
+        <p>total specimens</p>
+    </div>
+</div>
 <script src="mainPage.js"></script>
 </body>
 </html>

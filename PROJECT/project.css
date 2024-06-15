@@ -4,6 +4,10 @@ html, body {
     margin: 0;
     font-family: "Times New Roman", sans-serif;
 }
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 
 /* TOP NAV */
 .top-nav-container {
@@ -13,7 +17,7 @@ html, body {
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    width: 100vw;
+    width: 100%;
     z-index: 1;
     min-height: 75px;
 
@@ -70,7 +74,7 @@ html, body {
 #header-background {
     position: relative;
     z-index: -1;
-    width: 100vw;
+    width: 100%;
     height: 600px;
     background-size: cover;
     background-position: center;
@@ -116,15 +120,11 @@ html, body {
         color: white;
         text-decoration: none;
     }
-
-    #contact-regulations {
-        margin-top: calc(82vh - 210px);
-    }
 }
 
 /* FLEX FOR BUTTONS GRID */
 .button-banners-flexContainer {
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -148,7 +148,7 @@ html, body {
 
 /* GRID FOR BUTTONS */
 .button-banners-gridContainer {
-    width: 100vw;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
@@ -178,6 +178,60 @@ html, body {
     }
 }
 
+/* RESTAURANT BANNER */
+.restaurant-container {
+    position: relative;
+    margin-top: 50px;
+    border-top: 5px solid #3c1c03;
+    border-bottom: 5px solid #3c1c03;
+    width: 100%;
+
+    .middle-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 25px;
+        color: white;
+        padding: 0 50px;
+        z-index: 0;
+        text-align: center;
+
+        h1 strong {
+            display: block;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 75px;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+    }
+
+    .restaurant-background {
+        position: relative;
+        z-index: -1;
+    }
+
+    .restaurant-background img {
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 450px;
+        object-fit: cover;
+        margin-bottom: -5px;
+    }
+}
+
+.info-container {
+    background-color: #232121;
+    width: 100%;
+    height: 750px;
+    margin-top: 50px;
+    color: white;
+}
 
 /* MEDIA QUERIES FOR SMALLER SCREENS */
 @media (max-width: 1000px) {
@@ -212,7 +266,7 @@ html, body {
     }
 
     .button-banners-flexContainer {
-        width: 100vw;
+        width: 100%;
     }
 
     .button-banners-gridContainer {
