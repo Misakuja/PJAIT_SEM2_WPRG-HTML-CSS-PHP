@@ -11,12 +11,13 @@
     <a href="javascript:void(0)" class="closeButton" onclick="closeSideNav()">&times;</a>
     <a href="#">Register & Login</a>
     <a href="#">For Workers </a>
+    <a href="#">Our Animals</a>
     <a href="#">Tickets</a>
     <a href="#">Pricing</a>
     <a href="#">Opening Hours</a>
     <div id="contact-regulations">
-    <a href="#">Contact us</a>
-    <a href="#">Visiting Regulations</a>
+        <a href="#">Contact us</a>
+        <a href="#">Visiting Regulations</a>
     </div>
 </div>
 
@@ -33,10 +34,23 @@
 
 <div class="image-container" id="header-background"></div>
 
-<!--Species Page button-->
-<form id="species-button-form" action=".php">
-    <button type="submit">Check out all our species at the zoo!</button>
-</form>
+<div class="button-banners-flexContainer">
+    <div class="button-banners-gridContainer">
+        <!--Species Page-->
+        <form id="species-button-form" action=".php">
+            <button type="submit">Check out all our species at the zoo!</button>
+        </form>
+
+        <!--Pricing & Opening Hours-->
+        <form id="pricing-button-form" action=".php">
+            <button type="submit" id="pricing-opening-button">Pricing</button>
+        </form>
+        <form id="opening-button-form" action=".php">
+            <button type="submit" id="pricing-opening-button">Opening Hours</button>
+        </form>
+    </div>
+</div>
+
 <script src="mainPage.js"></script>
 </body>
 </html>

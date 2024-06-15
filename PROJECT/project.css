@@ -5,7 +5,7 @@ html, body {
     font-family: "Times New Roman", sans-serif;
 }
 
-/* TOPNAV */
+/* TOP NAV */
 .top-nav-container {
     align-items: center;
     display: flex;
@@ -13,7 +13,7 @@ html, body {
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    width: 100%;
+    width: 100vw;
     z-index: 1;
     min-height: 75px;
 
@@ -36,10 +36,10 @@ html, body {
 
         button {
             font-family: "Times New Roman", sans-serif;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.35);
             color: #000000;
             font-size: 25px;
-            border-radius: 20px;
+            border-radius: 25px;
             border: none;
             padding: 10px 25px;
             box-shadow: none;
@@ -90,7 +90,7 @@ html, body {
     left: 0;
     z-index: 2;
     background-color: rgba(0, 0, 0, 0.75);
-    overflow-x: hidden;
+    overflow: hidden;
     transition: 0.5s;
     padding: 75px 0;
 
@@ -122,28 +122,114 @@ html, body {
     }
 }
 
-/* SPECIES BUTTON HEADER */
-#species-button-form {
+/* FLEX FOR BUTTONS GRID */
+.button-banners-flexContainer {
     width: 100vw;
     display: flex;
-    justify-content: center;
-    position: relative;
+    flex-direction: column;
+    align-items: center;
 
     button {
         font-family: "Times New Roman", sans-serif;
-        padding: 25px 150px;
-        margin-top: 15px;
-        font-size: 25px;
+        font-size: 28px;
+        letter-spacing: 4px;
         border: 1px solid #ccc;
         border-radius: 15px;
         cursor: pointer;
         transition: background-color 0.3s ease;
         z-index: 1;
-        width: auto;
         box-sizing: border-box;
     }
 
     button:hover {
         background-color: #c6c6c6;
+    }
+}
+
+/* GRID FOR BUTTONS */
+.button-banners-gridContainer {
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    box-sizing: border-box;
+    padding: 0 10%;
+
+    #species-button-form {
+        grid-column: span 2;
+        display: flex;
+        justify-content: center;
+        position: relative;
+
+        button {
+            padding: 25px 150px;
+            margin: 25px 0 15px 0;
+            width: auto;
+        }
+
+        button #pricing-opening-button {
+            width: 100%;
+        }
+    }
+
+    button {
+        padding: 25px 150px;
+        width: 100%;
+    }
+}
+
+
+/* MEDIA QUERIES FOR SMALLER SCREENS */
+@media (max-width: 1000px) {
+    .top-nav-container {
+        padding: 10px;
+    }
+
+    #burger-menu {
+        font-size: 35px;
+        margin-right: 10px;
+    }
+
+    #tickets-button {
+        margin: 10px 0;
+        flex: 1 0 100%;
+        display: flex;
+        justify-content: center;
+
+        button {
+            font-size: 20px;
+            padding: 8px 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+    }
+
+    #logo {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+        flex: 0 0 auto;
+    }
+
+    .button-banners-flexContainer {
+        width: 100vw;
+    }
+
+    .button-banners-gridContainer {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 0 5%;
+
+        #species-button-form {
+            button {
+                padding: 15px 80px;
+                margin: 20px 0 10px 0;
+                box-sizing: border-box;
+            }
+        }
+
+        button {
+            padding: 15px 80px;
+        }
     }
 }
