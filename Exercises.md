@@ -545,3 +545,17 @@ Strona powinna wyświetlić komunikat o utworzeniu tabeli oraz powinna obsłuży
 - Dodatkowo w przypadku utworzenia mechanizmu resetowania hasła dla użytkownika. 
 
 ----
+
+# LAB13
+
+1. Przygotuj prosty sklep internetowy:
+- Użytkownik powinien móc stworzyć konto w sklepie (zapisz użytkownika do bazy).
+- Użytkownik powinien móc się zalogować (sprawdź w bazie login i hasło).
+- Użytkownik powinien móc dodać do koszyka produkty ze strony (tabela koszyk w bazie danych).
+- Użytkownik powinien móc wyświetlić swój koszyk i móc usunąć pojedyncze produkty.
+- Użytkownik powinien móc wyczyścić koszyk (usuń rekordy z id użytkownika w bazie).
+- Użytkownik powinien mieć określoną ilość pieniędzy. Stwórz formularz w którym będzie można dodać mu pieniądze (bankomat).
+- Po zapłaceniu za produkty w koszyku, zmniejsz pieniądze użytkownika i wyczyść koszyk.
+- Każdy użytkownik powinien mieć oddzielny koszyk. Powinna istnieć możliwość wylogowania się i zalogowania jako inny użytkownik.
+
+----
