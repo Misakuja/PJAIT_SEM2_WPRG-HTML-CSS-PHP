@@ -1,7 +1,6 @@
 <?php
 require_once 'PageFunctionality.php';
 $pageFunctionality = new PageFunctionality();
-global $notification;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["loginZookeeper"])) $pageFunctionality->loginZookeeper();
@@ -20,8 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- Side Navigation -->
 <div class="side-nav-container" id="sideNav">
     <a href="javascript:void(0)" class="closeButton" onclick="closeSideNav()">&times;</a>
-    <a href="6-RegisterLogin.php">Register & Login</a>
-    <a href="7-RegisterLoginZookeeper.php">Employees only</a>
+    <a href="6-RegisterLoginPage.php">Register & Login</a>
+    <a href="7-RegisterLoginZookeeperPage.php">Employees only</a>
     <a href="#">Our Animals</a>
     <a href="5-TicketsPage.php">Tickets</a>
     <a href="4-openingHoursPage.php">Opening Hours</a>
@@ -39,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="top-nav-container">
     <span class="top-nav-item" id="burger-menu" onclick="openSideNav()">&#9776;</span>
 
-    <form class="top-nav-item" id="register-login-button" action="6-RegisterLogin.php">
+    <form class="top-nav-item" id="register-login-button" action="6-RegisterLoginPage.php">
         <button class="top-nav-item" type="submit">Register & Login</button>
     </form>
 
@@ -52,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header class="middle-text">
         <a href="1-mainPage.php">Main Page </a>
         <a> &#x2192; </a>
-        <a href="7-RegisterLoginZookeeper.php"> Employees Only</a>
+        <a href="7-RegisterLoginZookeeperPage.php"> Employees Only</a>
     </header>
 </div>
 
@@ -67,8 +66,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php endif ?>
 </div>
 
-<?php if (isset($_SESSION['notification'])) : ?>
-    <p id="notifications"><?= $_SESSION['notification']; ?> </p>
+<?php if (isset($_SESSION['notification2'])) : ?>
+    <p id="notifications"><?= $_SESSION['notification2']; ?> </p>
 <?php endif ?>
 
 <div class="forms-page">

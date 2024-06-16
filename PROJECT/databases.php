@@ -11,12 +11,13 @@ try {
     $pdo->exec("CREATE DATABASE IF NOT EXISTS $dbname");
     $pdo->exec("USE $dbname");
 
-    $animalCategoriesTable = "CREATE TABLE IF NOT EXISTS animalCategories (
+    $animalCategoriesTable = "CREATE TABLE IF NOT EXISTS animalcategories (
         category_id INT AUTO_INCREMENT PRIMARY KEY,
         category_name INT,
         number_of_species INT,
         number_of_specimens INT                
     )";
+    $pdo->exec($animalCategoriesTable);
 
     $speciesTable = "CREATE TABLE IF NOT EXISTS species (
         species_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -28,8 +29,10 @@ try {
         behaviour TEXT,
         image TEXT,
         
-        FOREIGN KEY (category_id) REFERENCES animalCategories (category_id)                        
+        FOREIGN KEY (category_id) REFERENCES animalcategories (category_id)                        
     )";
+    $pdo->exec($speciesTable);
+
 
     $animalsTable = "CREATE TABLE IF NOT EXISTS animals (
         animal_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -42,6 +45,7 @@ try {
         
         FOREIGN KEY (species_id) REFERENCES species (species_id)
     )";
+    $pdo->exec($animalsTable);
 
     $zookeepersTable = "CREATE TABLE IF NOT EXISTS zookeepers (
         zookeeper_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,6 +55,7 @@ try {
         zookeeper_phone VARCHAR(255) NOT NULL,
         zookeeper_password VARCHAR(255) NOT NULL               
     )";
+    $pdo->exec($zookeepersTable);
 
     $usersTable = "CREATE TABLE IF NOT EXISTS users (
         user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -59,27 +64,21 @@ try {
         user_email VARCHAR(255) NOT NULL,
         user_password VARCHAR(255) NOT NULL
     )";
+    $pdo->exec($usersTable);
 
-    $ticketOrdersTable = "CREATE TABLE IF NOT EXISTS ticketOrders (
+    $ticketOrdersTable = "CREATE TABLE IF NOT EXISTS ticketorders (
         order_id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT,
         buyer_first_name VARCHAR(255) NOT NULL,
         buyer_last_name VARCHAR(255) NOT NULL,
-        ticket_date DATE NOT NULL,
-        adult_tickets_amount INT,
-        child_tickets_amount INT,
+        order_price FLOAT NOT NULL,
+        normal_tickets_amount INT,
+        reduced_tickets_amount INT,
         
         FOREIGN KEY (user_id) REFERENCES users (user_id)      
     )";
-
-    $pdo->exec($animalCategoriesTable);
-    $pdo->exec($speciesTable);
-    $pdo->exec($animalsTable);
-    $pdo->exec($zookeepersTable);
-    $pdo->exec($usersTable);
     $pdo->exec($ticketOrdersTable);
 
 } catch (PDOException $e) {
     die("Could not connect to the database: " . $e->getMessage());
 }
-?>

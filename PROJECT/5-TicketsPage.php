@@ -1,3 +1,16 @@
+<?php
+require_once 'PageFunctionality.php';
+$pageFunctionality = new PageFunctionality();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["logoutUser"])) $pageFunctionality->logoutUser();
+    if (isset($_POST["addOne"])) $pageFunctionality->addToCart($_POST['product_id']);
+    if (isset($_POST["subtractOne"])) $pageFunctionality->removeFromCart($_POST['product_id']);
+    if (isset($_POST["clearCart"])) $pageFunctionality->clearCart();
+    if (isset($_POST["checkoutCart"])) $pageFunctionality->checkoutCart();
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +22,8 @@
 <!-- Side Navigation -->
 <div class="side-nav-container" id="sideNav">
     <a href="javascript:void(0)" class="closeButton" onclick="closeSideNav()">&times;</a>
-    <a href="6-RegisterLogin.php">Register & Login</a>
-    <a href="7-RegisterLoginZookeeper.php">Employees only</a>
+    <a href="6-RegisterLoginPage.php">Register & Login</a>
+    <a href="7-RegisterLoginZookeeperPage.php">Employees only</a>
     <a href="#">Our Animals</a>
     <a href="5-TicketsPage.php">Tickets</a>
     <a href="4-openingHoursPage.php">Opening Hours</a>
@@ -28,11 +41,12 @@
 <div class="top-nav-container">
     <span class="top-nav-item" id="burger-menu" onclick="openSideNav()">&#9776;</span>
 
-    <form class="top-nav-item" id="register-login-button" action="6-RegisterLogin.php">
+    <form class="top-nav-item" id="register-login-button" action="6-RegisterLoginPage.php">
         <button class="top-nav-item" type="submit">Register & Login</button>
     </form>
 
-    <a href="1-mainPage.php" class="top-nav-item" id="logo-top"><img src="https://svgshare.com/i/17GD.svg" alt="logo-svg"></a>
+    <a href="1-mainPage.php" class="top-nav-item" id="logo-top"><img src="https://svgshare.com/i/17GD.svg"
+                                                                     alt="logo-svg"></a>
 </div>
 
 <!-- Header Image -->
@@ -43,6 +57,64 @@
         <a href="5-TicketsPage.php"> Tickets</a>
     </header>
 </div>
+
+<!-- CART DISPLAY -->
+<div id="cart-container">
+    <?php
+    if (isset($_SESSION['user_id'])) $pageFunctionality->displayCart();
+    if (!empty($_SESSION['cart']) && isset($_SESSION['user_id'])) : ?>
+    <form action="" method="post">
+        <button type="submit" name="clearCart">Clear Cart</button>
+        <button type="submit" name="checkoutCart">Checkout</button>
+    </form>
+</div>
+<?php endif ?>
+<?php if (!isset($_SESSION['user_id'])) echo "<h2 class='information-cart'>Log in before accessing the tickets page.</h2>";
+else { ?>
+    <div id="tickets">
+        <table>
+            <thead>
+            <tr>
+                <th>TYPE OF TICKET</th>
+                <th>PRICE</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Normal Ticket</td>
+                <td>10.00$</td>
+                <td>
+                    <form action="" method="post">
+                        <button type="submit" name="subtractOne">-</button>
+                        <button type="submit" name="addOne">+</button>
+                        <input type="hidden" name="product_id" value="Normal">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Reduced Ticket</label>
+                    <p>Reduced admission fee available to:<br>
+                        1. children between the ages 3-7, on presenting a document confirming the child’s age,<br>
+                        2. school-age youth, on presenting a school ID card,<br>
+                        3. students up to age 26, on presenting a student ID card,<br>
+                        4. pensioners, recipients of a disability pension and war veterans on presenting an ID card,<br>
+                        5. persons with moderate and mild disabilities, on presenting an appropriate document.</p>
+                </td>
+                <td>5.00$</td>
+                <td>
+                    <form action="" method="post">
+                        <button type="submit" name="subtractOne">-</button>
+                        <button type="submit" name="addOne">+</button>
+                        <input type="hidden" name="product_id" value="Reduced">
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<?php } ?>
 
 <!-- Bottom Navigation -->
 <div class="bottom-nav-container">

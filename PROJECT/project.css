@@ -271,7 +271,7 @@ body {
     #top-info {
         h1 {
             background-color: rgb(209, 202, 194);
-            color: black;
+            color: #2b2927;;
             font-size: 45px;
             padding: 12px 0;
             letter-spacing: 10px;
@@ -279,7 +279,7 @@ body {
 
         p {
 
-            color: black;
+            color: #2b2927;;
             font-size: 21px;
             margin: 15px 25px;
         }
@@ -288,7 +288,7 @@ body {
     #bottom-info {
         h1 {
             background-color: rgb(209, 202, 194);
-            color: black;
+            color: #2b2927;;
             font-size: 35px;
             padding: 12px 0;
             letter-spacing: 10px;
@@ -359,7 +359,7 @@ body {
 
     #bottom-nav-right a {
         text-decoration: none;
-        color: black;
+        color: #2b2927;;
         display: block;
         margin: 10px 0 20px 0;
         font-size: 20px;
@@ -490,7 +490,7 @@ body {
     h2 {
         text-align: center;
         background-color: rgba(0, 0, 0, 0.1);
-        color: black;
+        color: #2b2927;;
         font-size: 35px;
         padding: 12px 0;
         letter-spacing: 10px;
@@ -499,7 +499,7 @@ body {
 
     h4 {
         text-align: left;
-        color: black;
+        color: #2b2927;;
         font-size: 25px;
         padding: 12px 0;
         margin-top: 50px;
@@ -524,7 +524,7 @@ body {
         width: 100%;
         text-align: center;
         background-color: rgb(209, 202, 194);
-        color: black;
+        color: #2b2927;;
         font-size: 35px;
         padding: 12px 0;
         letter-spacing: 10px;
@@ -553,7 +553,19 @@ body {
     }
 }
 
-/* PAGE 5 - OPENING HOURS */
+/* PAGE 5 - TICKETS */
+.information-cart {
+    width: 100%;
+    text-align: center;
+    background-color: rgb(209, 202, 194);
+    color: #2b2927;
+    font-size: 35px;
+    padding: 20px 0;
+    margin: 50px 0 0 0;
+}
+
+
+/* PAGE 6 - LOGIN */
 .forms-page {
     width: 100%;
     margin-top: 50px;
@@ -631,13 +643,14 @@ body {
 
 #notifications {
     background-color: rgb(209, 202, 194);
-    color: black;
+    color: #2b2927;;
     text-align: center;
     font-size: 30px;
     padding: 12px 0;
 }
 
-/* PAGE 6 - EMPLOYEE ONLY */
+
+/* PAGE 7 - EMPLOYEE ONLY */
 #info-employee-only {
     display: flex;
     flex-direction: column;
@@ -660,8 +673,6 @@ body {
         margin: 20px auto;
     }
 }
-
-
 
 /* MEDIA QUERIES FOR SMALLER SCREENS */
 @media (max-width: 1000px) {

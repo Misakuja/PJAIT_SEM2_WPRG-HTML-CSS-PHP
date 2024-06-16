@@ -1,10 +1,23 @@
 <?php
 interface PageInterface {
-    public function sendMail();
+    public function sendMailContactForm();
+
     public function registerUser();
     public function loginUser();
     public function resetPasswordUser();
     public function logoutUser();
+
     public function loginZookeeper();
     public function resetPasswordZookeeper();
+
+
+    public function displayCart();
+    public function addToCart($product_id);
+    public function removeFromCart($product_id);
+    public function clearCart();
+    public function checkoutCart();
+    public function sendConfirmationMailCheckout();
+
+    public function calculatePrice($product_id, $ticketPrice);
+    public function calculateTotalValue();
 }
