@@ -3,6 +3,7 @@ html, body {
     width: 100%;
     margin: 0;
     font-family: "Times New Roman", sans-serif;
+    background-color: #e6e1dc;
 }
 
 body {
@@ -19,7 +20,7 @@ body {
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
-    z-index: 1;
+    z-index: 2;
     min-height: 75px;
 
     .top-nav-item {
@@ -33,7 +34,7 @@ body {
         margin-left: 20px;
     }
 
-    #tickets-button {
+    #register-login-button {
         display: flex;
         align-items: center;
         margin-left: auto;
@@ -52,6 +53,10 @@ body {
 
         button:active {
             color: #ffffff;
+        }
+
+        button:hover {
+            color: #393535;
         }
     }
 
@@ -74,7 +79,7 @@ body {
 
 #header-background {
     position: relative;
-    z-index: -1;
+    z-index: 0;
     width: 100%;
     height: 600px;
     background-size: cover;
@@ -82,6 +87,35 @@ body {
     object-fit: cover;
     transition: background-image 1s;
     box-shadow: 0 5px 15px 0 rgba(106, 106, 106, 0.75);
+
+
+    .middle-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: inline;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 25px;
+        color: white;
+        padding: 10px 50px;
+        z-index: 0;
+        text-align: center;
+
+        a {
+            display: inline;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 50px;
+            text-decoration: none;
+            color: white;
+        }
+
+        a:hover {
+            color: #a3958b;
+        }
+
+    }
 }
 
 /* SIDENAV MENU */
@@ -93,7 +127,7 @@ body {
     flex-direction: column;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 3;
     background-color: rgba(0, 0, 0, 0.75);
     overflow: hidden;
     transition: 0.5s;
@@ -130,16 +164,18 @@ body {
     flex-direction: column;
     align-items: center;
 
+
     button {
         font-family: "Times New Roman", sans-serif;
         font-size: 28px;
         letter-spacing: 4px;
-        border: 1px solid #ccc;
+        border: 1px solid rgb(115, 110, 105, 0.3);
         border-radius: 15px;
         cursor: pointer;
         transition: background-color 0.3s ease;
         z-index: 1;
         box-sizing: border-box;
+        background-color: rgb(223, 216, 208);
     }
 
     button:hover {
@@ -168,7 +204,7 @@ body {
             width: auto;
         }
 
-        button #pricing-opening-button {
+        button #tickets-opening-button {
             width: 100%;
         }
     }
@@ -183,8 +219,8 @@ body {
 .restaurant-container {
     position: relative;
     margin-top: 50px;
-    border-top: 5px solid #3c1c03;
-    border-bottom: 5px solid #3c1c03;
+    border-top: 5px solid rgb(115, 110, 105);
+    border-bottom: 5px solid rgb(115, 110, 105);
     width: 100%;
 
     .middle-text {
@@ -196,7 +232,7 @@ body {
         border-radius: 25px;
         color: white;
         padding: 0 50px;
-        z-index: 0;
+        z-index: 1;
         text-align: center;
 
         h1 strong {
@@ -213,7 +249,7 @@ body {
 
     .restaurant-background {
         position: relative;
-        z-index: -1;
+        z-index: 0;
     }
 
     .restaurant-background img {
@@ -231,11 +267,11 @@ body {
     width: 100%;
     margin-top: 50px;
     text-align: center;
-    background-color: rgba(80, 80, 80, 0.1);
+    border-bottom: 3px solid rgb(136, 131, 125);
 
     #top-info {
         h1 {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: rgb(209, 202, 194);
             color: black;
             font-size: 45px;
             padding: 12px 0;
@@ -252,7 +288,7 @@ body {
 
     #bottom-info {
         h1 {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: rgb(209, 202, 194);
             color: black;
             font-size: 35px;
             padding: 12px 0;
@@ -282,7 +318,7 @@ body {
             }
 
             .numbers-circle {
-                background-color: rgba(0, 0, 0, 0.5);
+                background-color: rgba(87, 83, 80, 0.5);
                 border-radius: 50%;
                 width: 250px;
                 height: 250px;
@@ -328,6 +364,193 @@ body {
         display: block;
         margin: 10px 0 20px 0;
         font-size: 20px;
+
+    }
+
+    #bottom-nav-right a:hover {
+        color: #a3958b;
+    }
+}
+
+
+/* PAGE 2 - CONTACT INFO */
+.contactInfo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 100px;
+    width: 100%;
+    height: 300px;
+    font-size: 30px;
+
+    .contactInfo-phone,
+    .contactInfo-mail {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.3);
+        padding: 30px;
+        border-radius: 50px;
+        width: calc(50% - 40px);
+        max-width: 300px;
+        align-items: center;
+        margin: 0 20px;
+        box-sizing: border-box;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
+
+        h3 {
+            margin: 25px 0;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+    }
+
+    img {
+        margin-top: 15px;
+        width: 100px;
+    }
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: 20px auto 0;
+    box-sizing: border-box;
+
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+
+
+        h3 {
+            font-size: 28px;
+            margin-right: 10px;
+        }
+
+        img {
+            width: 40px;
+        }
+    }
+
+    label {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    button[type="submit"] {
+        margin-top: 20px;
+        padding: 12px 20px;
+        font-size: 18px;
+        background-color: #786c60;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #473f36;
+    }
+}
+
+/* PAGE 3 - Regulations */
+.regulations {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding-bottom: 20px;
+
+    h2 {
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.1);
+        color: black;
+        font-size: 35px;
+        padding: 12px 0;
+        letter-spacing: 10px;
+        margin: 50px 0 0 0;
+    }
+
+    h4 {
+        text-align: left;
+        color: black;
+        font-size: 25px;
+        padding: 12px 0;
+        margin-top: 50px;
+        margin-left: 100px;
+    }
+
+    p {
+        text-align: left;
+        margin-top: 15px;
+        font-size: 18px;
+        margin-left: 100px;
+    }
+}
+
+/* PAGE 4 - OPENING HOURS */
+#opening-hours-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+        width: 100%;
+        text-align: center;
+        background-color: rgb(209, 202, 194);
+        color: black;
+        font-size: 35px;
+        padding: 12px 0;
+        letter-spacing: 10px;
+        margin: 50px 0 0 0;
+    }
+
+    table {
+        margin-top: 50px;
+        width: 50%;
+        border-collapse: collapse;
+
+        th {
+            background-color: rgb(211, 204, 196);
+        }
+
+        th, td {
+            border: 1px solid #8c8888;
+            padding: 8px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
     }
 }
 
@@ -342,7 +565,7 @@ body {
         margin-right: 10px;
     }
 
-    #tickets-button {
+    #register-login-button {
         margin: 10px 0;
         flex: 1 0 100%;
         display: flex;
@@ -402,5 +625,12 @@ body {
 @media (max-width: 799px) {
     .circles {
         grid-template-columns: 1fr;
+    }
+
+    .contactInfo-phone,
+    .contactInfo-mail {
+        width: calc(100% - 40px);
+        margin-right: 0;
+        font-size: 20px;
     }
 }
