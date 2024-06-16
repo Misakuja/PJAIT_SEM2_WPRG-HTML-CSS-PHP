@@ -1,9 +1,12 @@
 <?php
 require_once 'PageFunctionality.php';
 $pageFunctionality = new PageFunctionality();
+global $notification;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["loginZookeeper"])) $pageFunctionality->loginZookeeper();
     if (isset($_POST["logoutUser"])) $pageFunctionality->logoutUser();
+    if (isset($_POST["resetZookeeperPassword"])) $pageFunctionality->resetPasswordZookeeper();
 }
 ?>
 <!DOCTYPE html>
@@ -40,7 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button class="top-nav-item" type="submit">Register & Login</button>
     </form>
 
-    <a href="1-mainPage.php" class="top-nav-item" id="logo-top"><img src="https://svgshare.com/i/17GD.svg" alt="logo-svg"></a>
+    <a href="1-mainPage.php" class="top-nav-item" id="logo-top"><img src="https://svgshare.com/i/17GD.svg"
+                                                                     alt="logo-svg"></a>
 </div>
 
 <!-- Header Image -->
@@ -48,85 +52,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header class="middle-text">
         <a href="1-mainPage.php">Main Page </a>
         <a> &#x2192; </a>
-        <a href="4-openingHoursPage.php"> Opening Hours</a>
+        <a href="7-RegisterLoginZookeeper.php"> Employees Only</a>
     </header>
 </div>
 
-<!-- Opening Hours Table -->
-<div id="opening-hours-table">
-    <h2>OPENING HOURS</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Month</th>
-            <th>Entry Time</th>
-            <th>Sightseeing Until</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>January</td>
-            <td>9:00 AM</td>
-            <td>5:00 PM</td>
-        </tr>
-        <tr>
-            <td>February</td>
-            <td>9:00 AM</td>
-            <td>5:00 PM</td>
-        </tr>
-        <tr>
-            <td>March</td>
-            <td>9:00 AM</td>
-            <td>6:00 PM</td>
-        </tr>
-        <tr>
-            <td>April</td>
-            <td>9:00 AM</td>
-            <td>6:00 PM</td>
-        </tr>
-        <tr>
-            <td>May</td>
-            <td>9:00 AM</td>
-            <td>6:30 PM</td>
-        </tr>
-        <tr>
-            <td>June</td>
-            <td>9:00 AM</td>
-            <td>6:30 PM</td>
-        </tr>
-        <tr>
-            <td>July</td>
-            <td>9:00 AM</td>
-            <td>7:00 PM</td>
-        </tr>
-        <tr>
-            <td>August</td>
-            <td>9:00 AM</td>
-            <td>7:00 PM</td>
-        </tr>
-        <tr>
-            <td>September</td>
-            <td>9:00 AM</td>
-            <td>6:30 PM</td>
-        </tr>
-        <tr>
-            <td>October</td>
-            <td>9:00 AM</td>
-            <td>6:00 PM</td>
-        </tr>
-        <tr>
-            <td>November</td>
-            <td>9:00 AM</td>
-            <td>5:00 PM</td>
-        </tr>
-        <tr>
-            <td>December</td>
-            <td>9:00 AM</td>
-            <td>5:00 PM</td>
-        </tr>
-        </tbody>
-    </table>
+<!-- Info Banner-->
+<div class="info-container" id="info-employee-only">
+    <h1>EMPLOYEE ONLY ZONE</h1>
+    <p>Welcome to the Employee Login Portal.</p>
+    <p>This page is exclusively for employees to access internal resources and manage their professional
+        information.</p>
+    <?php if (isset($_SESSION['user_id'])) : ?>
+        <p id="user-on-employee-site">It looks like you've landed in a section that's off-limits to you!</p>
+    <?php endif ?>
 </div>
+
+<?php if (isset($_SESSION['notification'])) : ?>
+    <p id="notifications"><?= $_SESSION['notification']; ?> </p>
+<?php endif ?>
+
+<div class="forms-page">
+    <!--LOGIN-->
+    <form method='post' action="">
+        <fieldset>
+            <legend>Employee Login</legend>
+            <label for="loginZookeeperEmail">Email:</label>
+            <input type="email" id="loginZookeeperEmail" name="loginZookeeperEmail" required>
+            <label for="loginZookeeperPassword">Password:</label>
+            <input type="password" id="loginZookeeperPassword" name="loginZookeeperPassword" required>
+            <button type="submit" name="loginZookeeper">Login</button>
+        </fieldset>
+    </form>
+
+    <!--RESET-->
+    <?php if (isset($_SESSION['zookeeper_id'])) : ?>
+        <form method='post' action="">
+            <fieldset>
+                <legend>Reset Password</legend>
+                <label for="resetZookeeperEmail">Email:</label>
+                <input type="email" id="resetZookeeperEmail" name="resetZookeeperEmail" required>
+                <label for="resetZookeeperPassword">New Password:</label>
+                <input type="password" id="resetZookeeperPassword" name="resetZookeeperPassword" required>
+                <button type="submit" name="resetZookeeperPassword">Reset Password</button>
+            </fieldset>
+        </form>
+    <?php endif ?>
+</div>
+
 <!-- Bottom Navigation -->
 <div class="bottom-nav-container">
     <div class="bottom-nav-item" id="bottom-nav-left">

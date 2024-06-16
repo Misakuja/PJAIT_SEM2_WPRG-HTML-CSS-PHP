@@ -68,7 +68,39 @@ class PageFunctionality implements PageInterface {
     }
 
     public function logoutUser() : void {
-        unset($_SESSION['user_id']);
+        if (isset ($_SESSION['user_id'])) unset($_SESSION['user_id']);
+        if (isset ($_SESSION['zookeeper_id'])) unset($_SESSION['zookeeper_id']);
         session_destroy();
     }
+
+    public function loginZookeeper() : void {
+        global $pdo;
+        $loginZookeeperEmail = $_POST["loginZookeeperEmail"];
+        $loginPasswordZookeeper = $_POST["loginZookeeperPassword"];
+
+        $zookeeper = $pdo->query("SELECT * FROM zookeepers WHERE zookeeper_email = '$loginZookeeperEmail'")->fetch(PDO::FETCH_ASSOC);
+        if ($zookeeper && password_verify($loginPasswordZookeeper, $zookeeper['user_password'])) {
+            $_SESSION['zookeeper_id'] = $zookeeper['zookeeper_id'];
+
+            $_SESSION['notification'] = "Logged in successfully as " . $zookeeper['zookeeper_first_name'] . " " . $zookeeper['zookeeper_last_name'];
+        } else {
+            $_SESSION['notification'] = "Invalid Email or Password";
+        }
+    }
+    public function resetPasswordZookeeper() : void {
+        global $pdo;
+        $resetZookeeperEmail = $_POST["resetEmailZookeeper"];
+        $resetZookeeperPassword = password_hash($_POST["resetZookeeperPassword"], PASSWORD_DEFAULT);
+
+        $checkEmail = $pdo->query("SELECT * FROM zookeepers WHERE zookeepers_email = '$resetZookeeperEmail'")->fetch(PDO::FETCH_ASSOC);
+        if ($checkEmail) {
+            $sql = "UPDATE zookeepers SET zookeeper_password = '$resetZookeeperEmail' WHERE zookeeper_email = '$resetZookeeperPassword'";
+            $pdo->exec($sql);
+
+            $_SESSION['notification'] = "Password reset successfully.";
+        } else {
+            $_SESSION['notification'] = "Password reset failed.";
+        }
+    }
+
 }

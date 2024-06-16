@@ -18,7 +18,7 @@ try {
         number_of_specimens INT                
     )";
 
-    $speciesTable = "CREATE TABLE IF NOT EXISTS Species (
+    $speciesTable = "CREATE TABLE IF NOT EXISTS species (
         species_id INT AUTO_INCREMENT PRIMARY KEY,
         category_id INT,
         common_name VARCHAR(100),

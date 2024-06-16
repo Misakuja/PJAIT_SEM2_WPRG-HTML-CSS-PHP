@@ -3,7 +3,10 @@ require_once 'PageFunctionality.php';
 
 $pageFunctionality = new PageFunctionality();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contactForm'])) $pageFunctionality->sendMail();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['contactForm'])) $pageFunctionality->sendMail();
+    if (isset($_POST["logoutUser"])) $pageFunctionality->logoutUser();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,14 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contactForm'])) $page
 <div class="side-nav-container" id="sideNav">
     <a href="javascript:void(0)" class="closeButton" onclick="closeSideNav()">&times;</a>
     <a href="6-RegisterLogin.php">Register & Login</a>
-    <a href="#">For Workers </a>
+    <a href="7-RegisterLoginZookeeper.php">Employees only</a>
     <a href="#">Our Animals</a>
     <a href="5-TicketsPage.php">Tickets</a>
     <a href="4-openingHoursPage.php">Opening Hours</a>
     <a href="2-contactUsPage.php">Contact us</a>
     <a href="3-regulationsPage.php">Visiting Regulations</a>
     <!--LOGOUT-->
-    <?php if (isset($_SESSION['user_id'])) : ?>
+    <?php if (isset($_SESSION['user_id']) || isset($_SESSION['zookeeper_id'])) : ?>
         <form method='post' action="">
             <button type="submit" name="logoutUser">Logout</button>
         </form>
@@ -95,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contactForm'])) $page
     <div class="bottom-nav-item" id="bottom-nav-center">
         <p>Safari Trails ZOO</p>
         <p>ul. Targ Drzewny 9/11 83-000, Gdańsk </p>
-        <p>+48 690 420 420 © 2000 - 2024</p>
+        <p>+48 690 420 420 &#xa9; 2000 - 2024</p>
     </div>
     <div class="bottom-nav-item" id="bottom-nav-right">
         <a href="2-contactUsPage.php">Contact us</a>

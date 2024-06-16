@@ -628,6 +628,7 @@ body {
     }
 
 }
+
 #notifications {
     background-color: rgb(209, 202, 194);
     color: black;
@@ -635,6 +636,32 @@ body {
     font-size: 30px;
     padding: 12px 0;
 }
+
+/* PAGE 6 - EMPLOYEE ONLY */
+#info-employee-only {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+        background-color: rgb(209, 202, 194);
+        padding: 10px;
+    }
+    p {
+        font-size: 18px;
+    }
+    #user-on-employee-site {
+        background-color: rgb(195, 188, 181);
+        box-sizing: border-box;
+        border-radius: 25px;
+        width: fit-content;
+        padding: 10px 20px;
+        transition: background-color 0.3s;
+        margin: 20px auto;
+    }
+}
+
+
 
 /* MEDIA QUERIES FOR SMALLER SCREENS */
 @media (max-width: 1000px) {
@@ -645,20 +672,6 @@ body {
     #burger-menu {
         font-size: 35px;
         margin-right: 10px;
-    }
-
-    #register-login-button {
-        margin: 10px 0;
-        flex: 1 0 100%;
-        display: flex;
-        justify-content: center;
-
-        button {
-            font-size: 20px;
-            padding: 8px 20px;
-            width: 100%;
-            max-width: 300px;
-        }
     }
 
     #logo {

@@ -5,4 +5,6 @@ interface PageInterface {
     public function loginUser();
     public function resetPasswordUser();
     public function logoutUser();
+    public function loginZookeeper();
+    public function resetPasswordZookeeper();
 }
