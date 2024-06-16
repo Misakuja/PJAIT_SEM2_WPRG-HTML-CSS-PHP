@@ -14,10 +14,14 @@
     <a href="#">Our Animals</a>
     <a href="5-TicketsPage.php">Tickets</a>
     <a href="4-openingHoursPage.php">Opening Hours</a>
-    <div id="contact-regulations">
-        <a href="2-contactUsPage.php">Contact us</a>
-        <a href="3-regulationsPage.php">Visiting Regulations</a>
-    </div>
+    <a href="2-contactUsPage.php">Contact us</a>
+    <a href="3-regulationsPage.php">Visiting Regulations</a>
+    <!--LOGOUT-->
+    <?php if (isset($_SESSION['user_id'])) : ?>
+        <form method='post' action="">
+            <button type="submit" name="logoutUser">Logout</button>
+        </form>
+    <?php endif ?>
 </div>
 
 <!-- Top Navigation -->

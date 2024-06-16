@@ -1,3 +1,17 @@
+<?php
+require_once 'PageFunctionality.php';
+$pageFunctionality = new PageFunctionality();
+global $notification;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["registerUser"])) $pageFunctionality->registerUser();
+    if (isset($_POST["loginUser"])) $pageFunctionality->loginUser();
+    if (isset($_POST["logoutUser"])) $pageFunctionality->logoutUser();
+    if (isset($_POST["resetPasswordUser"])) $pageFunctionality->resetPasswordUser();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,10 +28,14 @@
     <a href="#">Our Animals</a>
     <a href="5-TicketsPage.php">Tickets</a>
     <a href="4-openingHoursPage.php">Opening Hours</a>
-    <div id="contact-regulations">
-        <a href="2-contactUsPage.php">Contact us</a>
-        <a href="3-regulationsPage.php">Visiting Regulations</a>
-    </div>
+    <a href="2-contactUsPage.php">Contact us</a>
+    <a href="3-regulationsPage.php">Visiting Regulations</a>
+    <!--LOGOUT-->
+    <?php if (isset($_SESSION['user_id'])) : ?>
+        <form method='post' action="">
+            <button type="submit" name="logoutUser">Logout</button>
+        </form>
+    <?php endif ?>
 </div>
 
 <!-- Top Navigation -->
@@ -28,7 +46,8 @@
         <button class="top-nav-item" type="submit">Register & Login</button>
     </form>
 
-    <a href="1-mainPage.php" class="top-nav-item" id="logo-top"><img src="https://svgshare.com/i/17GD.svg" alt="logo-svg"></a>
+    <a href="1-mainPage.php" class="top-nav-item" id="logo-top"><img src="https://svgshare.com/i/17GD.svg"
+                                                                     alt="logo-svg"></a>
 </div>
 
 <!-- Header Image -->
@@ -36,9 +55,57 @@
     <header class="middle-text">
         <a href="1-mainPage.php">Main Page </a>
         <a> &#x2192; </a>
-        <a href="5-TicketsPage.php"> Register & Login</a>
+        <a href="6-RegisterLogin.php"> Register & Login</a>
     </header>
 </div>
+
+    <?php if (isset($_SESSION['notification'])) : ?>
+        <p id="notifications"><?= $_SESSION['notification']; ?> </p>
+    <?php endif ?>
+
+<div class="forms-page">
+    <div id="register-login-forms">
+    <!--REGISTER-->
+    <form method='post' action="">
+        <fieldset>
+            <legend>Registration Form</legend>
+            <label for="registerFirstName">First Name:</label>
+            <input type="text" id="registerFirstName" name="registerFirstName" required>
+            <label for="registerLastName">Last Name:</label>
+            <input type="text" id="registerLastName" name="registerLastName" required>
+            <label for="registerPassword">Password:</label>
+            <input type="password" id="registerPassword" name="registerPassword" required>
+            <label for="registerEmail">Email:</label>
+            <input type="email" id="registerEmail" name="registerEmail" required>
+            <button type="submit" name="registerUser">Register</button>
+        </fieldset>
+    </form>
+    <!--LOGIN-->
+    <form method='post' action="">
+        <fieldset>
+            <legend>Login</legend>
+            <label for="loginEmail">Email:</label>
+            <input type="email" id="loginEmail" name="loginEmail" required>
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="loginPassword" required>
+            <button type="submit" name="loginUser">Login</button>
+        </fieldset>
+    </form>
+</div>
+    <!--RESET-->
+    <?php if (isset($_SESSION['user_id'])) : ?>
+    <form method='post' action="">
+        <fieldset>
+            <legend>Reset Password</legend>
+            <label for="resetEmail">Email:</label>
+            <input type="email" id="resetEmail" name="resetEmail" required>
+            <label for="resetPassword">New Password:</label>
+            <input type="password" id="resetPassword" name="resetPassword" required>
+            <button type="submit" name="resetPasswordUser">Reset Password</button>
+        </fieldset>
+    </form>
+</div>
+<?php endif ?>
 
 <!-- Bottom Navigation -->
 <div class="bottom-nav-container">

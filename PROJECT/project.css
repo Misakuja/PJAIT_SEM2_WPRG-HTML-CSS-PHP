@@ -133,7 +133,10 @@ body {
     transition: 0.5s;
     padding: 75px 0;
 
-    a {
+    a, button {
+        font-family: "Times New Roman", sans-serif;
+        background-color: transparent;
+        border: none;
         padding: 8px 10px 8px 25px;
         font-size: 23px;
         color: #818181;
@@ -142,7 +145,7 @@ body {
         text-decoration: none;
     }
 
-    a:hover {
+    a:hover, button:hover {
         color: #f1f1f1;
     }
 
@@ -202,10 +205,6 @@ body {
             padding: 25px 150px;
             margin: 25px 0 15px 0;
             width: auto;
-        }
-
-        button #tickets-opening-button {
-            width: 100%;
         }
     }
 
@@ -552,6 +551,89 @@ body {
         }
 
     }
+}
+
+/* PAGE 5 - OPENING HOURS */
+.forms-page {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    #register-login-forms {
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        max-width: 1200px;
+        gap: 20px;
+    }
+
+    form {
+        width: 45%;
+        min-width: 300px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+    }
+
+    fieldset {
+        display: flex;
+        flex-direction: column;
+        border: none;
+    }
+
+    legend {
+        letter-spacing: 5px;
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    label {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 5px;
+        margin-top: 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 12px 20px;
+        font-size: 18px;
+        background-color: #786c60;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #473f36;
+    }
+
+}
+#notifications {
+    background-color: rgb(209, 202, 194);
+    color: black;
+    text-align: center;
+    font-size: 30px;
+    padding: 12px 0;
 }
 
 /* MEDIA QUERIES FOR SMALLER SCREENS */

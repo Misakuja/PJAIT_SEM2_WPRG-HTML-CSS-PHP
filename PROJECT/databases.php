@@ -11,7 +11,7 @@ try {
     $pdo->exec("CREATE DATABASE IF NOT EXISTS $dbname");
     $pdo->exec("USE $dbname");
 
-    $animalCategoriesTable = "CREATE TABLE IF NOT EXISTS AnimalCategories (
+    $animalCategoriesTable = "CREATE TABLE IF NOT EXISTS animalCategories (
         category_id INT AUTO_INCREMENT PRIMARY KEY,
         category_name INT,
         number_of_species INT,
@@ -28,10 +28,10 @@ try {
         behaviour TEXT,
         image TEXT,
         
-        FOREIGN KEY (category_id) REFERENCES Category (category_id)                        
+        FOREIGN KEY (category_id) REFERENCES animalCategories (category_id)                        
     )";
 
-    $animalsTable = "CREATE TABLE IF NOT EXISTS Animals (
+    $animalsTable = "CREATE TABLE IF NOT EXISTS animals (
         animal_id INT AUTO_INCREMENT PRIMARY KEY,
         animaL_name VARCHAR(100),
         species_id INT,
@@ -40,10 +40,10 @@ try {
         description TEXT,
         image TEXT,
         
-        FOREIGN KEY (species_id) REFERENCES Species (species_id)
+        FOREIGN KEY (species_id) REFERENCES species (species_id)
     )";
 
-    $zookeepersTable = "CREATE TABLE IF NOT EXISTS Zookeepers (
+    $zookeepersTable = "CREATE TABLE IF NOT EXISTS zookeepers (
         zookeeper_id INT AUTO_INCREMENT PRIMARY KEY,
         zookeeper_first_name VARCHAR(255) NOT NULL,
         zookeeper_last_name VARCHAR(255) NOT NULL,
@@ -52,7 +52,7 @@ try {
         zookeeper_password VARCHAR(255) NOT NULL               
     )";
 
-    $usersTable = "CREATE TABLE IF NOT EXISTS Users (
+    $usersTable = "CREATE TABLE IF NOT EXISTS users (
         user_id INT AUTO_INCREMENT PRIMARY KEY,
         user_first_name VARCHAR(255) NOT NULL,
         user_last_name VARCHAR(255) NOT NULL,
@@ -60,7 +60,7 @@ try {
         user_password VARCHAR(255) NOT NULL
     )";
 
-    $ticketOrdersTable = "CREATE TABLE IF NOT EXISTS TicketOrders (
+    $ticketOrdersTable = "CREATE TABLE IF NOT EXISTS ticketOrders (
         order_id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT,
         buyer_first_name VARCHAR(255) NOT NULL,
@@ -69,7 +69,7 @@ try {
         adult_tickets_amount INT,
         child_tickets_amount INT,
         
-        FOREIGN KEY (user_id) REFERENCES User (user_id)      
+        FOREIGN KEY (user_id) REFERENCES users (user_id)      
     )";
 
     $pdo->exec($animalCategoriesTable);
