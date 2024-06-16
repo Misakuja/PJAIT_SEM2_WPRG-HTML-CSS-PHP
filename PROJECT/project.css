@@ -4,6 +4,7 @@ html, body {
     margin: 0;
     font-family: "Times New Roman", sans-serif;
 }
+
 body {
     overflow-y: scroll;
     overflow-x: hidden;
@@ -54,13 +55,13 @@ body {
         }
     }
 
-    #logo {
+    #logo-top {
         height: 50px;
-        width: 50px;
+        width: 100px;
         margin-right: 20px;
-        background-color: #ffffff;
-        border-radius: 50%;
+        margin-top: 10px;
         display: inline-block;
+        padding: 10px;
     }
 }
 
@@ -225,12 +226,109 @@ body {
     }
 }
 
+/* ZOO INFO */
 .info-container {
-    background-color: #232121;
     width: 100%;
-    height: 750px;
     margin-top: 50px;
-    color: white;
+    text-align: center;
+    background-color: rgba(80, 80, 80, 0.1);
+
+    #top-info {
+        h1 {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: black;
+            font-size: 45px;
+            padding: 12px 0;
+            letter-spacing: 10px;
+        }
+
+        p {
+
+            color: black;
+            font-size: 21px;
+            margin: 15px 25px;
+        }
+    }
+
+    #bottom-info {
+        h1 {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: black;
+            font-size: 35px;
+            padding: 12px 0;
+            letter-spacing: 10px;
+        }
+
+        .circles {
+            display: grid;
+            justify-content: center;
+            justify-items: center;
+            width: fit-content;
+            margin: 0 auto;
+
+
+            h2 {
+                font-size: 35px;
+                margin: 0;
+                color: white;
+                transition: 0.3s;
+
+            }
+
+            p {
+                color: white;
+                transition: 0.3s;
+
+            }
+
+            .numbers-circle {
+                background-color: rgba(0, 0, 0, 0.5);
+                border-radius: 50%;
+                width: 250px;
+                height: 250px;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                margin: 10px;
+            }
+        }
+    }
+}
+
+/* BOTTOM NAV */
+.bottom-nav-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 100px;
+    align-items: center;
+    text-align: center;
+    padding-top: 20px;
+
+    .bottom-nav-item {
+        padding: 8px 10px 8px 25px;
+        font-size: 18px;
+        display: block;
+        margin: 10px;
+    }
+
+    #logo-bottom img {
+        width: 150px;
+        height: auto;
+    }
+
+    #bottom-nav-left p {
+        font-style: italic;
+    }
+
+    #bottom-nav-right a {
+        text-decoration: none;
+        color: black;
+        display: block;
+        margin: 10px 0 20px 0;
+        font-size: 20px;
+    }
 }
 
 /* MEDIA QUERIES FOR SMALLER SCREENS */
@@ -285,5 +383,24 @@ body {
         button {
             padding: 15px 80px;
         }
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .circles {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 800px) {
+    .circles {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 799px) {
+    .circles {
+        grid-template-columns: 1fr;
     }
 }

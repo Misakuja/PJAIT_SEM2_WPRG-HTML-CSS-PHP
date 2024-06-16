@@ -29,7 +29,7 @@
         <button class="top-nav-item" type="submit">Tickets</button>
     </form>
 
-    <a href="mainPage.php" class="top-nav-item" id="logo"></a>
+    <a href="mainPage.php" class="top-nav-item" id="logo-top"><img src="https://svgshare.com/i/17GD.svg" alt="logo-svg"></a>
 </div>
 
 <div class="image-container" id="header-background"></div>
@@ -65,41 +65,68 @@
 
 <!--Zoo in Numbers + Info Banner-->
 <div class="info-container">
-    <h1>Welcome!</h1>
-    <p>We're delighted to have you here, a unique sanctuary sprawling across approximately 69
-        hectares, housing animals from every corner of the globe. Our zoo offers a diverse and enriching experience,
-        providing a safe haven for species from various continents.
-    </p>
-    <p>
-        While you explore our fascinating animal exhibits, don't forget to visit Safari Stop, our charming zoo
-        restaurant. It's the perfect spot to unwind and refuel after your wildlife adventures. Whether you're craving a
-        quick snack or a leisurely meal, Safari Stop promises a delightful dining experience amidst the zoo's natural
-        beauty.
-    </p>
-    <p>
-        Come discover the wonders of the animal kingdom and indulge in delicious treats at Safari Stop – your gateway to
-        both wildlife and culinary delights at the ZOO!
-    </p>
-    <h1>Our ZOO in numbers</h1>
-    <div class="box">
-        <h1>2000</h1>
-        <p>year of foundation</p>
+    <div id="top-info">
+        <h1>Welcome!</h1>
+        <p>We're delighted to have you here, a unique sanctuary sprawling across approximately 69
+            hectares, housing animals from every corner of the globe. Our zoo offers a diverse and enriching experience,
+            providing a safe haven for species from various continents.
+        </p>
+        <p>
+            While you explore our fascinating animal exhibits, don't forget to visit Safari Stop, our charming zoo
+            restaurant. It's the perfect spot to unwind and refuel after your wildlife adventures. Whether you're
+            craving a
+            quick snack or a leisurely meal, Safari Stop promises a delightful dining experience amidst the zoo's
+            natural
+            beauty.
+        </p>
+        <p>
+            Come discover the wonders of the animal kingdom and indulge in delicious treats at Safari Stop – your
+            gateway to
+            both wildlife and culinary delights at the ZOO!
+        </p>
     </div>
-    <div class="box">
-        <h1>69 ha</h1>
-        <p>total area</p>
-    </div>
-    <div class="box">
-        <!--TODO// ECHO SPECIES FROM DATABASES TABLE-->
-        <h1>420</h1>
-        <p>total species</p>
-    </div>
-    <div class="box">
-        <!--TODO// ECHO SPECIMENS FROM DATABASES TABLE-->
-        <h1>2137</h1>
-        <p>total specimens</p>
+    <div id="bottom-info">
+        <h1>Our ZOO in numbers</h1>
+        <div class="circles">
+            <div class="numbers-circle">
+                <h2>2000</h2>
+                <p>year of foundation</p>
+            </div>
+            <div class="numbers-circle">
+                <h2>69 ha</h2>
+                <p>total area</p>
+            </div>
+            <div class="numbers-circle">
+                <!--TODO// ECHO SPECIES FROM DATABASES TABLE-->
+                <h2>420</h2>
+                <p>total species</p>
+            </div>
+            <div class="numbers-circle">
+                <!--TODO// ECHO SPECIMENS FROM DATABASES TABLE-->
+                <h2>2137</h2>
+                <p>total specimens</p>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav-container">
+    <div class="bottom-nav-item" id="bottom-nav-left">
+        <a href="mainPage.php" id="logo-bottom"><img src="https://svgshare.com/i/17J8.svg" alt="logo-svg"></a>
+        <p>Inspired by ZOO Wrocław & ZOO Gdańsk</p>
+    </div>
+    <div class="bottom-nav-item" id="bottom-nav-center">
+        <p>The best zoo ever, truly</p>
+        <p>ul. Targ Drzewny 9/11 83-000, Gdańsk </p>
+        <p>+48 690 420 420 © 2000 - 2024</p>
+    </div>
+    <div class="bottom-nav-item" id="bottom-nav-right">
+        <a href="#">Contact us</a>
+        <a href="#">Visiting Regulations</a>
+    </div>
+</div>
+
 <script src="mainPage.js"></script>
 </body>
 </html>
