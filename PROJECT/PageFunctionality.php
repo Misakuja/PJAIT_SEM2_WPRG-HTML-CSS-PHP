@@ -108,9 +108,9 @@ class PageFunctionality implements PageInterface {
 
     public function displayCart(): void {
         if (!empty($_SESSION['cart'])) {
-            echo "<h2>Cart Contents:</h2>";
+            echo "<h2 class='information-cart'>Cart Contents:</h2>";
             echo "
-            <table>
+            <table id='cart-table'>
             <thead>
                 <tr>
                     <th>TYPE OF TICKET</th>
@@ -137,7 +137,7 @@ class PageFunctionality implements PageInterface {
             echo "</tbody></table>";
 
             $totalPrice = $this->calculateTotalValue();
-            echo "Total Price:" . $totalPrice;
+            echo "<h3>Total Price: " . $totalPrice . "$</h3>";
         } else {
             echo "<h2 class='information-cart'>Your cart is empty.</h2>";
         }

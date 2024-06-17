@@ -554,6 +554,23 @@ body {
 }
 
 /* PAGE 5 - TICKETS */
+.cart-table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+        width: 25%;
+        text-align: center;
+        background-color: rgb(209, 202, 194);
+        color: #2b2927;
+        font-size: 35px;
+        padding: 20px 0;
+        margin: 50px 0 0 0;
+        border-radius: 25px;
+    }
+}
+
 .information-cart {
     width: 100%;
     text-align: center;
@@ -564,6 +581,120 @@ body {
     margin: 50px 0 0 0;
 }
 
+#tickets-table-container {
+    display: grid;
+    place-items: center;
+    margin-top: 50px;
+}
+
+#tickets-table {
+    width: 75%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+
+    th {
+        background-color: rgb(211, 204, 196);
+        color: #333;
+        font-weight: bold;
+        padding: 10px;
+        text-align: center;
+        border-bottom: 2px solid #ddd;
+    }
+
+    td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            button {
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 5px;
+                cursor: pointer;
+                width: 30px;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            button:hover {
+                background-color: #e0e0e0;
+            }
+        }
+    }
+
+    p {
+        font-size: 14px;
+        color: #666;
+        margin: 5px 0 0 0;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    button[type="submit"] {
+        background-color: #786c60;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #473f36;
+    }
+}
+
+#cart-actions-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    button[type="submit"] {
+        background-color: #786c60;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #473f36;
+    }
+}
+
+#cart-table {
+    width: 75%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: rgb(211, 204, 196);
+        color: #333;
+        font-weight: bold;
+    }
+}
 
 /* PAGE 6 - LOGIN */
 .forms-page {
@@ -660,9 +791,11 @@ body {
         background-color: rgb(209, 202, 194);
         padding: 10px;
     }
+
     p {
         font-size: 18px;
     }
+
     #user-on-employee-site {
         background-color: rgb(195, 188, 181);
         box-sizing: border-box;

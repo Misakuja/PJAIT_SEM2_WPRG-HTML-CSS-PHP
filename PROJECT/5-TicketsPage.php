@@ -59,19 +59,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 <!-- CART DISPLAY -->
-<div id="cart-container">
+<div class='cart-table-container'>
     <?php
     if (isset($_SESSION['user_id'])) $pageFunctionality->displayCart();
     if (!empty($_SESSION['cart']) && isset($_SESSION['user_id'])) : ?>
-    <form action="" method="post">
+    <form action="" method="post" id="cart-actions-container">
         <button type="submit" name="clearCart">Clear Cart</button>
         <button type="submit" name="checkoutCart">Checkout</button>
     </form>
-</div>
 <?php endif ?>
 <?php if (!isset($_SESSION['user_id'])) echo "<h2 class='information-cart'>Log in before accessing the tickets page.</h2>";
 else { ?>
-    <div id="tickets">
+    <div id="tickets-table-container">
+    <div id="tickets-table">
         <table>
             <thead>
             <tr>
@@ -82,7 +82,7 @@ else { ?>
             </thead>
             <tbody>
             <tr>
-                <td>Normal Ticket</td>
+                <td><label>Normal Ticket</label></td>
                 <td>10.00$</td>
                 <td>
                     <form action="" method="post">
@@ -114,6 +114,7 @@ else { ?>
             </tbody>
         </table>
     </div>
+</div>
 <?php } ?>
 
 <!-- Bottom Navigation -->
