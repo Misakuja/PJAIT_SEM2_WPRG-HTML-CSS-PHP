@@ -20,4 +20,8 @@ interface PageInterface {
 
     public function calculatePrice($product_id, $ticketPrice);
     public function calculateTotalValue();
+
+    public function updateAnimalCategoriesDatabase();
+    public function getNumberOfSpecies();
+    public function getNumberOfSpecimens();
 }

@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <a href="javascript:void(0)" class="closeButton" onclick="closeSideNav()">&times;</a>
     <a href="6-RegisterLoginPage.php">Register & Login</a>
     <a href="7-RegisterLoginZookeeperPage.php">Employees only</a>
-    <a href="#">Our Animals</a>
+    <a href="8-SpeciesPage.php">Our Animals</a>
     <a href="5-TicketsPage.php">Tickets</a>
     <a href="4-openingHoursPage.php">Opening Hours</a>
     <a href="2-contactUsPage.php">Contact us</a>
@@ -108,14 +108,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <h2>69 ha</h2>
                 <p>total area</p>
             </div>
+
             <div class="numbers-circle">
-                <!--TODO// ECHO SPECIES FROM DATABASES TABLE-->
-                <h2>420</h2>
+                <h2><?= $pageFunctionality->getNumberOfSpecies(); ?></h2>
                 <p>total species</p>
             </div>
             <div class="numbers-circle">
-                <!--TODO// ECHO SPECIMENS FROM DATABASES TABLE-->
-                <h2>2137</h2>
+                <h2><?= $pageFunctionality->getNumberOfSpecimens(); ?></h2>
                 <p>total specimens</p>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <?php
 require_once 'PageInterface.php';
-require_once 'databases.php';
+require_once 'Databases.php';
 session_start();
 
 global $pdo;
@@ -215,5 +215,36 @@ class PageFunctionality implements PageInterface {
         $headers = 'From no-reply@zoo.com';
 
         mail($email, $subject, $message, $headers);
+    }
+
+    function updateAnimalCategoriesDatabase(): void {
+        global $pdo;
+
+            $sql1= "UPDATE animalcategories SET number_of_species = (SELECT COUNT(DISTINCT species_id) FROM species WHERE species.category_id = animalCategories.category_id);";
+            $pdo->exec($sql1);
+
+            $sql2 = "UPDATE animalcategories SET number_of_specimens = (SELECT COUNT(*) FROM animals JOIN species ON animals.species_id = species.species_id WHERE species.category_id = animalcategories.category_id);";
+            $pdo->exec($sql2);
+    }
+
+    function getNumberOfSpecies(): int {
+        global $pdo;
+
+        $this->updateAnimalCategoriesDatabase();
+
+        $fetchSpecies = $pdo->query("SELECT SUM(number_of_species) AS total_species FROM animalcategories")->fetch(PDO::FETCH_ASSOC);
+
+        return (int) $fetchSpecies['total_species'];
+    }
+
+    function getNumberOfSpecimens(): int {
+        global $pdo;
+
+        $this->updateAnimalCategoriesDatabase();
+
+        $fetchSpecimens = $pdo->query("SELECT SUM(number_of_specimens) AS total_specimens FROM animalcategories")->fetch(PDO::FETCH_ASSOC);
+
+
+        return (int) $fetchSpecimens['total_specimens'];
     }
 }
