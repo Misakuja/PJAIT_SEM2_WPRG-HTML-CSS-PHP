@@ -59,6 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- Animal Categories Table -->
 <?php $pageFunctionality->showAnimalCategoriesTable(); ?>
 
+<?php if (isset($_SESSION['notificationAdd'])) : ?>
+    <p id="notifications"><?= $_SESSION['notificationAdd']; ?> </p>
+<?php endif ?>
+
 <!-- ZOOKEEPERS ONLY FORMS (ADD/EDIT) -->
 <?php if (isset($_SESSION['zookeeper_id'])) : ?>
 
@@ -68,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="categoryNameSpeciesAdd">Category Name:</label>
         <select name="categoryNameSpeciesAdd" id="categoryNameSpeciesAdd" required>
             <option value="">Select Category</option>
-            <?php $pageFunctionality->getCategories(); ?>
+            <?php $pageFunctionality->getCategories(0); ?>
         </select>
         <label for="commonNameSpeciesAdd">Common Name:</label>
         <input type="text" id="commonNameSpeciesAdd" name="commonNameSpeciesAdd" required>
@@ -98,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="categoryNameSpeciesEdit">Category Name:</label>
             <select name="categoryNameSpeciesEdit" id="categoryNameSpeciesEdit" required>
                 <option value="">Select Category</option>
-                <?php $pageFunctionality->getCategories(); ?>
+                <?php $pageFunctionality->getCategories($speciesData['category_id']); ?>
             </select>
             <label for="commonNameSpeciesEdit">Common Name:</label>
             <input type="text" id="commonNameSpeciesEdit" name="commonNameSpeciesEdit"

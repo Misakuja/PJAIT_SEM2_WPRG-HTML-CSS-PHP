@@ -68,6 +68,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
 </div>
 
+<?php if (isset($_SESSION['notificationAdd'])) : ?>
+    <p id="notifications"><?= $_SESSION['notificationAdd']; ?> </p>
+<?php endif ?>
+
+
 <!-- ZOOKEEPERS ONLY FORMS (ADD/EDIT) -->
 <?php if (isset($_SESSION['zookeeper_id'])) : ?>
 

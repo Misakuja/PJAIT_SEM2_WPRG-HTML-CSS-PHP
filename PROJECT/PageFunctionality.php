@@ -59,6 +59,7 @@ class PageFunctionality implements PageInterface {
         } else {
             $_SESSION['notification'] = "Invalid Email or Password";
         }
+        if (isset($_SESSION['zookeeper_id'])) unset($_SESSION['zookeeper_id']);
     }
 
     function resetPasswordUser(): void {
@@ -90,6 +91,7 @@ class PageFunctionality implements PageInterface {
         } else {
             $_SESSION['notification2'] = "Invalid Email or Password.";
         }
+        if (isset($_SESSION['user_id'])) unset($_SESSION['user_id']);
     }
 
     function resetPasswordZookeeper(): void {
@@ -334,13 +336,14 @@ class PageFunctionality implements PageInterface {
         }
     }
 
-    function getCategories(): void {
+    function getCategories($selectedCategoryId): void {
         global $pdo;
         $sql = "SELECT category_id, category_name FROM animalcategories ORDER BY category_name";
         $categories = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($categories as $category) {
-            echo '<option value="' . $category['category_id'] . '">' . $category['category_name'] . '</option>';
+            $isSelected = ($category['category_id'] == $selectedCategoryId) ? 'selected' : '';
+            echo '<option value="' . $category['category_id'] . '" ' . $isSelected . '>' . $category['category_name'] . '</option>';
         }
     }
 
@@ -354,8 +357,12 @@ class PageFunctionality implements PageInterface {
         $behaviour = $_POST['behaviourSpeciesAdd'];
         $imageUrl = $_POST['imageSpeciesAdd'];
 
-        $sql = "INSERT INTO species (category_id, common_name, scientific_name, conservation_status, diet, behaviour, image) VALUES ('$categoryName', '$commonName', '$scientificName', '$conservationStatus', '$diet', '$behaviour', '$imageUrl')";
-        $pdo->exec($sql);
+        try {
+            $sql = "INSERT INTO species (category_id, common_name, scientific_name, conservation_status, diet, behaviour, image) VALUES ('$categoryName', '$commonName', '$scientificName', '$conservationStatus', '$diet', '$behaviour', '$imageUrl')";
+            $pdo->exec($sql);
+        } catch (PDOException $e) {
+            $_SESSION['notificationAdd'] = "Failed to add new entry.";
+        }
     }
 
     function fetchClickedSpecies() {
@@ -398,8 +405,12 @@ class PageFunctionality implements PageInterface {
         $description = $_POST['descriptionAnimalAdd'];
         $imageUrl = $_POST['imageAnimalAdd'];
 
-        $sql = "INSERT INTO animals (animal_name, species_id, habitat_id, date_of_birth, description, image) VALUES ('$name', '$speciesId', '$habitatId', '$dateOfBirth', '$description', '$imageUrl')";
-        $pdo->exec($sql);
+        try {
+            $sql = "INSERT INTO animals (animal_name, species_id, habitat_id, date_of_birth, description, image) VALUES ('$name', '$speciesId', '$habitatId', '$dateOfBirth', '$description', '$imageUrl')";
+            $pdo->exec($sql);
+        } catch (PDOException $e) {
+            $_SESSION['notificationAdd'] = "Failed to add new entry.";
+        }
     }
 
     function fetchClickedAnimal() {

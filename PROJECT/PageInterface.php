@@ -29,15 +29,15 @@ interface PageInterface {
     public function listAllSpecimen($url_id);
 
 
-    public function getCategories();
+    public function getCategories($selectedCategoryId);
     public function addSpecies();
     public function fetchClickedSpecies();
     public function editSpecies($selectedSpeciesId);
     public function deleteSpecies();
 
     public function addAnimal();
-    public function fetchClickedAnimal(); //TODO
-    public function editAnimal($selectedAnimalId); //TODO
+    public function fetchClickedAnimal();
+    public function editAnimal($selectedAnimalId);
     public function deleteAnimal();
 
 }
