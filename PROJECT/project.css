@@ -787,6 +787,7 @@ body {
         margin-bottom: 50px;
     }
 }
+
 #info-employee-only {
     display: flex;
     flex-direction: column;
@@ -810,7 +811,99 @@ body {
         transition: background-color 0.3s;
         margin: 20px auto;
     }
+}
 
+/* PAGE 8 & 9 - SPECIES AND ANIMAL PAGES */
+.edit-add-forms-container {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+        background-color: rgb(209, 202, 194);
+        width: 100%;
+        color: #2b2927;
+        text-align: center;
+        font-size: 30px;
+        padding: 12px 0;
+        border-top: 3px solid rgba(115, 110, 105, 0.3);
+        border-bottom: 3px solid rgba(115, 110, 105, 0.3);
+    }
+
+    form {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+    }
+
+    .edit-add-forms-zookeeper {
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        max-width: 800px;
+        gap: 20px;
+    }
+
+    #species-add, #species-edit {
+        label {
+            font-size: 16px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"], input[type="url"], input[type="number"], select {
+            width: calc(100% - 10px);
+        }
+
+        input[type="text"], input[type="url"], select, textarea {
+            padding: 5px;
+            margin-top: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+    }
+    #animal-add, #animal-edit {
+        label {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="text"], input[type="url"], textarea, input[type="number"], input[type="date"] {
+            width: 100%;
+            font-size: 16px;
+            padding: 5px 0;
+            text-align: center;
+        }
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 6px 15px;
+        font-size: 18px;
+        background-color: #786c60;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #473f36;
+    }
 }
 
 /* MEDIA QUERIES FOR SMALLER SCREENS */

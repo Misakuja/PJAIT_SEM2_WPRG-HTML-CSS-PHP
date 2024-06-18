@@ -38,7 +38,7 @@ try {
     (7, 'Tarantula', 'Theraphosidae', 'Least Concern', 'Carnivore', 'Solitary, nocturnal')";
     $pdo->exec($insertSpecies);
 
-    $insertAnimals = "INSERT IGNORE INTO animals (animal_name, species_id, habitat_id, date_of_birth, description) VALUES
+    $insertAnimals = "INSERT IGNORE INTO animals (animal_name, species_id, habitat_id, date_of_birth, description, image) VALUES
     ('Charlie', 1, 1, '2015-03-15', 'A friendly capybara.'),
     ('Binky', 2, 1, '2017-05-20', 'Loves climbing trees.'),
     ('Rex', 3, 1, '2016-08-30', 'Often seen sunbathing.'),

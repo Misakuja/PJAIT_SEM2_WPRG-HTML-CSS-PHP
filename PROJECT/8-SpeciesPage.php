@@ -65,69 +65,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- ZOOKEEPERS ONLY FORMS (ADD/EDIT) -->
 <?php if (isset($_SESSION['zookeeper_id'])) : ?>
-
+<div class="edit-add-forms-container">
     <!-- Add Species - ZOOKEEPERS ONLY -->
     <h2>Add New Species</h2>
-    <form method="POST">
-        <label for="categoryNameSpeciesAdd">Category Name:</label>
+    <form class="edit-add-forms-zookeeper" id="species-add" method="POST">
+        <label for="categoryNameSpeciesAdd">Category Name:
         <select name="categoryNameSpeciesAdd" id="categoryNameSpeciesAdd" required>
             <option value="">Select Category</option>
             <?php $pageFunctionality->getCategories(0); ?>
-        </select>
-        <label for="commonNameSpeciesAdd">Common Name:</label>
+        </select></label>
+        <label for="commonNameSpeciesAdd">Common Name:
         <input type="text" id="commonNameSpeciesAdd" name="commonNameSpeciesAdd" required>
-
-        <label for="scientificNameSpeciesAdd">Scientific Name:</label>
+        </label>
+        <label for="scientificNameSpeciesAdd">Scientific Name:
         <input type="text" id="scientificNameSpeciesAdd" name="scientificNameSpeciesAdd" required>
-
-        <label for="conservationStatusSpeciesAdd">Conservation Status:</label>
+        </label>
+        <label for="conservationStatusSpeciesAdd">Conservation Status:
         <input type="text" id="conservationStatusSpeciesAdd" name="conservationStatusSpeciesAdd">
-
-        <label for="dietSpeciesAdd">Diet:</label>
+        </label>
+        <label for="dietSpeciesAdd">Diet:
         <textarea id="dietSpeciesAdd" name="dietSpeciesAdd"></textarea>
-
-        <label for="behaviourSpeciesAdd">Behaviour:</label>
+        </label>
+        <label for="behaviourSpeciesAdd">Behaviour:
         <textarea id="behaviourSpeciesAdd" name="behaviourSpeciesAdd"></textarea>
-
-        <label for="imageSpeciesAdd">Image URL:</label>
+        </label>
+        <label for="imageSpeciesAdd">Image URL:
         <input type="url" id="imageSpeciesAdd" name="imageSpeciesAdd">
-
+        </label>
         <button type="submit" name="addSpecies">Submit</button>
     </form>
     <!-- Edit Species - ZOOKEEPERS ONLY -->
     <?php if (isset($_POST['editSpecies'])) :
         $speciesData = $pageFunctionality->fetchClickedSpecies(); ?>
         <h2>Edit Species: <?= $speciesData['common_name'] ?> </h2>
-        <form method="POST">
-            <label for="categoryNameSpeciesEdit">Category Name:</label>
+        <form class="edit-add-forms-zookeeper" id="species-edit" method="POST">
+            <label for="categoryNameSpeciesEdit">Category Name:
             <select name="categoryNameSpeciesEdit" id="categoryNameSpeciesEdit" required>
                 <option value="">Select Category</option>
                 <?php $pageFunctionality->getCategories($speciesData['category_id']); ?>
-            </select>
-            <label for="commonNameSpeciesEdit">Common Name:</label>
+            </select></label>
+            <label for="commonNameSpeciesEdit">Common Name:
             <input type="text" id="commonNameSpeciesEdit" name="commonNameSpeciesEdit"
                    value="<?= $speciesData['common_name'] ?>" required>
-
-            <label for="scientificNameSpeciesEdit">Scientific Name:</label>
+            </label>
+            <label for="scientificNameSpeciesEdit">Scientific Name:
             <input type="text" id="scientificNameSpeciesEdit" name="scientificNameSpeciesEdit"
                    value="<?= $speciesData['scientific_name'] ?>" required>
-
-            <label for="conservationStatusSpeciesEdit">Conservation Status:</label>
+            </label>
+            <label for="conservationStatusSpeciesEdit">Conservation Status:
             <input type="text" id="conservationStatusSpeciesEdit" name="conservationStatusSpeciesEdit"
                    value="<?= $speciesData['conservation_status'] ?>">
-
-            <label for="dietSpeciesEdit">Diet:</label>
+            </label>
+            <label for="dietSpeciesEdit">Diet:
             <textarea id="dietSpeciesEdit" name="dietSpeciesEdit"><?= $speciesData['diet'] ?></textarea>
-
-            <label for="behaviourSpeciesEdit">Behaviour:</label>
+            </label>
+            <label for="behaviourSpeciesEdit">Behaviour:
             <textarea id="behaviourSpeciesEdit" name="behaviourSpeciesEdit"><?= $speciesData['behaviour'] ?></textarea>
-
-            <label for="imageSpeciesEdit">Image URL:</label>
+            </label>
+            <label for="imageSpeciesEdit">Image URL:
             <input type="url" id="imageSpeciesEdit" name="imageSpeciesEdit" value="<?= $speciesData['image'] ?>">
-
+            </label>
             <button type="submit" name="editSpeciesClick" value="<?= $speciesData['species_id'] ?>">Submit</button>
         </form>
     <?php endif ?>
+</div>
 <?php endif ?>
 
 

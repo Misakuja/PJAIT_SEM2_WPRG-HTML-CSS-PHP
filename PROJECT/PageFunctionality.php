@@ -293,9 +293,9 @@ class PageFunctionality implements PageInterface {
                     <h3>{$nextRow['common_name']}</h3>
                     <h4>{$nextRow['scientific_name']}</h4>
                     <ul>
-                        <li>{$nextRow['conservation_status']}</li>
-                        <li>{$nextRow['diet']}</li>
-                        <li>{$nextRow['behaviour']}</li>";
+                        <li>Conservation Status: {$nextRow['conservation_status']}</li>
+                        <li>Diet: {$nextRow['diet']}</li>
+                        <li>Behaviour: {$nextRow['behaviour']}</li>";
                 if (isset($_SESSION['zookeeper_id'])) {
                     echo "<li> 
                             <form method='POST'>
@@ -322,9 +322,9 @@ class PageFunctionality implements PageInterface {
                 <div class='speciemen-information'>
                     <h3>{$nextRow['animal_name']}</h3>
                     <ul>
-                        <li>{$nextRow['date_of_birth']}</li>
-                        <li>{$nextRow['habitat_id']}</li>
-                        <li>{$nextRow['description']}</li>";
+                        <li>Date of Birth: {$nextRow['date_of_birth']}</li>
+                        <li>Habitat: {$nextRow['habitat_id']}</li>
+                        <li>Description: {$nextRow['description']}</li>";
                 if (isset($_SESSION['zookeeper_id'])) {
                     echo "<li><form method='POST'>
                                 <button type='submit' name='deleteAnimal' value='{$nextRow['animal_id']}'>Delete</button>

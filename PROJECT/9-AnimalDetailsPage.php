@@ -75,54 +75,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- ZOOKEEPERS ONLY FORMS (ADD/EDIT) -->
 <?php if (isset($_SESSION['zookeeper_id'])) : ?>
+<div class="edit-add-forms-container">
 
 <!-- Add Animal - ZOOKEEPERS ONLY -->
 <h2>Add a <?= $clickedSpecies['common_name'] ?></h2>
-<form method="POST">
+<form class="edit-add-forms-zookeeper" id="animal-add" method="POST">
     <input type="hidden" id="SpeciesIdAnimalAdd" name="SpeciesIdAnimalAdd" value="<?= $url_id ?>">
 
-    <label for="nameAnimalAdd">Name:</label>
+    <label for="nameAnimalAdd">Name:
     <input type="text" id="nameAnimalAdd" name="nameAnimalAdd" required>
-
-    <label for="habitatIdAnimalAdd">Habitat Number:</label>
+    </label>
+    <label for="habitatIdAnimalAdd">Habitat Number:
     <input type="number" id="habitatIdAnimalAdd" name="habitatIdAnimalAdd">
-
-    <label for="dateOfBirthAnimalAdd">Date of Birth:</label>
+    </label>
+    <label for="dateOfBirthAnimalAdd">Date of Birth:
     <input type="date" id="dateOfBirthAnimalAdd" name="dateOfBirthAnimalAdd">
-
-    <label for="descriptionAnimalAdd">Description:</label>
+    </label>
+    <label for="descriptionAnimalAdd">Description:
     <textarea id="descriptionAnimalAdd" name="descriptionAnimalAdd"></textarea>
-
-    <label for="imageAnimalAdd">Image URL:</label>
+    </label>
+    <label for="imageAnimalAdd">Image URL:
     <input type="url" id="imageAnimalAdd" name="imageAnimalAdd">
-
+    </label>
     <button type="submit" name="addAnimal">Submit</button>
 </form>
 <!-- Edit Animal - ZOOKEEPERS ONLY -->
 <?php if (isset($_POST['editAnimal'])) :
 $animalData = $pageFunctionality->fetchClickedAnimal(); ?>
 <h2>Edit Animal <?= $animalData['animal_name'] ?> </h2>
-<form method="POST">
+<form class="edit-add-forms-zookeeper" id="animal-edit" method="POST">
     <input type="hidden" id="SpeciesIdAnimalEdit" name="SpeciesIdAnimalEdit" value="<?= $url_id ?>">
 
-    <label for="nameAnimalEdit">Name:</label>
+    <label for="nameAnimalEdit">Name:
     <input type="text" id="nameAnimalEdit" name="nameAnimalEdit" value="<?= $animalData['animal_name'] ?>" required>
-
-    <label for="habitatIdAnimalEdit">Habitat Number:</label>
+    </label>
+    <label for="habitatIdAnimalEdit">Habitat Number:
     <input type="number" id="habitatIdAnimalEdit" name="habitatIdAnimalEdit" value="<?= $animalData['habitat_id'] ?>">
-
-    <label for="dateOfBirthAnimalEdit">Date of Birth:</label>
+    </label>
+    <label for="dateOfBirthAnimalEdit">Date of Birth:
     <input type="date" id="dateOfBirthAnimalEdit" name="dateOfBirthAnimalEdit"
            value="<?= $animalData['date_of_birth'] ?>">
-
-    <label for="descriptionAnimalEdit">Description:</label>
+    </label>
+    <label for="descriptionAnimalEdit">Description:
     <textarea id="descriptionAnimalEdit" name="descriptionAnimalEdit"><?= $animalData['description'] ?></textarea>
-
-    <label for="imageAnimalEdit">Image URL:</label>
+    </label>
+    <label for="imageAnimalEdit">Image URL:
     <input type="url" id="imageAnimalEdit" name="imageAnimalEdit" value="<?= $animalData['image'] ?>">
-
+    </label>
     <button type="submit" name="editAnimalClick" value="<?= $animalData['animal_id'] ?>">Submit</button>
     <?php endif ?>
+</div>
     <?php endif ?>
 
 
