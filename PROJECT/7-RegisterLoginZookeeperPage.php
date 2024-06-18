@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- Side Navigation -->
 <div class="side-nav-container" id="sideNav">
     <a href="javascript:void(0)" class="closeButton" onclick="closeSideNav()">&#215;</a>
+    <a href="1-mainPage.php">Main Page</a>
     <a href="6-RegisterLoginPage.php">Register & Login</a>
     <a href="7-RegisterLoginZookeeperPage.php">Employees only</a>
     <a href="8-SpeciesPage.php">Our Animals</a>

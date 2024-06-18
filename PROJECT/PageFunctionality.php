@@ -257,7 +257,7 @@ class PageFunctionality implements PageInterface {
         global $pdo;
         $sql = "SELECT category_id FROM animalcategories";
         $ids = $pdo->query($sql)->fetchAll(PDO::FETCH_COLUMN, 0);
-        echo "<table>
+        echo "<div id='animal-categories'><h2>All Our animals in numbers</h2><table>
     <thead>
         <tr>
             <th>Category</th>
@@ -274,7 +274,7 @@ class PageFunctionality implements PageInterface {
                 <td>{$nextRow['number_of_specimens']}</td>
             </tr>";
         }
-        echo "</tbody></table>";
+        echo "</tbody></table></div>";
     }
 
     function listAllSpecies(): void {
@@ -287,15 +287,15 @@ class PageFunctionality implements PageInterface {
 
             $url = "9-AnimalDetailsPage.php?id=" . $id;
             if ($nextRow) {
-                echo "<a href='$url' class='species-box'>
-                <img id='species-image' src='{$nextRow['image']}' alt='species_img'>
-                <div class='species-information'>
-                    <h3>{$nextRow['common_name']}</h3>
+                echo "<a href='$url' class='animal-species-box' id='species-box'>
+                <img class='animal-species-image' src='{$nextRow['image']}' alt='species_img'>
+                <div class='animal-species-information'>
+                    <h3 id='species-common-name'>{$nextRow['common_name']}</h3>
                     <h4>{$nextRow['scientific_name']}</h4>
                     <ul>
-                        <li>Conservation Status: {$nextRow['conservation_status']}</li>
-                        <li>Diet: {$nextRow['diet']}</li>
-                        <li>Behaviour: {$nextRow['behaviour']}</li>";
+                        <li><strong>Conservation Status:</strong> {$nextRow['conservation_status']}</li>
+                        <li><strong>Diet:</strong> {$nextRow['diet']}</li>
+                        <li><strong>Behaviour:</strong> {$nextRow['behaviour']}</li>";
                 if (isset($_SESSION['zookeeper_id'])) {
                     echo "<li> 
                             <form method='POST'>
@@ -317,14 +317,14 @@ class PageFunctionality implements PageInterface {
             $nextRow = $pdo->query("SELECT * FROM animals WHERE animal_id = '$id'")->fetch(PDO::FETCH_ASSOC);
 
             if ($nextRow) {
-                echo "<div>
-                <img id='speciemen-image' src='{$nextRow['image']}' alt='specimen_img'>
-                <div class='speciemen-information'>
-                    <h3>{$nextRow['animal_name']}</h3>
+                echo "<div class='animal-species-box' id='animal-box'>
+                <img class='animal-species-image' src='{$nextRow['image']}' alt='specimen_img'>
+                <div class='animal-species-information'>
+                    <h3 id='animal-name'>{$nextRow['animal_name']}</h3>
                     <ul>
-                        <li>Date of Birth: {$nextRow['date_of_birth']}</li>
-                        <li>Habitat: {$nextRow['habitat_id']}</li>
-                        <li>Description: {$nextRow['description']}</li>";
+                        <li><strong>Date of Birth:</strong> {$nextRow['date_of_birth']}</li>
+                        <li><strong>Habitat:</strong> {$nextRow['habitat_id']}</li>
+                        <li><strong>Description:</strong> {$nextRow['description']}</li>";
                 if (isset($_SESSION['zookeeper_id'])) {
                     echo "<li><form method='POST'>
                                 <button type='submit' name='deleteAnimal' value='{$nextRow['animal_id']}'>Delete</button>
