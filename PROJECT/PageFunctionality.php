@@ -398,16 +398,28 @@ class PageFunctionality implements PageInterface {
         $description = $_POST['descriptionAnimalAdd'];
         $imageUrl = $_POST['imageAnimalAdd'];
 
-        $sql = "INSERT INTO animals (animal_name, species_id, habitat_id, date_of_birth, description, image) VALUES ('$name', '$speciesId', '$habitatId', '$dateOfBirth', '$description', '$imageUrl)'";
+        $sql = "INSERT INTO animals (animal_name, species_id, habitat_id, date_of_birth, description, image) VALUES ('$name', '$speciesId', '$habitatId', '$dateOfBirth', '$description', '$imageUrl')";
         $pdo->exec($sql);
     }
 
     function fetchClickedAnimal() {
+        global $pdo;
 
+        $sql = "SELECT * FROM animals WHERE animal_id = {$_POST['editAnimal']}";
+        return $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
-    function editAnimal($selectedAnimalId) {
-        // TODO: Implement editAnimal() method.
+    function editAnimal($selectedAnimalId): void {
+        global $pdo;
+        $speciesId = $_POST['SpeciesIdAnimalEdit'];
+        $name = $_POST['nameAnimalEdit'];
+        $habitatId = $_POST['habitatIdAnimalEdit'];
+        $dateOfBirth = $_POST['dateOfBirthAnimalEdit'];
+        $description = $_POST['descriptionAnimalEdit'];
+        $imageUrl = $_POST['imageAnimalEdit'];
+
+        $sql = "UPDATE animals SET species_id = '$speciesId', animal_name = '$name', habitat_id = '$habitatId', date_of_birth = '$dateOfBirth', description = '$description', image = '$imageUrl' WHERE animal_id = '$selectedAnimalId'";
+        $pdo->exec($sql);
     }
 
     function deleteAnimal(): void {

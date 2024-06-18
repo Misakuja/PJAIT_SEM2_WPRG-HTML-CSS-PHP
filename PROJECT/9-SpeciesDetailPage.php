@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["logoutUser"])) $pageFunctionality->logoutUser();
     if (isset($_POST["deleteAnimal"])) $pageFunctionality->deleteAnimal();
     if (isset($_POST["addAnimal"])) $pageFunctionality->addAnimal();
+    if (isset($_POST["editAnimalClick"])) $pageFunctionality->editAnimal($_POST['editAnimalClick']);
 }
 ?>
 <!DOCTYPE html>
@@ -67,59 +68,80 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
 </div>
 
-<!-- List all animals inside the species category -->
-<?php $pageFunctionality->listAllSpecimen($url_id); ?>
-
-<!-- TODO Add Animal Form + if isset Edit Animal Form-->
-
 <!-- ZOOKEEPERS ONLY FORMS (ADD/EDIT) -->
 <?php if (isset($_SESSION['zookeeper_id'])) : ?>
 
-    <!-- Add Species - ZOOKEEPERS ONLY -->
-    <h2>Add a <?= $clickedSpecies['common_name'] ?></h2>
-    <form method="POST">
-        <input type="hidden" id="SpeciesIdAnimalAdd" name="SpeciesIdAnimalAdd" value="<?= $url_id ?>">
+<!-- Add Animal - ZOOKEEPERS ONLY -->
+<h2>Add a <?= $clickedSpecies['common_name'] ?></h2>
+<form method="POST">
+    <input type="hidden" id="SpeciesIdAnimalAdd" name="SpeciesIdAnimalAdd" value="<?= $url_id ?>">
 
-        <label for="nameAnimalAdd">Name:</label>
-        <input type="text" id="nameAnimalAdd" name="nameAnimalAdd" required>
+    <label for="nameAnimalAdd">Name:</label>
+    <input type="text" id="nameAnimalAdd" name="nameAnimalAdd" required>
 
-        <label for="habitatIdAnimalAdd">Habitat Number:</label>
-        <input type="number" id="habitatIdAnimalAdd" name="habitatIdAnimalAdd">
+    <label for="habitatIdAnimalAdd">Habitat Number:</label>
+    <input type="number" id="habitatIdAnimalAdd" name="habitatIdAnimalAdd">
 
-        <label for="dateOfBirthAnimalAdd">Date of Birth:</label>
-        <input type="date" id="dateOfBirthAnimalAdd" name="dateOfBirthAnimalAdd">
+    <label for="dateOfBirthAnimalAdd">Date of Birth:</label>
+    <input type="date" id="dateOfBirthAnimalAdd" name="dateOfBirthAnimalAdd">
 
-        <label for="descriptionAnimalAdd">Description:</label>
-        <textarea id="descriptionAnimalAdd" name="descriptionAnimalAdd"></textarea>
+    <label for="descriptionAnimalAdd">Description:</label>
+    <textarea id="descriptionAnimalAdd" name="descriptionAnimalAdd"></textarea>
 
-        <label for="imageAnimalAdd">Image URL:</label>
-        <input type="url" id="imageAnimalAdd" name="imageAnimalAdd">
+    <label for="imageAnimalAdd">Image URL:</label>
+    <input type="url" id="imageAnimalAdd" name="imageAnimalAdd">
 
-        <button type="submit" name="addAnimal">Submit</button>
-    </form>
-    <?php if (isset($_POST['editAnimal'])) : ?>
-        <h2>Edit Animal <?= $_POST['editAnimal'] ?> </h2>
-        <form method="POST"></form>
+    <button type="submit" name="addAnimal">Submit</button>
+</form>
+<!-- Edit Animal - ZOOKEEPERS ONLY -->
+<?php if (isset($_POST['editAnimal'])) :
+$animalData = $pageFunctionality->fetchClickedAnimal(); ?>
+<h2>Edit Animal <?= $animalData['animal_name'] ?> </h2>
+<form method="POST">
+    <input type="hidden" id="SpeciesIdAnimalEdit" name="SpeciesIdAnimalEdit" value="<?= $url_id ?>">
+
+    <label for="nameAnimalEdit">Name:</label>
+    <input type="text" id="nameAnimalEdit" name="nameAnimalEdit" value="<?= $animalData['animal_name'] ?>" required>
+
+    <label for="habitatIdAnimalEdit">Habitat Number:</label>
+    <input type="number" id="habitatIdAnimalEdit" name="habitatIdAnimalEdit" value="<?= $animalData['habitat_id'] ?>">
+
+    <label for="dateOfBirthAnimalEdit">Date of Birth:</label>
+    <input type="date" id="dateOfBirthAnimalEdit" name="dateOfBirthAnimalEdit"
+           value="<?= $animalData['date_of_birth'] ?>">
+
+    <label for="descriptionAnimalEdit">Description:</label>
+    <textarea id="descriptionAnimalEdit" name="descriptionAnimalEdit"><?= $animalData['description'] ?></textarea>
+
+    <label for="imageAnimalEdit">Image URL:</label>
+    <input type="url" id="imageAnimalEdit" name="imageAnimalEdit" value="<?= $animalData['image'] ?>">
+
+    <button type="submit" name="editAnimalClick" value="<?= $animalData['animal_id'] ?>">Submit</button>
     <?php endif ?>
-<?php endif ?>
+    <?php endif ?>
 
-<!-- Bottom Navigation -->
-<div class="bottom-nav-container">
-    <div class="bottom-nav-item" id="bottom-nav-left">
-        <a href="1-mainPage.php" id="logo-bottom"><img src="https://svgshare.com/i/17J8.svg" alt="logo-svg"></a>
-        <p>Inspired by ZOO Wrocław & ZOO Gdańsk</p>
-    </div>
-    <div class="bottom-nav-item" id="bottom-nav-center">
-        <p>Safari Trails ZOO</p>
-        <p>ul. Targ Drzewny 9/11 83-000, Gdańsk </p>
-        <p>+48 690 420 420 &#xa9; 2000 - 2024</p>
-    </div>
-    <div class="bottom-nav-item" id="bottom-nav-right">
-        <a href="2-contactUsPage.php">Contact us</a>
-        <a href="3-regulationsPage.php">Visiting Regulations</a>
-    </div>
-</div>
 
-<script src="1-mainPage.js"></script>
+    <!-- List all animals inside the species category -->
+    <?php $pageFunctionality->listAllSpecimen($url_id); ?>
+
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav-container">
+        <div class="bottom-nav-item" id="bottom-nav-left">
+            <a href="1-mainPage.php" id="logo-bottom"><img src="https://svgshare.com/i/17J8.svg" alt="logo-svg"></a>
+            <p>Inspired by ZOO Wrocław & ZOO Gdańsk</p>
+        </div>
+        <div class="bottom-nav-item" id="bottom-nav-center">
+            <p>Safari Trails ZOO</p>
+            <p>ul. Targ Drzewny 9/11 83-000, Gdańsk </p>
+            <p>+48 690 420 420 &#xa9; 2000 - 2024</p>
+        </div>
+        <div class="bottom-nav-item" id="bottom-nav-right">
+            <a href="2-contactUsPage.php">Contact us</a>
+            <a href="3-regulationsPage.php">Visiting Regulations</a>
+        </div>
+    </div>
+
+    <script src="1-mainPage.js"></script>
 </body>
 </html>

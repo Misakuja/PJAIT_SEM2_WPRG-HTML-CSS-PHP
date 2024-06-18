@@ -59,9 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- Animal Categories Table -->
 <?php $pageFunctionality->showAnimalCategoriesTable(); ?>
 
-
-<!-- TODO Add Species Form + if isset Edit Species Form-->
-
 <!-- ZOOKEEPERS ONLY FORMS (ADD/EDIT) -->
 <?php if (isset($_SESSION['zookeeper_id'])) : ?>
 
@@ -93,9 +90,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <button type="submit" name="addSpecies">Submit</button>
     </form>
+    <!-- Edit Species - ZOOKEEPERS ONLY -->
     <?php if (isset($_POST['editSpecies'])) :
-        $speciesData = $pageFunctionality->fetchClickedSpecies();
-        ?>
+        $speciesData = $pageFunctionality->fetchClickedSpecies(); ?>
         <h2>Edit Species: <?= $speciesData['common_name'] ?> </h2>
         <form method="POST">
             <label for="categoryNameSpeciesEdit">Category Name:</label>
