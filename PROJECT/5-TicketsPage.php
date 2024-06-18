@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Project</title>
+    <title>ZOO Tickets</title>
     <link href="project.css" rel="stylesheet" type="text/css">
 </head>
 <body>

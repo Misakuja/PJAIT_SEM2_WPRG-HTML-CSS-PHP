@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ZOO Visiting Regulations Page</title>
+    <title>ZOO Species Page</title>
     <link href="project.css" rel="stylesheet" type="text/css">
 </head>
 <body>

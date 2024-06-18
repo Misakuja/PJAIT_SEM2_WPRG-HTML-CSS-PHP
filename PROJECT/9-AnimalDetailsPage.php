@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ZOO Visiting Regulations Page</title>
+    <title>ZOO Animal Detail Page</title>
     <link href="project.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "SELECT * FROM `species` WHERE `species_id` = '$url_id'";
         $clickedSpecies = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-        $url = "9-SpeciesDetailPage.php?id=" . $url_id;
+        $url = "9-AnimalDetailsPage.php?id=" . $url_id;
         if ($clickedSpecies) {
             echo "<a> &#x2192; </a>
               <a href='$url'> {$clickedSpecies['common_name']} Details</a>";

@@ -285,7 +285,7 @@ class PageFunctionality implements PageInterface {
         foreach ($ids as $id) {
             $nextRow = $pdo->query("SELECT * FROM species WHERE species_id = '$id'")->fetch(PDO::FETCH_ASSOC);
 
-            $url = "9-SpeciesDetailPage.php?id=" . $id;
+            $url = "9-AnimalDetailsPage.php?id=" . $id;
             if ($nextRow) {
                 echo "<a href='$url' class='species-box'>
                 <img id='species-image' src='{$nextRow['image']}' alt='species_img'>
