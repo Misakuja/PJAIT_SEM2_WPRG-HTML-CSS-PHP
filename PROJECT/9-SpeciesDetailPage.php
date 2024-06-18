@@ -7,8 +7,8 @@ $url_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["logoutUser"])) $pageFunctionality->logoutUser();
-    if (isset($_POST["DeleteAnimal"])) $pageFunctionality->deleteAnimal(); //TODO
-    if (isset($_POST["editAnimal"])) $pageFunctionality->showEditFormAnimal(); //TODO
+    if (isset($_POST["deleteAnimal"])) $pageFunctionality->deleteAnimal();
+    if (isset($_POST["addAnimal"])) $pageFunctionality->addAnimal();
 }
 ?>
 <!DOCTYPE html>
@@ -57,12 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="8-SpeciesPage.php"> Our Species </a>
         <?php
         $sql = "SELECT * FROM `species` WHERE `species_id` = '$url_id'";
-        $result = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $clickedSpecies = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 
         $url = "9-SpeciesDetailPage.php?id=" . $url_id;
-        if ($result) {
+        if ($clickedSpecies) {
             echo "<a> &#x2192; </a>
-              <a href='$url'> {$result['common_name']} Details</a>";
+              <a href='$url'> {$clickedSpecies['common_name']} Details</a>";
         } ?>
     </header>
 </div>
@@ -70,6 +70,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- List all animals inside the species category -->
 <?php $pageFunctionality->listAllSpecimen($url_id); ?>
 
+<!-- TODO Add Animal Form + if isset Edit Animal Form-->
+
+<!-- ZOOKEEPERS ONLY FORMS (ADD/EDIT) -->
+<?php if (isset($_SESSION['zookeeper_id'])) : ?>
+
+    <!-- Add Species - ZOOKEEPERS ONLY -->
+    <h2>Add a <?= $clickedSpecies['common_name'] ?></h2>
+    <form method="POST">
+        <input type="hidden" id="SpeciesIdAnimalAdd" name="SpeciesIdAnimalAdd" value="<?= $url_id ?>">
+
+        <label for="nameAnimalAdd">Name:</label>
+        <input type="text" id="nameAnimalAdd" name="nameAnimalAdd" required>
+
+        <label for="habitatIdAnimalAdd">Habitat Number:</label>
+        <input type="number" id="habitatIdAnimalAdd" name="habitatIdAnimalAdd">
+
+        <label for="dateOfBirthAnimalAdd">Date of Birth:</label>
+        <input type="date" id="dateOfBirthAnimalAdd" name="dateOfBirthAnimalAdd">
+
+        <label for="descriptionAnimalAdd">Description:</label>
+        <textarea id="descriptionAnimalAdd" name="descriptionAnimalAdd"></textarea>
+
+        <label for="imageAnimalAdd">Image URL:</label>
+        <input type="url" id="imageAnimalAdd" name="imageAnimalAdd">
+
+        <button type="submit" name="addAnimal">Submit</button>
+    </form>
+    <?php if (isset($_POST['editAnimal'])) : ?>
+        <h2>Edit Animal <?= $_POST['editAnimal'] ?> </h2>
+        <form method="POST"></form>
+    <?php endif ?>
+<?php endif ?>
 
 <!-- Bottom Navigation -->
 <div class="bottom-nav-container">

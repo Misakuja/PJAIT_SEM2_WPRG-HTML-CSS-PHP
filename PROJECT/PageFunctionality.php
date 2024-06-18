@@ -7,7 +7,7 @@ global $pdo;
 
 class PageFunctionality implements PageInterface {
 
-    public function sendMailContactForm(): void {
+    function sendMailContactForm(): void {
         $name = $_POST['contactFormName'];
         $mail = $_POST['contactFormMail'];
         $phone = $_POST['contactFormPhone'];
@@ -20,13 +20,13 @@ class PageFunctionality implements PageInterface {
         mail('contact@zoo.com', 'Contact Form Message', $message, $headers);
     }
 
-    public function logoutUser(): void {
+    function logoutUser(): void {
         unset($_SESSION['user_id']);
         unset($_SESSION['zookeeper_id']);
         session_destroy();
     }
 
-    public function registerUser(): void {
+    function registerUser(): void {
         global $pdo;
         $firstName = $_POST["registerFirstName"];
         $lastName = $_POST["registerLastName"];
@@ -43,7 +43,7 @@ class PageFunctionality implements PageInterface {
         }
     }
 
-    public function loginUser(): void {
+    function loginUser(): void {
         global $pdo;
         $loginEmail = $_POST["loginEmail"];
         $loginPassword = $_POST["loginPassword"];
@@ -61,7 +61,7 @@ class PageFunctionality implements PageInterface {
         }
     }
 
-    public function resetPasswordUser(): void {
+    function resetPasswordUser(): void {
         global $pdo;
         $resetEmail = $_POST["resetEmail"];
         $resetPassword = password_hash($_POST["resetPassword"], PASSWORD_DEFAULT);
@@ -77,7 +77,7 @@ class PageFunctionality implements PageInterface {
         }
     }
 
-    public function loginZookeeper(): void {
+    function loginZookeeper(): void {
         global $pdo;
         $loginZookeeperEmail = $_POST["loginZookeeperEmail"];
         $loginPasswordZookeeper = $_POST["loginZookeeperPassword"];
@@ -92,7 +92,7 @@ class PageFunctionality implements PageInterface {
         }
     }
 
-    public function resetPasswordZookeeper(): void {
+    function resetPasswordZookeeper(): void {
         global $pdo;
         $resetZookeeperEmail = $_POST["resetEmailZookeeper"];
         $resetZookeeperPassword = password_hash($_POST["resetZookeeperPassword"], PASSWORD_DEFAULT);
@@ -108,7 +108,7 @@ class PageFunctionality implements PageInterface {
         }
     }
 
-    public function displayCart(): void {
+    function displayCart(): void {
         if (!empty($_SESSION['cart'])) {
             echo "<h2 class='information-cart'>Cart Contents:</h2>";
             echo "
@@ -145,11 +145,11 @@ class PageFunctionality implements PageInterface {
         }
     }
 
-    public function calculatePrice($product_id, $ticketPrice): int|float {
+    function calculatePrice($product_id, $ticketPrice): int|float {
         return $ticketPrice * $_SESSION['cart'][$product_id];
     }
 
-    public function calculateTotalValue(): int|float {
+    function calculateTotalValue(): int|float {
         $totalPrice = null;
         foreach ($_SESSION['cart'] as $product_id => $quantity) {
             if ($product_id === "Normal") {
@@ -161,7 +161,7 @@ class PageFunctionality implements PageInterface {
         return $totalPrice;
     }
 
-    public function addToCart($product_id): void {
+    function addToCart($product_id): void {
         if (isset($_SESSION['cart'][$product_id])) {
             $_SESSION['cart'][$product_id] += 1;
         } else {
@@ -169,7 +169,7 @@ class PageFunctionality implements PageInterface {
         }
     }
 
-    public function removeFromCart($product_id): void {
+    function removeFromCart($product_id): void {
         if (isset($_SESSION['cart'][$product_id])) {
             $_SESSION['cart'][$product_id] -= 1;
 
@@ -179,11 +179,11 @@ class PageFunctionality implements PageInterface {
         }
     }
 
-    public function clearCart(): void {
+    function clearCart(): void {
         unset($_SESSION['cart']);
     }
 
-    public function checkoutCart(): void {
+    function checkoutCart(): void {
         global $pdo;
 
         $totalPrice = $this->calculateTotalValue();
@@ -202,7 +202,7 @@ class PageFunctionality implements PageInterface {
         unset($_SESSION['cart']);
     }
 
-    public function sendConfirmationMailCheckout(): void {
+    function sendConfirmationMailCheckout(): void {
         $email = $_SESSION['user_email'];
         $subject = 'Ticket Confirmation';
         $totalValue = $this->calculateTotalValue() . "$" . PHP_EOL;
@@ -297,8 +297,8 @@ class PageFunctionality implements PageInterface {
                 if (isset($_SESSION['zookeeper_id'])) {
                     echo "<li> 
                             <form method='POST'>
-                                <button type='submit' name='DeleteSpecies'>Delete</button>
-                                <button type='submit' name='editSpecies'>Edit</button>
+                                <button type='submit' name='deleteSpecies' value='{$nextRow['species_id']}'>Delete</button>
+                                <button type='submit' name='editSpecies' value='{$nextRow['species_id']}'>Edit</button>
                             </form></li>";
                 }
                 echo "</ul></div></a>";
@@ -316,7 +316,7 @@ class PageFunctionality implements PageInterface {
 
             if ($nextRow) {
                 echo "<div>
-                <img id='speciemen-image' src='{$nextRow['image']}' alt='species_img'>
+                <img id='speciemen-image' src='{$nextRow['image']}' alt='specimen_img'>
                 <div class='speciemen-information'>
                     <h3>{$nextRow['animal_name']}</h3>
                     <ul>
@@ -325,8 +325,8 @@ class PageFunctionality implements PageInterface {
                         <li>{$nextRow['description']}</li>";
                 if (isset($_SESSION['zookeeper_id'])) {
                     echo "<li><form method='POST'>
-                                <button type='submit' name='DeleteAnimal'>Delete</button>
-                                <button type='submit' name='editAnimal'>Edit</button>
+                                <button type='submit' name='deleteAnimal' value='{$nextRow['animal_id']}'>Delete</button>
+                                <button type='submit' name='editAnimal' value='{$nextRow['animal_id']}'>Edit</button>
                             </form></li>";
                 }
                 echo "</ul></div></div>";
@@ -334,27 +334,85 @@ class PageFunctionality implements PageInterface {
         }
     }
 
-    public function addSpecies() {
-        // TODO: Implement addSpecies() method.
+    function getCategories(): void {
+        global $pdo;
+        $sql = "SELECT category_id, category_name FROM animalcategories ORDER BY category_name";
+        $categories = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($categories as $category) {
+            echo '<option value="' . $category['category_id'] . '">' . $category['category_name'] . '</option>';
+        }
     }
 
-    public function editSpecies() {
-        // TODO: Implement editSpecies() method.
+    function addSpecies(): void {
+        global $pdo;
+        $categoryName = $_POST['categoryNameSpeciesAdd'];
+        $commonName = $_POST['commonNameSpeciesAdd'];
+        $scientificName = $_POST['scientificNameSpeciesAdd'];
+        $conservationStatus = $_POST['conservationStatusSpeciesAdd'];
+        $diet = $_POST['dietSpeciesAdd'];
+        $behaviour = $_POST['behaviourSpeciesAdd'];
+        $imageUrl = $_POST['imageSpeciesAdd'];
+
+        $sql = "INSERT INTO species (category_id, common_name, scientific_name, conservation_status, diet, behaviour, image) VALUES ('$categoryName', '$commonName', '$scientificName', '$conservationStatus', '$diet', '$behaviour', '$imageUrl')";
+        $pdo->exec($sql);
     }
 
-    public function deleteSpecies() {
-        // TODO: Implement deleteSpecies() method.
+    function fetchClickedSpecies() {
+        global $pdo;
+
+        $sql = "SELECT * FROM species WHERE species_id = {$_POST['editSpecies']}";
+        return $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function addAnimal() {
-        // TODO: Implement addAnimal() method.
+    function editSpecies($selectedSpeciesId): void {
+        global $pdo;
+        $categoryName = $_POST['categoryNameSpeciesEdit'];
+        $commonName = $_POST['commonNameSpeciesEdit'];
+        $scientificName = $_POST['scientificNameSpeciesEdit'];
+        $conservationStatus = $_POST['conservationStatusSpeciesEdit'];
+        $diet = $_POST['dietSpeciesEdit'];
+        $behaviour = $_POST['behaviourSpeciesEdit'];
+        $imageUrl = $_POST['imageSpeciesEdit'];
+
+        $sql = "UPDATE species SET category_id = '$categoryName', common_name = '$commonName', scientific_name = '$scientificName', conservation_status = '$conservationStatus', diet = '$diet', behaviour = '$behaviour', image = '$imageUrl' WHERE species_id = '$selectedSpeciesId'";
+        $pdo->exec($sql);
     }
 
-    public function editAnimal() {
+    function deleteSpecies(): void {
+        global $pdo;
+
+        $sql1 = "DELETE FROM animals WHERE species_id = '{$_POST['deleteSpecies']}'";
+        $pdo->exec($sql1);
+
+        $sql2 = "DELETE FROM species WHERE species_id = '{$_POST['deleteSpecies']}'";
+        $pdo->exec($sql2);
+    }
+
+    function addAnimal(): void {
+        global $pdo;
+        $speciesId = $_POST['SpeciesIdAnimalAdd'];
+        $name = $_POST['nameAnimalAdd'];
+        $habitatId = $_POST['habitatIdAnimalAdd'];
+        $dateOfBirth = $_POST['dateOfBirthAnimalAdd'];
+        $description = $_POST['descriptionAnimalAdd'];
+        $imageUrl = $_POST['imageAnimalAdd'];
+
+        $sql = "INSERT INTO animals (animal_name, species_id, habitat_id, date_of_birth, description, image) VALUES ('$name', '$speciesId', '$habitatId', '$dateOfBirth', '$description', '$imageUrl)'";
+        $pdo->exec($sql);
+    }
+
+    function fetchClickedAnimal() {
+
+    }
+
+    function editAnimal($selectedAnimalId) {
         // TODO: Implement editAnimal() method.
     }
 
-    public function deleteAnimal() {
-        // TODO: Implement deleteAnimal() method.
+    function deleteAnimal(): void {
+        global $pdo;
+        $sql = "DELETE FROM animals WHERE animal_id = '{$_POST['deleteAnimal']}'";
+        $pdo->exec($sql);
     }
 }

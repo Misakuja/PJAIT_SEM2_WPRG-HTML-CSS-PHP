@@ -4,8 +4,9 @@ $pageFunctionality = new PageFunctionality();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["logoutUser"])) $pageFunctionality->logoutUser();
-    if (isset($_POST["deleteSpecies"])) $pageFunctionality->DeleteSpecies(); //TODO
-    if (isset($_POST["editSpecies"])) $pageFunctionality->showEditFormSpecies(); //TODO
+    if (isset($_POST["deleteSpecies"])) $pageFunctionality->deleteSpecies();
+    if (isset($_POST["addSpecies"])) $pageFunctionality->addSpecies();
+    if (isset($_POST["editSpeciesClick"])) $pageFunctionality->editSpecies($_POST["editSpeciesClick"]);
 }
 ?>
 <!DOCTYPE html>
@@ -61,9 +62,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- TODO Add Species Form + if isset Edit Species Form-->
 
+<!-- ZOOKEEPERS ONLY FORMS (ADD/EDIT) -->
+<?php if (isset($_SESSION['zookeeper_id'])) : ?>
+
+    <!-- Add Species - ZOOKEEPERS ONLY -->
+    <h2>Add New Species</h2>
+    <form method="POST">
+        <label for="categoryNameSpeciesAdd">Category Name:</label>
+        <select name="categoryNameSpeciesAdd" id="categoryNameSpeciesAdd" required>
+            <option value="">Select Category</option>
+            <?php $pageFunctionality->getCategories(); ?>
+        </select>
+        <label for="commonNameSpeciesAdd">Common Name:</label>
+        <input type="text" id="commonNameSpeciesAdd" name="commonNameSpeciesAdd" required>
+
+        <label for="scientificNameSpeciesAdd">Scientific Name:</label>
+        <input type="text" id="scientificNameSpeciesAdd" name="scientificNameSpeciesAdd" required>
+
+        <label for="conservationStatusSpeciesAdd">Conservation Status:</label>
+        <input type="text" id="conservationStatusSpeciesAdd" name="conservationStatusSpeciesAdd">
+
+        <label for="dietSpeciesAdd">Diet:</label>
+        <textarea id="dietSpeciesAdd" name="dietSpeciesAdd"></textarea>
+
+        <label for="behaviourSpeciesAdd">Behaviour:</label>
+        <textarea id="behaviourSpeciesAdd" name="behaviourSpeciesAdd"></textarea>
+
+        <label for="imageSpeciesAdd">Image URL:</label>
+        <input type="url" id="imageSpeciesAdd" name="imageSpeciesAdd">
+
+        <button type="submit" name="addSpecies">Submit</button>
+    </form>
+    <?php if (isset($_POST['editSpecies'])) :
+        $speciesData = $pageFunctionality->fetchClickedSpecies();
+        ?>
+        <h2>Edit Species: <?= $speciesData['common_name'] ?> </h2>
+        <form method="POST">
+            <label for="categoryNameSpeciesEdit">Category Name:</label>
+            <select name="categoryNameSpeciesEdit" id="categoryNameSpeciesEdit" required>
+                <option value="">Select Category</option>
+                <?php $pageFunctionality->getCategories(); ?>
+            </select>
+            <label for="commonNameSpeciesEdit">Common Name:</label>
+            <input type="text" id="commonNameSpeciesEdit" name="commonNameSpeciesEdit"
+                   value="<?= $speciesData['common_name'] ?>" required>
+
+            <label for="scientificNameSpeciesEdit">Scientific Name:</label>
+            <input type="text" id="scientificNameSpeciesEdit" name="scientificNameSpeciesEdit"
+                   value="<?= $speciesData['scientific_name'] ?>" required>
+
+            <label for="conservationStatusSpeciesEdit">Conservation Status:</label>
+            <input type="text" id="conservationStatusSpeciesEdit" name="conservationStatusSpeciesEdit"
+                   value="<?= $speciesData['conservation_status'] ?>">
+
+            <label for="dietSpeciesEdit">Diet:</label>
+            <textarea id="dietSpeciesEdit" name="dietSpeciesEdit"><?= $speciesData['diet'] ?></textarea>
+
+            <label for="behaviourSpeciesEdit">Behaviour:</label>
+            <textarea id="behaviourSpeciesEdit" name="behaviourSpeciesEdit"><?= $speciesData['behaviour'] ?></textarea>
+
+            <label for="imageSpeciesEdit">Image URL:</label>
+            <input type="url" id="imageSpeciesEdit" name="imageSpeciesEdit" value="<?= $speciesData['image'] ?>">
+
+            <button type="submit" name="editSpeciesClick" value="<?= $speciesData['species_id'] ?>">Submit</button>
+        </form>
+    <?php endif ?>
+<?php endif ?>
+
+
 <!-- List all species -->
 <?php $pageFunctionality->listAllSpecies(); ?>
-
 
 <!-- Bottom Navigation -->
 <div class="bottom-nav-container">

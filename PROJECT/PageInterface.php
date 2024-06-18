@@ -28,12 +28,16 @@ interface PageInterface {
     public function listAllSpecies();
     public function listAllSpecimen($url_id);
 
-    public function addSpecies(); //TODO
-    public function editSpecies(); //TODO
-    public function deleteSpecies(); //TODO
 
-    public function addAnimal(); //TODO
-    public function editAnimal(); //TODO
-    public function deleteAnimal(); //TODO
+    public function getCategories();
+    public function addSpecies();
+    public function fetchClickedSpecies();
+    public function editSpecies($selectedSpeciesId);
+    public function deleteSpecies();
+
+    public function addAnimal();
+    public function fetchClickedAnimal(); //TODO
+    public function editAnimal($selectedAnimalId); //TODO
+    public function deleteAnimal();
 
 }
