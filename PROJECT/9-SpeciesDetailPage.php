@@ -2,10 +2,13 @@
 require_once 'PageFunctionality.php';
 $pageFunctionality = new PageFunctionality();
 
+global $pdo;
+$url_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["logoutUser"])) $pageFunctionality->logoutUser();
-    if (isset($_POST["deleteSpecies"])) $pageFunctionality->DeleteSpecies(); //TODO
-    if (isset($_POST["editSpecies"])) $pageFunctionality->showEditFormSpecies(); //TODO
+    if (isset($_POST["DeleteAnimal"])) $pageFunctionality->deleteAnimal(); //TODO
+    if (isset($_POST["editAnimal"])) $pageFunctionality->showEditFormAnimal(); //TODO
 }
 ?>
 <!DOCTYPE html>
@@ -51,18 +54,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header class="middle-text">
         <a href="1-mainPage.php">Main Page </a>
         <a> &#x2192; </a>
-        <a href="8-SpeciesPage.php"> Our Species</a>
+        <a href="8-SpeciesPage.php"> Our Species </a>
+        <?php
+        $sql = "SELECT * FROM `species` WHERE `species_id` = '$url_id'";
+        $result = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+        $url = "9-SpeciesDetailPage.php?id=" . $url_id;
+        if ($result) {
+            echo "<a> &#x2192; </a>
+              <a href='$url'> {$result['common_name']} Details</a>";
+        } ?>
     </header>
 </div>
 
-<!-- Animal Categories Table -->
-<?php $pageFunctionality->showAnimalCategoriesTable(); ?>
-
-
-<!-- TODO Add Species Form + if isset Edit Species Form-->
-
-<!-- List all species -->
-<?php $pageFunctionality->listAllSpecies(); ?>
+<!-- List all animals inside the species category -->
+<?php $pageFunctionality->listAllSpecimen($url_id); ?>
 
 
 <!-- Bottom Navigation -->

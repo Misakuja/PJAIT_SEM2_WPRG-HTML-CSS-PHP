@@ -20,6 +20,12 @@ class PageFunctionality implements PageInterface {
         mail('contact@zoo.com', 'Contact Form Message', $message, $headers);
     }
 
+    public function logoutUser(): void {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['zookeeper_id']);
+        session_destroy();
+    }
+
     public function registerUser(): void {
         global $pdo;
         $firstName = $_POST["registerFirstName"];
@@ -71,17 +77,13 @@ class PageFunctionality implements PageInterface {
         }
     }
 
-    public function logoutUser(): void {
-        session_destroy();
-    }
-
     public function loginZookeeper(): void {
         global $pdo;
         $loginZookeeperEmail = $_POST["loginZookeeperEmail"];
         $loginPasswordZookeeper = $_POST["loginZookeeperPassword"];
 
         $zookeeper = $pdo->query("SELECT * FROM zookeepers WHERE zookeeper_email = '$loginZookeeperEmail'")->fetch(PDO::FETCH_ASSOC);
-        if ($zookeeper && password_verify($loginPasswordZookeeper, $zookeeper['user_password'])) {
+        if ($zookeeper && password_verify($loginPasswordZookeeper, $zookeeper['zookeeper_password'])) {
             $_SESSION['zookeeper_id'] = $zookeeper['zookeeper_id'];
 
             $_SESSION['notification2'] = "Logged in successfully as " . $zookeeper['zookeeper_first_name'] . " " . $zookeeper['zookeeper_last_name'];
@@ -203,14 +205,14 @@ class PageFunctionality implements PageInterface {
     public function sendConfirmationMailCheckout(): void {
         $email = $_SESSION['user_email'];
         $subject = 'Ticket Confirmation';
-        $totalValue = $this->calculateTotalValue() . "$". PHP_EOL;
+        $totalValue = $this->calculateTotalValue() . "$" . PHP_EOL;
         $adultAmount = $_SESSION['cart']["Normal"] ?? 0;
         $reducedAmount = $_SESSION['cart']["Reduced"] ?? 0;
 
         $message = 'Name: ' . $_SESSION['user_first_name'] . ' ' . $_SESSION['user_last_name'] . PHP_EOL;
         $message .= 'Total Price: ' . $totalValue . PHP_EOL;
-        $message .= 'Normal Tickets: '. $adultAmount . PHP_EOL;
-        $message .= 'Reduced Tickets: '. $reducedAmount . PHP_EOL;
+        $message .= 'Normal Tickets: ' . $adultAmount . PHP_EOL;
+        $message .= 'Reduced Tickets: ' . $reducedAmount . PHP_EOL;
 
         $headers = 'From no-reply@zoo.com';
 
@@ -220,11 +222,11 @@ class PageFunctionality implements PageInterface {
     function updateAnimalCategoriesDatabase(): void {
         global $pdo;
 
-            $sql1= "UPDATE animalcategories SET number_of_species = (SELECT COUNT(DISTINCT species_id) FROM species WHERE species.category_id = animalCategories.category_id);";
-            $pdo->exec($sql1);
+        $sql1 = "UPDATE animalcategories SET number_of_species = (SELECT COUNT(DISTINCT species_id) FROM species WHERE species.category_id = animalCategories.category_id);";
+        $pdo->exec($sql1);
 
-            $sql2 = "UPDATE animalcategories SET number_of_specimens = (SELECT COUNT(*) FROM animals JOIN species ON animals.species_id = species.species_id WHERE species.category_id = animalcategories.category_id);";
-            $pdo->exec($sql2);
+        $sql2 = "UPDATE animalcategories SET number_of_specimens = (SELECT COUNT(*) FROM animals JOIN species ON animals.species_id = species.species_id WHERE species.category_id = animalcategories.category_id);";
+        $pdo->exec($sql2);
     }
 
     function getNumberOfSpecies(): int {
@@ -234,7 +236,7 @@ class PageFunctionality implements PageInterface {
 
         $fetchSpecies = $pdo->query("SELECT SUM(number_of_species) AS total_species FROM animalcategories")->fetch(PDO::FETCH_ASSOC);
 
-        return (int) $fetchSpecies['total_species'];
+        return (int)$fetchSpecies['total_species'];
     }
 
     function getNumberOfSpecimens(): int {
@@ -244,7 +246,115 @@ class PageFunctionality implements PageInterface {
 
         $fetchSpecimens = $pdo->query("SELECT SUM(number_of_specimens) AS total_specimens FROM animalcategories")->fetch(PDO::FETCH_ASSOC);
 
+        return (int)$fetchSpecimens['total_specimens'];
+    }
 
-        return (int) $fetchSpecimens['total_specimens'];
+    function showAnimalCategoriesTable(): void {
+        $this->updateAnimalCategoriesDatabase();
+
+        global $pdo;
+        $sql = "SELECT category_id FROM animalcategories";
+        $ids = $pdo->query($sql)->fetchAll(PDO::FETCH_COLUMN, 0);
+        echo "<table>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Species</th>
+            <th>Specimens</th>
+        </tr>
+    </thead>
+    <tbody>";
+        foreach ($ids as $id) {
+            $nextRow = $pdo->query("SELECT * FROM animalcategories WHERE category_id = '$id'")->fetch(PDO::FETCH_ASSOC);
+            echo "<tr>
+                <td>{$nextRow['category_name']}</td>
+                <td>{$nextRow['number_of_species']}</td>
+                <td>{$nextRow['number_of_specimens']}</td>
+            </tr>";
+        }
+        echo "</tbody></table>";
+    }
+
+    function listAllSpecies(): void {
+        global $pdo;
+        $sql = "SELECT species_id FROM species";
+        $ids = $pdo->query($sql)->fetchAll(PDO::FETCH_COLUMN, 0);
+
+        foreach ($ids as $id) {
+            $nextRow = $pdo->query("SELECT * FROM species WHERE species_id = '$id'")->fetch(PDO::FETCH_ASSOC);
+
+            $url = "9-SpeciesDetailPage.php?id=" . $id;
+            if ($nextRow) {
+                echo "<a href='$url' class='species-box'>
+                <img id='species-image' src='{$nextRow['image']}' alt='species_img'>
+                <div class='species-information'>
+                    <h3>{$nextRow['common_name']}</h3>
+                    <h4>{$nextRow['scientific_name']}</h4>
+                    <ul>
+                        <li>{$nextRow['conservation_status']}</li>
+                        <li>{$nextRow['diet']}</li>
+                        <li>{$nextRow['behaviour']}</li>";
+                if (isset($_SESSION['zookeeper_id'])) {
+                    echo "<li> 
+                            <form method='POST'>
+                                <button type='submit' name='DeleteSpecies'>Delete</button>
+                                <button type='submit' name='editSpecies'>Edit</button>
+                            </form></li>";
+                }
+                echo "</ul></div></a>";
+            }
+        }
+    }
+
+    function listAllSpecimen($url_id): void {
+        global $pdo;
+        $sql = "SELECT animal_id FROM animals WHERE species_id = '$url_id'";
+        $ids = $pdo->query($sql)->fetchAll(PDO::FETCH_COLUMN, 0);
+
+        foreach ($ids as $id) {
+            $nextRow = $pdo->query("SELECT * FROM animals WHERE animal_id = '$id'")->fetch(PDO::FETCH_ASSOC);
+
+            if ($nextRow) {
+                echo "<div>
+                <img id='speciemen-image' src='{$nextRow['image']}' alt='species_img'>
+                <div class='speciemen-information'>
+                    <h3>{$nextRow['animal_name']}</h3>
+                    <ul>
+                        <li>{$nextRow['date_of_birth']}</li>
+                        <li>{$nextRow['habitat_id']}</li>
+                        <li>{$nextRow['description']}</li>";
+                if (isset($_SESSION['zookeeper_id'])) {
+                    echo "<li><form method='POST'>
+                                <button type='submit' name='DeleteAnimal'>Delete</button>
+                                <button type='submit' name='editAnimal'>Edit</button>
+                            </form></li>";
+                }
+                echo "</ul></div></div>";
+            }
+        }
+    }
+
+    public function addSpecies() {
+        // TODO: Implement addSpecies() method.
+    }
+
+    public function editSpecies() {
+        // TODO: Implement editSpecies() method.
+    }
+
+    public function deleteSpecies() {
+        // TODO: Implement deleteSpecies() method.
+    }
+
+    public function addAnimal() {
+        // TODO: Implement addAnimal() method.
+    }
+
+    public function editAnimal() {
+        // TODO: Implement editAnimal() method.
+    }
+
+    public function deleteAnimal() {
+        // TODO: Implement deleteAnimal() method.
     }
 }

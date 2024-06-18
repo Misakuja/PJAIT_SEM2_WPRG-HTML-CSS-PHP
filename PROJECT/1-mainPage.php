@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <!-- Side Navigation -->
 <div class="side-nav-container" id="sideNav">
-    <a href="javascript:void(0)" class="closeButton" onclick="closeSideNav()">&times;</a>
+    <a href="javascript:void(0)" class="closeButton" onclick="closeSideNav()">&#215;</a>
     <a href="6-RegisterLoginPage.php">Register & Login</a>
     <a href="7-RegisterLoginZookeeperPage.php">Employees only</a>
     <a href="8-SpeciesPage.php">Our Animals</a>
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="button-banners-flexContainer">
     <div class="button-banners-gridContainer">
         <!--Species Page-->
-        <form id="species-button-form" action=".php">
+        <form id="species-button-form" action="8-SpeciesPage.php">
             <button type="submit">Check out all our species at the zoo!</button>
         </form>
 
