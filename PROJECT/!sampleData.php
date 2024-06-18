@@ -33,6 +33,8 @@ VALUES
     (1, 'Snow Leopard', 'Panthera uncia', 'Vulnerable', 'Carnivorous', 'Snow leopards are solitary and elusive cats found in mountainous regions of Central and South Asia. They are well adapted to cold environments and are known for their agility and stealth in hunting.', 'https://i.imgur.com/0qE1tkd.png'),
     (1, 'Sand Cat', 'Felis margarita', 'Least Concern', 'Carnivorous', 'Sand cats are small, solitary cats adapted to desert environments. They are nocturnal and have large ears that help them detect prey and stay cool in hot climates.', 'https://i.imgur.com/WVHDDxD.png'),
     (1, 'Binturong', 'Arctictis binturong', 'Vulnerable', 'Omnivorous', 'Binturongs are arboreal (tree-dwelling) and nocturnal animals found in Southeast Asia. They are known for their prehensile tail, which helps them climb and maneuver in trees.', 'https://i.imgur.com/21zwqZ3.png'),
+    (1, 'Zebra', 'Equus quagga', 'Near Threatened', 'Herbivorous', 'Zebras are social animals known for their distinctive black-and-white striped coats. They live in herds and are commonly found in savannas and grasslands in Africa. Zebras communicate through vocalizations, body language, and facial expressions.', 'https://i.imgur.com/sOdsraN.jpeg');
+
     -- Birds
     (2, 'Bald Eagle', 'Haliaeetus leucocephalus', 'Least Concern', 'Carnivorous', 'Bald eagles are majestic birds of prey found in North America. They are known for their white head and tail feathers.', 'https://i.imgur.com/BIvuW69.png'),
     (2, 'Penguin', 'Spheniscidae', 'Varies by species', 'Piscivorous', 'Penguins are flightless birds adapted to aquatic life. They are excellent swimmers and can be found in various regions from Antarctica to the Galápagos Islands.', 'https://i.imgur.com/RDIjmuj.png'),
@@ -57,7 +59,6 @@ VALUES
     ('Golf', 1, 1, '2017-06-30', 'Capybara Golf is an adventurous explorer, often venturing into new areas to forage for food.', 'https://i.imgur.com/8vpHiXk.png'),
     ('Hotel', 1, 1, '2016-10-15', 'Capybara Hotel is a gentle giant that enjoys basking in the sun during lazy afternoons.', 'https://i.imgur.com/wj0Whxl.png'),
     
-    
     ('Adam', 2, 2, '2018-11-10', 'Hyrax Adam lives in rocky terrains and loves basking in the sun during the day.', 'https://i.imgur.com/orSK40s.png'),
     ('Eve', 2, 2, '2017-08-03', 'Hyrax Eve is a social herbivore that communicates through various vocalizations.', 'https://i.imgur.com/TODPwN0.png'),
     ('Felix', 2, 2, '2019-02-18', 'Hyrax Felix is adventurous and enjoys climbing rocky cliffs to get a better view of its surroundings.', 'https://i.imgur.com/seZd1XW.png'),
@@ -65,7 +66,8 @@ VALUES
     
     ('Ellie', 3, 3, '2015-03-20', 'Ellie the African Elephant is a gentle giant known for its intelligence and strong social bonds within the herd.', 'https://i.imgur.com/knlfLfc.jpeg'),
     ('Dumbo', 3, 3, '2016-07-14', 'Dumbo the African Elephant has a distinctive set of tusks and loves bathing in mud to keep cool.', 'https://i.imgur.com/JykX07i.png'),
-    
+    ('Szymon', 3, 3, '2016-07-14', 'Szymon the African Elephant is known for its playful nature and enjoys interacting with other members of the herd.', 'https://i.imgur.com/An9are8.jpeg'),
+
     ('Lightning', 4, 4, '2019-09-28', 'Lightning the Cheetah is a swift carnivore known for its impressive hunting prowess and sleek build.', 'https://i.imgur.com/tFErFUo.png'),
     ('Spots', 4, 4, '2020-04-12', 'Spots the Cheetah enjoys sprinting across the savannah and resting under shady trees.', 'https://i.imgur.com/g3sbAJm.png'),
     
@@ -78,29 +80,31 @@ VALUES
     ('Blizzard', 7, 7, '2018-02-14', 'Blizzard the Snow Leopard is an elusive predator of the mountain ranges, adapted to cold environments and known for its agility and stealth in hunting.', 'https://i.imgur.com/RpT10fp.png'),
     ('Frost', 7, 7, '2019-10-01', 'Frost the Snow Leopard prowls the snowy peaks with unmatched grace, blending seamlessly into its environment.', 'https://i.imgur.com/9W8ggBE.png'),
     
-    -- Birds
-    ('Freedom', 10, 8, '2017-05-25', 'Freedom the Bald Eagle soars through the skies of North America, symbolizing strength and independence.', 'https://i.imgur.com/9zdVf98.png'),
-    ('Liberty', 10, 8, '2018-09-12', 'Liberty the Bald Eagle is a skilled hunter with keen eyesight, often seen near bodies of water.', 'https://i.imgur.com/HkkN2Lw.png'),
+    ('Zuzia', 10, 15, '2020-03-14', 'Zuzia the Zebra is known for her striking black-and-white stripes, social nature, and love for grazing on the savannah.', 'https://i.imgur.com/hycX8bT.png'),
     
-    ('Chilly', 11, 9, '2016-12-08', 'Chilly the Penguin waddles gracefully across icy terrain, expertly navigating the waters of the Antarctic.', 'https://i.imgur.com/DHwqgPf.png'),
-    ('Flipper', 11, 9, '2015-07-03', 'Flipper the Penguin loves to dive deep into the ocean, catching fish with swift movements.', 'https://i.imgur.com/DHwqgPf.png'),
+    -- Birds
+    ('Freedom', 11, 8, '2017-05-25', 'Freedom the Bald Eagle soars through the skies of North America, symbolizing strength and independence.', 'https://i.imgur.com/9zdVf98.png'),
+    ('Liberty', 11, 8, '2018-09-12', 'Liberty the Bald Eagle is a skilled hunter with keen eyesight, often seen near bodies of water.', 'https://i.imgur.com/HkkN2Lw.png'),
+    
+    ('Chilly', 12, 9, '2016-12-08', 'Chilly the Penguin waddles gracefully across icy terrain, expertly navigating the waters of the Antarctic.', 'https://i.imgur.com/DHwqgPf.png'),
+    ('Flipper', 12, 9, '2015-07-03', 'Flipper the Penguin loves to dive deep into the ocean, catching fish with swift movements.', 'https://i.imgur.com/DHwqgPf.png'),
     
     -- Reptiles
-    ('Ana', 12, 10, '2017-04-20', 'Ana the Green Anaconda is a massive serpent lurking in the rivers of South America, known for its ambush hunting technique.', 'https://i.imgur.com/nEe3maA.png'),
-    ('Conda', 12, 10, '2018-11-29', 'Conda the Green Anaconda coils around its prey with incredible strength, dominating its aquatic domain.', 'https://i.imgur.com/5xEXyS9.png'),
+    ('Ana', 13, 10, '2017-04-20', 'Ana the Green Anaconda is a massive serpent lurking in the rivers of South America, known for its ambush hunting technique.', 'https://i.imgur.com/nEe3maA.png'),
+    ('Conda', 13, 10, '2018-11-29', 'Conda the Green Anaconda coils around its prey with incredible strength, dominating its aquatic domain.', 'https://i.imgur.com/5xEXyS9.png'),
     
-    ('Darwin', 13, 11, '2016-08-15', 'Darwin the Galápagos Tortoise is a living relic of evolution, wandering the volcanic islands with deliberate steps.', 'https://i.imgur.com/Kq7RRuO.png'),
-    ('Shellby', 13, 11, '2015-03-07', 'Shellby the Galápagos Tortoise grazes leisurely on vegetation, its slow pace reflecting the calmness of island life.', 'https://i.imgur.com/gyi1hmu.jpeg'),
+    ('Darwin', 14, 11, '2016-08-15', 'Darwin the Galápagos Tortoise is a living relic of evolution, wandering the volcanic islands with deliberate steps.', 'https://i.imgur.com/Kq7RRuO.png'),
+    ('Shellby', 14, 11, '2015-03-07', 'Shellby the Galápagos Tortoise grazes leisurely on vegetation, its slow pace reflecting the calmness of island life.', 'https://i.imgur.com/gyi1hmu.jpeg'),
     
     -- Amphibians
-    ('Axle', 14, 12, '2019-01-12', 'Axle the Axolotl is a unique amphibian that regenerates its limbs with astonishing speed, thriving in aquatic habitats.', 'https://i.imgur.com/NZTw6U0.png'),
-    ('Nix', 14, 12, '2020-04-30', 'Nix the Axolotl remains youthful and vibrant, its neotenic features captivating observers with every graceful movement.', 'https://i.imgur.com/vZvyWQZ.png'),
+    ('Axle', 15, 12, '2019-01-12', 'Axle the Axolotl is a unique amphibian that regenerates its limbs with astonishing speed, thriving in aquatic habitats.', 'https://i.imgur.com/NZTw6U0.png'),
+    ('Nix', 15, 12, '2020-04-30', 'Nix the Axolotl remains youthful and vibrant, its neotenic features captivating observers with every graceful movement.', 'https://i.imgur.com/vZvyWQZ.png'),
     
-    ('Rio', 15, 13, '2018-06-18', 'Rio the Red-eyed Tree Frog leaps through the rainforest canopy, its vibrant colors warning predators of its toxic skin.', 'https://i.imgur.com/yIFz7fL.png'),
-    ('Ember', 15, 13, '2017-12-03', 'Ember the Red-eyed Tree Frog hides among lush foliage, its crimson eyes watching for insect prey.', 'https://i.imgur.com/WyxE6G2.jpeg'),
+    ('Rio', 16, 13, '2018-06-18', 'Rio the Red-eyed Tree Frog leaps through the rainforest canopy, its vibrant colors warning predators of its toxic skin.', 'https://i.imgur.com/yIFz7fL.png'),
+    ('Ember', 16, 13, '2017-12-03', 'Ember the Red-eyed Tree Frog hides among lush foliage, its crimson eyes watching for insect prey.', 'https://i.imgur.com/WyxE6G2.jpeg'),
     
-    ('Venom', 16, 14, '2016-03-22', 'Venom the Poison Dart Frog moves with caution, its vivid colors serving as a deadly warning to those who dare to touch.', 'https://i.imgur.com/wehlLsT.png'),
-    ('Dart', 16, 14, '2015-08-11', 'Dart the Poison Dart Frog navigates the forest floor with agility, relying on camouflage and poison for defense.', 'https://i.imgur.com/WVfBAJU.png');";
+    ('Venom', 17, 14, '2016-03-22', 'Venom the Poison Dart Frog moves with caution, its vivid colors serving as a deadly warning to those who dare to touch.', 'https://i.imgur.com/wehlLsT.png'),
+    ('Dart', 17, 14, '2015-08-11', 'Dart the Poison Dart Frog navigates the forest floor with agility, relying on camouflage and poison for defense.', 'https://i.imgur.com/WVfBAJU.png');";
     $pdo->exec($insertAnimals);
 
     $password1 = password_hash("password123", PASSWORD_DEFAULT);
