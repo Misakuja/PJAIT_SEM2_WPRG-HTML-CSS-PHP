@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+#tableForms {
+    margin-top: 20px;
+    width: 80%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+
+
+    #moviesTable {
+        width: 100%;
+        border-collapse: collapse;
+
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+    }
+
+    .formsPage {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .formBox {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+
+        fieldset {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        legend {
+            padding: 0 10px;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    }
+
+    button {
+        padding: 10px 15px;
+        background-color: #038ab9;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #0e5537;
+    }
+
+}
