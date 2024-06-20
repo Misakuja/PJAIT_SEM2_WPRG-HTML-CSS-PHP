@@ -559,3 +559,26 @@ Strona powinna wyświetlić komunikat o utworzeniu tabeli oraz powinna obsłuży
 - Każdy użytkownik powinien mieć oddzielny koszyk. Powinna istnieć możliwość wylogowania się i zalogowania jako inny użytkownik.
 
 ----
+
+# LAB14
+
+1. W dziale pliki znajduje sięplik movies.csv, który zawiera bazę filmów. Plik ma następującą strukturę:
+ID,Tytuł,Reżyser,Rok Wydania,Gatunek,Ocena
+1,Inception,Christopher Nolan,2010,Sci-Fi,8.8
+2,The Godfather,Francis Ford Coppola,1972,Crime,9.2
+3,Pulp Fiction,Quentin Tarantino,1994,Crime,8.9
+- Stwórz klasę Movie, która będzie przechowywać dane z pliku CSV. Klasa powinna mieć następujące pola: ID, Title, Director, ReleaseYear, Genre, Rating.
+  - Klasa powinna umożliwiać tworzenie obiektów z danymi filmów.
+- Zaimplementuj funkcję, która wczytuje dane z pliku CSV do tablicy obiektów Movie. Zapewnij obsługę sytuacji wyjątkowych, takich jak brak pliku, błędny format danych lub puste pola.
+- Wyświetl dane o filmach w formie interaktywnej tabeli na stronie internetowej. Tabela powinna zawieraćwszystkie kolumny z pliku CSV oraz umożliwiać sortowanie danych według kolumn "Rok wydania" oraz "Ocena" poprzez odpowiedni przycisk.
+- Dodaj nowy film do bazy za pomocą formularza HTML. Formularz powinien zawierać pola dla wszystkich informacji o filmie (ID, Tytuł, Reżyser, Rok wydania, Gatunek, Ocena). Zapewnij walidację danych oraz obsługębłędów, takich jak puste pola, nieprawidłowy format danych czy duplikaty ID.
+- Stwórz funkcję w PHP, która pozwoli na aktualizację danych filmu poprzez dedykowany przycisk wyświetlany w tabeli. Funkcja powinna umożliwiać modyfikację wszystkich danych filmu (tytuł, reżyser, rok wydania, gatunek, ocena) na podstawie jego ID.
+
+----
+
+2. Utwórz stylizację strony internetowej obsługującej bazę filmów z wykorzystaniem CSS. Stylizacja powinna uwzględniać:
+- Wygląd zbliżony do pokazanego przykładu.
+- Użycie pseudoklas (np. :hover, :active) do interakcji z elementami, np. zmiana koloru przycisku ponajechaniu.
+- Zastosowanie Flexbox do rozmieszczenia elementów, np. ułożenie formularzy i tabeli obok siebie.
+- Zastosowanie Grid do rozmieszczenia elementów głównychstrony.
+- Stylizację tabeli, taką jak wyrównanie tekstu, koloryzacja wierszy naprzemiennych, szerokość kolumn oraz dostosowanie wyglądu nagłówków tabeli.
